@@ -1,0 +1,17 @@
+uuid: 84d7570d-6c23-4a0f-a96c-87bf28266834
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Trove Story Submission'
+type: trove_story_submission
+description: 'Trove stories submitted by the public'
+help: null
+new_revision: false
+preview_mode: 1
+display_submitted: true

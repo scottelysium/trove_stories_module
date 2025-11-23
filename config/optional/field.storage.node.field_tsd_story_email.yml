@@ -1,0 +1,18 @@
+uuid: cbc9bc82-aeec-429f-ae93-c36660571e1b
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_tsd_story_email
+field_name: field_tsd_story_email
+entity_type: node
+type: email
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

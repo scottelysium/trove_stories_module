@@ -1,0 +1,11 @@
+uuid: 448eb362-2004-4dbd-83b0-a4faf4b17ff5
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trove_story_submission
+id: node.trove_story_submission
+target_entity_type_id: node
+target_bundle: trove_story_submission
+default_langcode: site_default
+language_alterable: false

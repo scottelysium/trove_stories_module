@@ -1,0 +1,1 @@
+trove_stories_selected_form: trove_story #this doesn't seem to work as optional - using hook_install instead.

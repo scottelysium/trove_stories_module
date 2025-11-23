@@ -1,0 +1,19 @@
+uuid: 3be8d206-00bd-4f08-9398-a9a83b15f423
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.field_tss_story_article_links
+field_name: field_tss_story_article_links
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 4
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

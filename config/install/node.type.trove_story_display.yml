@@ -1,0 +1,17 @@
+uuid: 61ae147e-9bb9-4ef2-8435-b16f900bc2b0
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Trove Story Display'
+type: trove_story_display
+description: 'A trove story display item that can be viewed by the public'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

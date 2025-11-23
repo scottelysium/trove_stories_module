@@ -1,0 +1,22 @@
+uuid: 93c38cc9-a561-44ec-94c6-85137580a956
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trove_story_submission
+id: node.trove_story_submission.promote
+field_name: promote
+entity_type: node
+bundle: trove_story_submission
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

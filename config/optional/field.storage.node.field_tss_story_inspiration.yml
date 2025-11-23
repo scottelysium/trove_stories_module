@@ -1,0 +1,19 @@
+uuid: 43a6bd60-41e0-438d-ae72-a8cf99a59653
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_tss_story_inspiration
+field_name: field_tss_story_inspiration
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

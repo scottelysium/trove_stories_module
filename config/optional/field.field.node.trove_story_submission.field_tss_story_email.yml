@@ -1,0 +1,19 @@
+uuid: b731361f-af76-4dcf-8a14-f9e561a4a571
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tss_story_email
+    - node.type.trove_story_submission
+id: node.trove_story_submission.field_tss_story_email
+field_name: field_tss_story_email
+entity_type: node
+bundle: trove_story_submission
+label: 'Story Email'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

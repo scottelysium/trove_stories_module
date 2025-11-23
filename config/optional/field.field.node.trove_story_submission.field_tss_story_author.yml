@@ -1,0 +1,26 @@
+uuid: 482f2e1f-3768-4755-96b9-b818e9125fc4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tss_story_author
+    - node.type.trove_story_submission
+  module:
+    - regex_field_validation
+third_party_settings:
+  regex_field_validation:
+    enable: 0
+    regex: ''
+    error_message: ''
+id: node.trove_story_submission.field_tss_story_author
+field_name: field_tss_story_author
+entity_type: node
+bundle: trove_story_submission
+label: 'Story Author'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

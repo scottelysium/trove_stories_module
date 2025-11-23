@@ -1,0 +1,4 @@
+services:
+  trove_stories.common_services:
+    class: Drupal\trove_stories\Services\TroveStoriesCommonServices
+    #arguments: ['@logger.factory', '@config.factory'] # Example dependencies

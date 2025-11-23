@@ -1,0 +1,49 @@
+uuid: fa394e6b-dc4b-44b9-9778-d401454884e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tsd_links
+    - node.type.trove_story_display
+  module:
+    - link
+    - link_field_autocomplete_filter
+third_party_settings:
+  link_field_autocomplete_filter:
+    negate: null
+    allowed_content_types:
+      trove_story_display: '0'
+      article: '0'
+      homepage: '0'
+      landing_page: '0'
+      la_help: '0'
+      page: '0'
+      suspension_directory: '0'
+      trove_alert: '0'
+      trove_blog: '0'
+      trove_collection_feature: '0'
+      trove_event: '0'
+      trove_help: '0'
+      trove_information: '0'
+      trove_news: '0'
+      trove_partner: '0'
+      trove_partner_feature: '0'
+      trove_presentation: '0'
+      trove_profile: '0'
+      trove_story: '0'
+      trove_trivia: '0'
+      webform: '0'
+id: node.trove_story_display.field_tsd_links
+field_name: field_tsd_links
+entity_type: node
+bundle: trove_story_display
+label: 'Story Article Links'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

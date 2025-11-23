@@ -1,0 +1,60 @@
+.troveStories { /* body class */
+
+}
+
+.troveStories .wrapper {
+    max-width: 1440px;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.troveStoriesForm {
+    
+}
+
+/**** general admin area ****/
+
+.troveStories .storiesTitleAlert {
+    border: 1px solid #73b355;
+    background-color: #f0ffeb;
+    margin: 0px 20px 20px 20px;
+    border-radius: 4px;
+    padding: 15px 15px 15px 15px;
+    font-weight: bold;
+}
+
+/**** admin area fixing bootstrap/adminimal css bugs ****/
+
+.troveStories .content-outer-wrap {
+    max-width: 1440px;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.troveStories .region-messages {
+    justify-content: center;
+}
+
+.troveStories .region-messages .messages__wrapper {
+    text-align: center;
+    margin: 40px auto 40px auto;
+}
+
+.troveStories table.sticky-header thead {
+    top: auto;
+}
+
+/* status message is transparent and cant read it */
+.troveStories.adminimal .messages--status { 
+    background-color: #fff;
+}
+
+/* tab margins are set to negative causing bottom horizonatl scrollbar to appear */
+.troveStories.adminimal nav.is-horizontal.is-collapsible.position-container.is-horizontal-enabled ul.tabs.primary {
+    margin-left: 0;
+    margin-right: 0;
+}

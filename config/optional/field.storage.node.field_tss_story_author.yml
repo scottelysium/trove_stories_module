@@ -1,0 +1,21 @@
+uuid: ab287b6a-95c3-4efe-ac38-0533bf8fa169
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_tss_story_author
+field_name: field_tss_story_author
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

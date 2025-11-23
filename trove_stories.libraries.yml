@@ -1,0 +1,4 @@
+trove_stories_library:
+  css:
+    theme:
+      css/trove_stories.css: {}

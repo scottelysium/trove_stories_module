@@ -1,0 +1,22 @@
+uuid: bf06fa9c-9f05-4ef8-bb81-b1caa943e915
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trove_story_display
+id: node.trove_story_display.status
+field_name: status
+entity_type: node
+bundle: trove_story_display
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

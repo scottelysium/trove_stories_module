@@ -1,0 +1,22 @@
+uuid: 003eb4e2-faa8-4582-8960-c29ab53efad4
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.trove_story_submission
+id: node.trove_story_submission.status
+field_name: status
+entity_type: node
+bundle: trove_story_submission
+label: Published
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
