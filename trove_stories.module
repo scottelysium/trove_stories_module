@@ -62,6 +62,13 @@ function trove_stories_theme_suggestions_webform_alter(array &$suggestions, arra
     }
 }
 
+
+function trove_stories_webform_submission_presave(\Drupal\Core\Entity\EntityInterface $entity) {
+    if ($entity->getEntityTypeId() === 'webform_submission') {
+        //stuff
+    }
+}
+
 // function trove_stories_views_pre_view(ViewExecutable $view, $display_id) {
 //     if ($view->id() === 'trove_stories_submissions' && $display_id === 'page_1') {
 //         echo "test";
