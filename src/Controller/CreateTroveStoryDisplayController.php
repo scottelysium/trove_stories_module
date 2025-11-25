@@ -10,7 +10,7 @@ use Drupal\media\Entity\Media;
 //use Drupal\webform\Entity\WebformSubmission;
 
 /**
- * Controller for trove_stories custom operations.
+ * Controller for creating a trove story display
  */
 class CreateTroveStoryDisplayController extends ControllerBase {
 

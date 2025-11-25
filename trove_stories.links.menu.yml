@@ -4,6 +4,23 @@ trove_stories.settings:
   description: 'Configure settings for Trove Stories'
   route_name: trove_stories.settings
   parent: system.admin_config_content
+  weight: 100
+
+# trove_stories.settings_form:
+#   title: 'Settings'
+#   parent: trove_stories.settings
+#   description: 'Configure settings for Trove Stories'
+#   route_name: trove_stories.settings
+#   weight: 101
+
+# trove_stories.settings_update:
+#   title: 'Update configuration'
+#   parent: trove_stories.settings
+#   description: 'Update configuration'
+#   route_name: trove_stories.update
+#   weight: 101
+  
+
 
 # trove_stories.content:
 #   title: 'Trove Stories'
