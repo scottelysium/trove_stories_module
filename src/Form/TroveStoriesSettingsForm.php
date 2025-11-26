@@ -55,18 +55,19 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
 
         ];
 
-        $form['trove_stories_update_settings'] = [
-            '#type' => 'fieldset',
-            '#title' => $this->t('Update configurtation'),
-            '#description' => $this->t('This is a custom action that will reinstall the configuration for this module after a manual update.'),
-        ];
+        //NOTE: this is no longer used
+        // $form['trove_stories_update_settings'] = [
+        //     '#type' => 'fieldset',
+        //     '#title' => $this->t('Update configurtation'),
+        //     '#description' => $this->t('This is a custom action that will reinstall the configuration for this module after a manual update.'),
+        // ];
 
-        $form['trove_stories_update_settings']['update_config'] = [
-            '#type' => 'submit',
-            '#value' => $this->t('Reinstall configuration'),
-            '#submit' => ['::submitUpdateConfig'], 
-            '#limit_validation_errors' => [],
-        ];
+        // $form['trove_stories_update_settings']['update_config'] = [
+        //     '#type' => 'submit',
+        //     '#value' => $this->t('Reinstall configuration'),
+        //     '#submit' => ['::submitUpdateConfig'], 
+        //     '#limit_validation_errors' => [],
+        // ];
 
         return $form;
 
