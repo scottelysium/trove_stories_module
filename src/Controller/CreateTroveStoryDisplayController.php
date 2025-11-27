@@ -69,14 +69,15 @@ class CreateTroveStoryDisplayController extends ControllerBase {
             'langcode' => 'en',
             'uid' => \Drupal::currentUser()->id(), 
             'status' => 0,
-            'field_tsd_use' => $submissionData["use_trove"],
+            'field_tsd_story_use' => $submissionData["use_trove"],
             'field_tsd_story_about' => $submissionData["tell_us_about_your_story"],
-            'field_tsd_links' => $submissionData["trove_urls"],
+            'field_tsd_story_links' => $submissionData["trove_urls"],
             'field_tsd_story_author' => $submissionData["display_name_story_author"],
             'field_tsd_story_email' => $submissionData["email"],
             'field_tsd_story_images' => $uploaded_media_ids,
             'field_tsd_story_inspiration' => $submissionData["what_inspired_you_to_make_this_project"],
             'field_tsd_story_name' => $submissionData["name"],
+            //DONT FORGET CATEGORY
             'field_tsd_story_postcode' => $submissionData["postcode"],
             'field_tsd_story_title' => $submissionData["story_title"],
             'field_tsd_story_year_of_birth' => $submissionData["year_of_birth"]

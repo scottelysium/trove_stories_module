@@ -8,6 +8,8 @@ third_party_settings:
   menu_ui:
     available_menus: {  }
     parent: ''
+_core:
+  default_config_hash: d_BjOFgj0wVKeQ2hL9pecAAiWXE2U4FnBr6CzTKLTu8
 name: 'Trove Story Display'
 type: trove_story_display
 description: 'A trove story display item that can be viewed by the public'

@@ -3,41 +3,29 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.trove_story_display.field_tsd_story_links
     - field.field.node.trove_story_display.field_tsd_story_about
     - field.field.node.trove_story_display.field_tsd_story_author
     - field.field.node.trove_story_display.field_tsd_story_category
     - field.field.node.trove_story_display.field_tsd_story_email
     - field.field.node.trove_story_display.field_tsd_story_images
     - field.field.node.trove_story_display.field_tsd_story_inspiration
+    - field.field.node.trove_story_display.field_tsd_story_links
     - field.field.node.trove_story_display.field_tsd_story_name
     - field.field.node.trove_story_display.field_tsd_story_postcode
     - field.field.node.trove_story_display.field_tsd_story_title
-    - field.field.node.trove_story_display.field_tsd_story_year_of_birth
     - field.field.node.trove_story_display.field_tsd_story_use
+    - field.field.node.trove_story_display.field_tsd_story_year_of_birth
     - node.type.trove_story_display
   module:
     - link
     - user
 _core:
-  default_config_hash: M3dsj0CD8XLjoYluoxqULcEHYczRdAHFYiOL5lK2gvo
+  default_config_hash: pxL7UAihj0OY8sE4Vmb8PFDMRy3w8qMuibFY1zI3cek
 id: node.trove_story_display.default
 targetEntityType: node
 bundle: trove_story_display
 mode: default
 content:
-  field_tsd_story_links:
-    type: link
-    label: above
-    settings:
-      trim_length: 80
-      url_only: false
-      url_plain: false
-      rel: ''
-      target: ''
-    third_party_settings: {  }
-    weight: 103
-    region: content
   field_tsd_story_about:
     type: basic_string
     label: above
@@ -84,6 +72,18 @@ content:
     third_party_settings: {  }
     weight: 107
     region: content
+  field_tsd_story_links:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 103
+    region: content
   field_tsd_story_name:
     type: string
     label: above
@@ -108,6 +108,13 @@ content:
     third_party_settings: {  }
     weight: 110
     region: content
+  field_tsd_story_use:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
   field_tsd_story_year_of_birth:
     type: string
     label: above
@@ -115,13 +122,6 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 111
-    region: content
-  field_tsd_story_use:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 101
     region: content
   links:
     settings: {  }

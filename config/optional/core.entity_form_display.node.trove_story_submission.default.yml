@@ -5,7 +5,7 @@ dependencies:
   config:
     - entity_browser.browser.media_entity_browser
     - field.field.node.trove_story_submission.field_tss_story_about
-    - field.field.node.trove_story_submission.field_tss_story_article_links
+    - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_author
     - field.field.node.trove_story_submission.field_tss_story_email
     - field.field.node.trove_story_submission.field_tss_story_images
@@ -40,7 +40,7 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_tss_story_article_links:
+  field_tss_story_links:
     type: link_default
     weight: 123
     region: content

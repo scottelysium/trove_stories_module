@@ -3,6 +3,9 @@ use Drupal\Core\Url;
 // use Drupal\views\ViewExecutable;
 // //use Drupal\menu_link_content\Plugin\Menu;
 // use Drupal\menu_link_content\Entity\MenuLinkContent;
+use Drupal\node\Entity\Node;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
 
 /**
 * Implements hook_theme().
@@ -62,10 +65,63 @@ function trove_stories_theme_suggestions_webform_alter(array &$suggestions, arra
     }
 }
 
+//hook into the form submission and create a new trove webform submission entry.
+function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
 
-function trove_stories_webform_submission_presave(\Drupal\Core\Entity\EntityInterface $entity) {
-    if ($entity->getEntityTypeId() === 'webform_submission') {
-        //stuff
+    if ($webform_submission->getEntityTypeId() === 'webform_submission') {
+        if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) {
+
+            //create trove story submission content
+            $submissionData = $webform_submission->getData();
+
+            $uploaded_media_ids = [];
+
+            foreach($submissionData["upload_images"] as $file_id) {
+                
+                $file = File::load($file_id);
+                $media = Media::create([
+                'bundle' => 'image',
+                'uid' => \Drupal::currentUser()->id(),
+                'status' => 1,
+                'name' => $file->getFilename(),
+                'field_media_image' => [
+                    'target_id' => $file->id(),
+                    'alt' => $file->getFilename(),
+                    'title' => $file->getFilename(),
+                    ],
+                ]);
+
+                $media->save();
+
+                $uploaded_media_ids[] = ['target_id' => $media->id()];
+            }
+
+            //create new trove story display from the data
+            $trove_story_submission = Node::create(array(
+                'type' => 'trove_story_submission',
+                'title' => $submissionData["story_title"],
+                'langcode' => 'en',
+                'uid' => \Drupal::currentUser()->id(), 
+                'status' => 0,
+                'field_tss_story_use' => $submissionData["use_trove"],
+                'field_tss_story_about' => $submissionData["tell_us_about_your_story"],
+                'field_tss_story_links' => $submissionData["trove_urls"],
+                'field_tss_story_author' => $submissionData["display_name_story_author"],
+                'field_tss_story_email' => $submissionData["email"],
+                'field_tss_story_images' => $uploaded_media_ids,
+                'field_tss_story_inspiration' => $submissionData["what_inspired_you_to_make_this_project"],
+                'field_tss_story_name' => $submissionData["name"],
+                'field_tss_story_postcode' => $submissionData["postcode"],
+                'field_tss_story_title' => $submissionData["story_title"],
+                'field_tss_story_year_of_birth' => $submissionData["year_of_birth"]
+            ));
+
+            $trove_story_submission->save();
+
+
+        }
+        
+        echo "test";
     }
 }
 

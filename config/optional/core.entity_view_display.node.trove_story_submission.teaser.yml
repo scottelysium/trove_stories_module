@@ -5,7 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.trove_story_submission.field_tss_story_about
-    - field.field.node.trove_story_submission.field_tss_story_article_links
+    - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_author
     - field.field.node.trove_story_submission.field_tss_story_email
     - field.field.node.trove_story_submission.field_tss_story_images
@@ -30,7 +30,7 @@ content:
     region: content
 hidden:
   field_tss_story_about: true
-  field_tss_story_article_links: true
+  field_tss_story_links: true
   field_tss_story_author: true
   field_tss_story_email: true
   field_tss_story_images: true

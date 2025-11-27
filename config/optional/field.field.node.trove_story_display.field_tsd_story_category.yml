@@ -6,6 +6,8 @@ dependencies:
     - field.storage.node.field_tsd_story_category
     - node.type.trove_story_display
     - taxonomy.vocabulary.trove_category
+_core:
+  default_config_hash: PEt1yN9t_jXqQt6S1GkeM-ruuHPPEl2ebl4UvPwxg4w
 id: node.trove_story_display.field_tsd_story_category
 field_name: field_tsd_story_category
 entity_type: node

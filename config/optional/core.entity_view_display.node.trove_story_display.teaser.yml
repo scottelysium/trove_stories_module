@@ -4,23 +4,23 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.trove_story_display.field_tsd_story_links
     - field.field.node.trove_story_display.field_tsd_story_about
     - field.field.node.trove_story_display.field_tsd_story_author
     - field.field.node.trove_story_display.field_tsd_story_category
     - field.field.node.trove_story_display.field_tsd_story_email
     - field.field.node.trove_story_display.field_tsd_story_images
     - field.field.node.trove_story_display.field_tsd_story_inspiration
+    - field.field.node.trove_story_display.field_tsd_story_links
     - field.field.node.trove_story_display.field_tsd_story_name
     - field.field.node.trove_story_display.field_tsd_story_postcode
     - field.field.node.trove_story_display.field_tsd_story_title
-    - field.field.node.trove_story_display.field_tsd_story_year_of_birth
     - field.field.node.trove_story_display.field_tsd_story_use
+    - field.field.node.trove_story_display.field_tsd_story_year_of_birth
     - node.type.trove_story_display
   module:
     - user
 _core:
-  default_config_hash: a_4GTmwUifdtT0sUJMcWWzLIxOuuIxqBXV-7NlCPstw
+  default_config_hash: WsjIxR08usTqZXppnRsEWFR4UfakN7YZ8kFVObwsYMM
 id: node.trove_story_display.teaser
 targetEntityType: node
 bundle: trove_story_display
@@ -32,17 +32,17 @@ content:
     weight: 100
     region: content
 hidden:
-  field_tsd_story_links: true
   field_tsd_story_about: true
   field_tsd_story_author: true
   field_tsd_story_category: true
   field_tsd_story_email: true
   field_tsd_story_images: true
   field_tsd_story_inspiration: true
+  field_tsd_story_links: true
   field_tsd_story_name: true
   field_tsd_story_postcode: true
   field_tsd_story_title: true
-  field_tsd_story_year_of_birth: true
   field_tsd_story_use: true
+  field_tsd_story_year_of_birth: true
   langcode: true
   search_api_excerpt: true
