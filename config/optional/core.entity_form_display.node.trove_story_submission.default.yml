@@ -14,7 +14,7 @@ dependencies:
     - field.field.node.trove_story_submission.field_tss_story_postcode
     - field.field.node.trove_story_submission.field_tss_story_title
     - field.field.node.trove_story_submission.field_tss_story_year_of_birth
-    - field.field.node.trove_story_submission.field_tss_use
+    - field.field.node.trove_story_submission.field_tss_story_use
     - node.type.trove_story_submission
   module:
     - content_moderation
@@ -118,7 +118,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_tss_use:
+  field_tss_story_use:
     type: string_textarea
     weight: 121
     region: content

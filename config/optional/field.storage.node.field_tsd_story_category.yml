@@ -1,0 +1,20 @@
+uuid: 467c2496-058d-422a-bb01-e9e34a533e20
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_tsd_story_category
+field_name: field_tsd_story_category
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

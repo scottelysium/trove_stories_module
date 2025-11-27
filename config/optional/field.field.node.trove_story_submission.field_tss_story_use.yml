@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_tss_use
+    - field.storage.node.field_tss_story_use
     - node.type.trove_story_submission
   module:
     - regex_field_validation
@@ -12,8 +12,8 @@ third_party_settings:
     enable: 0
     regex: ''
     error_message: ''
-id: node.trove_story_submission.field_tss_use
-field_name: field_tss_use
+id: node.trove_story_submission.field_tss_story_use
+field_name: field_tss_story_use
 entity_type: node
 bundle: trove_story_submission
 label: 'How do you use Trove?'

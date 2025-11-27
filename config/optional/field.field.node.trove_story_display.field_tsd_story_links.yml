@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_tsd_links
+    - field.storage.node.field_tsd_story_links
     - node.type.trove_story_display
   module:
     - link
@@ -33,8 +33,8 @@ third_party_settings:
       trove_story: '0'
       trove_trivia: '0'
       webform: '0'
-id: node.trove_story_display.field_tsd_links
-field_name: field_tsd_links
+id: node.trove_story_display.field_tsd_story_links
+field_name: field_tsd_story_links
 entity_type: node
 bundle: trove_story_display
 label: 'Story Article Links'

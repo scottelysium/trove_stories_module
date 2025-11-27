@@ -1,11 +1,11 @@
-uuid: 9da046aa-8fcd-4f83-aeae-58fd3abdf276
+uuid: b6f43358-f12c-4f5b-9e91-d1011f68268a
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_tsd_use
-field_name: field_tsd_use
+id: node.field_tss_story_use
+field_name: field_tss_story_use
 entity_type: node
 type: string_long
 settings:

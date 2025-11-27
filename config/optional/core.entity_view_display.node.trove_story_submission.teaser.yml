@@ -14,7 +14,7 @@ dependencies:
     - field.field.node.trove_story_submission.field_tss_story_postcode
     - field.field.node.trove_story_submission.field_tss_story_title
     - field.field.node.trove_story_submission.field_tss_story_year_of_birth
-    - field.field.node.trove_story_submission.field_tss_use
+    - field.field.node.trove_story_submission.field_tss_story_use
     - node.type.trove_story_submission
   module:
     - user
@@ -39,6 +39,6 @@ hidden:
   field_tss_story_postcode: true
   field_tss_story_title: true
   field_tss_story_year_of_birth: true
-  field_tss_use: true
+  field_tss_story_use: true
   langcode: true
   search_api_excerpt: true

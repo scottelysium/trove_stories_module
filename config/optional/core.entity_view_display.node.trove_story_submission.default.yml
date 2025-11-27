@@ -13,7 +13,7 @@ dependencies:
     - field.field.node.trove_story_submission.field_tss_story_postcode
     - field.field.node.trove_story_submission.field_tss_story_title
     - field.field.node.trove_story_submission.field_tss_story_year_of_birth
-    - field.field.node.trove_story_submission.field_tss_use
+    - field.field.node.trove_story_submission.field_tss_story_use
     - node.type.trove_story_submission
   module:
     - link
@@ -105,7 +105,7 @@ content:
     third_party_settings: {  }
     weight: 111
     region: content
-  field_tss_use:
+  field_tss_story_use:
     type: basic_string
     label: above
     settings: {  }

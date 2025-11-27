@@ -1,0 +1,29 @@
+uuid: a6160b02-fb47-41d4-9cfa-a18dcee2251f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tsd_story_category
+    - node.type.trove_story_display
+    - taxonomy.vocabulary.trove_category
+id: node.trove_story_display.field_tsd_story_category
+field_name: field_tsd_story_category
+entity_type: node
+bundle: trove_story_display
+label: 'Trove Story Category'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      trove_category: trove_category
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

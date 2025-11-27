@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.media_entity_browser
-    - field.field.node.trove_story_display.field_tsd_links
+    - field.field.node.trove_story_display.field_tsd_story_links
     - field.field.node.trove_story_display.field_tsd_story_about
     - field.field.node.trove_story_display.field_tsd_story_author
     - field.field.node.trove_story_display.field_tsd_story_email
@@ -14,7 +14,7 @@ dependencies:
     - field.field.node.trove_story_display.field_tsd_story_postcode
     - field.field.node.trove_story_display.field_tsd_story_title
     - field.field.node.trove_story_display.field_tsd_story_year_of_birth
-    - field.field.node.trove_story_display.field_tsd_use
+    - field.field.node.trove_story_display.field_tsd_story_use
     - node.type.trove_story_display
   module:
     - content_moderation
@@ -32,7 +32,7 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_tsd_links:
+  field_tsd_story_links:
     type: link_default
     weight: 123
     region: content
@@ -118,7 +118,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_tsd_use:
+  field_tsd_story_use:
     type: string_textarea
     weight: 121
     region: content

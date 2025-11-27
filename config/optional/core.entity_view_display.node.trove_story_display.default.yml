@@ -3,9 +3,10 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.trove_story_display.field_tsd_links
+    - field.field.node.trove_story_display.field_tsd_story_links
     - field.field.node.trove_story_display.field_tsd_story_about
     - field.field.node.trove_story_display.field_tsd_story_author
+    - field.field.node.trove_story_display.field_tsd_story_category
     - field.field.node.trove_story_display.field_tsd_story_email
     - field.field.node.trove_story_display.field_tsd_story_images
     - field.field.node.trove_story_display.field_tsd_story_inspiration
@@ -13,17 +14,19 @@ dependencies:
     - field.field.node.trove_story_display.field_tsd_story_postcode
     - field.field.node.trove_story_display.field_tsd_story_title
     - field.field.node.trove_story_display.field_tsd_story_year_of_birth
-    - field.field.node.trove_story_display.field_tsd_use
+    - field.field.node.trove_story_display.field_tsd_story_use
     - node.type.trove_story_display
   module:
     - link
     - user
+_core:
+  default_config_hash: M3dsj0CD8XLjoYluoxqULcEHYczRdAHFYiOL5lK2gvo
 id: node.trove_story_display.default
 targetEntityType: node
 bundle: trove_story_display
 mode: default
 content:
-  field_tsd_links:
+  field_tsd_story_links:
     type: link
     label: above
     settings:
@@ -49,6 +52,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 104
+    region: content
+  field_tsd_story_category:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 112
     region: content
   field_tsd_story_email:
     type: basic_string
@@ -105,7 +116,7 @@ content:
     third_party_settings: {  }
     weight: 111
     region: content
-  field_tsd_use:
+  field_tsd_story_use:
     type: basic_string
     label: above
     settings: {  }
