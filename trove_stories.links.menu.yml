@@ -1,4 +1,4 @@
-#settings page
+#settings page at admin/config/system/trove_stories
 trove_stories.settings:
   title: 'Trove Stories Settings'
   description: 'Configure settings for Trove Stories'
@@ -21,10 +21,24 @@ trove_stories.settings:
 #   weight: 101
   
 
+#main content menu item
+trove_stories.content:
+  title: 'Trove Stories'
+  description: 'View the Trove Stories content area'
+  route_name: 'view.trove_stories_views.page_1'
+  parent: 'system.admin_content'
 
-# trove_stories.content:
-#   title: 'Trove Stories'
-#   description: 'View the Trove Stories content area'
-#   route_name: 'trove_stories.settings'
-#   parent: 'system.admin_content'
+trove_stories.content.tabs:
+  title: 'Manage content'
+  route_name: 'view.trove_stories_views.page_1'
+  parent: trove_stories.content
 
+trove_stories.content.tabs:
+  title: 'Settings'
+  route_name: 'view.trove_stories_views.page_1'
+  parent: trove_stories.content
+
+#list submissions
+#list website stories "trove_story_web_story"
+#view public form
+#view public site
