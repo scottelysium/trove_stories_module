@@ -1,15 +1,17 @@
-uuid: 9da046aa-8fcd-4f83-aeae-58fd3abdf276
+uuid: ea79cc06-16d3-4c07-80a4-ffbbe405ab06
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_tsd_story_use
-field_name: field_tsd_story_use
+id: node.field_tsws_story_postcode
+field_name: field_tsws_story_postcode
 entity_type: node
-type: string_long
+type: string
 settings:
+  max_length: 255
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

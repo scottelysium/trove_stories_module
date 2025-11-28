@@ -3,11 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.trove_story_display
-id: node.trove_story_display.status
+    - node.type.trove_story_web_story
+id: node.trove_story_web_story.status
 field_name: status
 entity_type: node
-bundle: trove_story_display
+bundle: trove_story_web_story
 label: Published
 description: ''
 required: false

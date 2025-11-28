@@ -7,8 +7,8 @@ dependencies:
     - taxonomy
 _core:
   default_config_hash: ajSdlQT4RqYPee9304fgE1dXzMu1Rt8YBP7kOXvyxYE
-id: node.field_tsd_story_category
-field_name: field_tsd_story_category
+id: node.field_tsws_story_category
+field_name: field_tsws_story_category
 entity_type: node
 type: entity_reference
 settings:

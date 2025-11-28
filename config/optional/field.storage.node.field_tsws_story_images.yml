@@ -1,20 +1,19 @@
-uuid: 98d7cbce-e21b-4152-9059-e13984779ac6
+uuid: 0648a2ec-1ef4-4934-bacf-04ba2b501553
 langcode: en
 status: true
 dependencies:
   module:
+    - media
     - node
-id: node.field_tsd_story_name
-field_name: field_tsd_story_name
+id: node.field_tsws_story_images
+field_name: field_tsws_story_images
 entity_type: node
-type: string
+type: entity_reference
 settings:
-  max_length: 255
-  case_sensitive: false
-  is_ascii: false
+  target_type: media
 module: core
 locked: false
-cardinality: 1
+cardinality: 4
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

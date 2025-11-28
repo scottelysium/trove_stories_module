@@ -1,17 +1,15 @@
-uuid: c9907207-0d15-4b1b-8c94-7ec06ad85879
+uuid: 824a80cd-52ef-49f8-9ee5-ead7ca41b44d
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_tsd_story_year_of_birth
-field_name: field_tsd_story_year_of_birth
+id: node.field_tsws_story_about
+field_name: field_tsws_story_about
 entity_type: node
-type: string
+type: string_long
 settings:
-  max_length: 255
   case_sensitive: false
-  is_ascii: false
 module: core
 locked: false
 cardinality: 1

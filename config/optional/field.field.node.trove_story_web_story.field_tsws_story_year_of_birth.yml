@@ -1,10 +1,10 @@
-uuid: e33716d0-3002-4d17-a022-945ea35ede5b
+uuid: 8907391a-7614-4701-b145-fea548662f8e
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_tsd_story_name
-    - node.type.trove_story_display
+    - field.storage.node.field_tsws_story_year_of_birth
+    - node.type.trove_story_web_story
   module:
     - regex_field_validation
 third_party_settings:
@@ -12,11 +12,11 @@ third_party_settings:
     enable: 0
     regex: ''
     error_message: ''
-id: node.trove_story_display.field_tsd_story_name
-field_name: field_tsd_story_name
+id: node.trove_story_web_story.field_tsws_story_year_of_birth
+field_name: field_tsws_story_year_of_birth
 entity_type: node
-bundle: trove_story_display
-label: 'Story Name'
+bundle: trove_story_web_story
+label: 'Story Year of Birth'
 description: ''
 required: false
 translatable: false

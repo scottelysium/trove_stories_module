@@ -3,8 +3,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_tsd_story_links
-    - node.type.trove_story_display
+    - field.storage.node.field_tsws_story_links
+    - node.type.trove_story_web_story
   module:
     - link
     - link_field_autocomplete_filter
@@ -12,7 +12,7 @@ third_party_settings:
   link_field_autocomplete_filter:
     negate: null
     allowed_content_types:
-      trove_story_display: '0'
+      trove_story_web_story: '0'
       article: '0'
       homepage: '0'
       landing_page: '0'
@@ -33,10 +33,10 @@ third_party_settings:
       trove_story: '0'
       trove_trivia: '0'
       webform: '0'
-id: node.trove_story_display.field_tsd_story_links
-field_name: field_tsd_story_links
+id: node.trove_story_web_story.field_tsws_story_links
+field_name: field_tsws_story_links
 entity_type: node
-bundle: trove_story_display
+bundle: trove_story_web_story
 label: 'Story Article Links'
 description: ''
 required: false

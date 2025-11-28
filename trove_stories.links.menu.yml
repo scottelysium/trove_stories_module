@@ -28,15 +28,18 @@ trove_stories.content:
   route_name: 'view.trove_stories_views.page_1'
   parent: 'system.admin_content'
 
+#In Drupal, the route name of a Views page display follows a specific pattern: view.VIEW_MACHINE_NAME.PAGE_MACHINE_NAME.
+
+
 trove_stories.content.tabs:
   title: 'Manage content'
   route_name: 'view.trove_stories_views.page_1'
   parent: trove_stories.content
 
-trove_stories.content.tabs:
-  title: 'Settings'
-  route_name: 'view.trove_stories_views.page_1'
-  parent: trove_stories.content
+# trove_stories.content.tabs:
+#   title: 'Settings'
+#   route_name: 'view.trove_stories_views.page_1'
+#   parent: trove_stories.content
 
 #list submissions
 #list website stories "trove_story_web_story"

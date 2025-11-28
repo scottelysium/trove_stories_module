@@ -1,14 +1,15 @@
-uuid: cbc9bc82-aeec-429f-ae93-c36660571e1b
+uuid: fea7a3ea-e260-4c2c-a245-65cb219c9ff5
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_tsd_story_email
-field_name: field_tsd_story_email
+id: node.field_tsws_story_inspiration
+field_name: field_tsws_story_inspiration
 entity_type: node
-type: email
-settings: {  }
+type: string_long
+settings:
+  case_sensitive: false
 module: core
 locked: false
 cardinality: 1

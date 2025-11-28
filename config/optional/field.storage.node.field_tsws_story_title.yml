@@ -1,11 +1,11 @@
-uuid: ea79cc06-16d3-4c07-80a4-ffbbe405ab06
+uuid: 0aa35b33-ea3c-448f-8eab-a3ae506fb97b
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_tsd_story_postcode
-field_name: field_tsd_story_postcode
+id: node.field_tsws_story_title
+field_name: field_tsws_story_title
 entity_type: node
 type: string
 settings:

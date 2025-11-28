@@ -30,7 +30,7 @@ third_party_settings:
       trove_presentation: '0'
       trove_profile: '0'
       trove_story: '0'
-      trove_story_display: '0'
+      trove_story_web_story: '0'
       trove_story_submission: '0'
       trove_trivia: '0'
       webform: '0'

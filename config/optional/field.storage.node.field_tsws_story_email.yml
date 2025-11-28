@@ -1,19 +1,17 @@
-uuid: 0648a2ec-1ef4-4934-bacf-04ba2b501553
+uuid: cbc9bc82-aeec-429f-ae93-c36660571e1b
 langcode: en
 status: true
 dependencies:
   module:
-    - media
     - node
-id: node.field_tsd_story_images
-field_name: field_tsd_story_images
+id: node.field_tsws_story_email
+field_name: field_tsws_story_email
 entity_type: node
-type: entity_reference
-settings:
-  target_type: media
+type: email
+settings: {  }
 module: core
 locked: false
-cardinality: 4
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

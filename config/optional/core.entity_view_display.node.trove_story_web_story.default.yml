@@ -3,37 +3,37 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.trove_story_display.field_tsd_story_about
-    - field.field.node.trove_story_display.field_tsd_story_author
-    - field.field.node.trove_story_display.field_tsd_story_category
-    - field.field.node.trove_story_display.field_tsd_story_email
-    - field.field.node.trove_story_display.field_tsd_story_images
-    - field.field.node.trove_story_display.field_tsd_story_inspiration
-    - field.field.node.trove_story_display.field_tsd_story_links
-    - field.field.node.trove_story_display.field_tsd_story_name
-    - field.field.node.trove_story_display.field_tsd_story_postcode
-    - field.field.node.trove_story_display.field_tsd_story_title
-    - field.field.node.trove_story_display.field_tsd_story_use
-    - field.field.node.trove_story_display.field_tsd_story_year_of_birth
-    - node.type.trove_story_display
+    - field.field.node.trove_story_web_story.field_tsws_story_about
+    - field.field.node.trove_story_web_story.field_tsws_story_author
+    - field.field.node.trove_story_web_story.field_tsws_story_category
+    - field.field.node.trove_story_web_story.field_tsws_story_email
+    - field.field.node.trove_story_web_story.field_tsws_story_images
+    - field.field.node.trove_story_web_story.field_tsws_story_inspiration
+    - field.field.node.trove_story_web_story.field_tsws_story_links
+    - field.field.node.trove_story_web_story.field_tsws_story_name
+    - field.field.node.trove_story_web_story.field_tsws_story_postcode
+    - field.field.node.trove_story_web_story.field_tsws_story_title
+    - field.field.node.trove_story_web_story.field_tsws_story_use
+    - field.field.node.trove_story_web_story.field_tsws_story_year_of_birth
+    - node.type.trove_story_web_story
   module:
     - link
     - user
 _core:
   default_config_hash: pxL7UAihj0OY8sE4Vmb8PFDMRy3w8qMuibFY1zI3cek
-id: node.trove_story_display.default
+id: node.trove_story_web_story.default
 targetEntityType: node
-bundle: trove_story_display
+bundle: trove_story_web_story
 mode: default
 content:
-  field_tsd_story_about:
+  field_tsws_story_about:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
     weight: 102
     region: content
-  field_tsd_story_author:
+  field_tsws_story_author:
     type: string
     label: above
     settings:
@@ -41,7 +41,7 @@ content:
     third_party_settings: {  }
     weight: 104
     region: content
-  field_tsd_story_category:
+  field_tsws_story_category:
     type: entity_reference_label
     label: above
     settings:
@@ -49,14 +49,14 @@ content:
     third_party_settings: {  }
     weight: 112
     region: content
-  field_tsd_story_email:
+  field_tsws_story_email:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
     weight: 105
     region: content
-  field_tsd_story_images:
+  field_tsws_story_images:
     type: entity_reference_entity_view
     label: above
     settings:
@@ -65,14 +65,14 @@ content:
     third_party_settings: {  }
     weight: 106
     region: content
-  field_tsd_story_inspiration:
+  field_tsws_story_inspiration:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
     weight: 107
     region: content
-  field_tsd_story_links:
+  field_tsws_story_links:
     type: link
     label: above
     settings:
@@ -84,7 +84,7 @@ content:
     third_party_settings: {  }
     weight: 103
     region: content
-  field_tsd_story_name:
+  field_tsws_story_name:
     type: string
     label: above
     settings:
@@ -92,7 +92,7 @@ content:
     third_party_settings: {  }
     weight: 108
     region: content
-  field_tsd_story_postcode:
+  field_tsws_story_postcode:
     type: string
     label: above
     settings:
@@ -100,7 +100,7 @@ content:
     third_party_settings: {  }
     weight: 109
     region: content
-  field_tsd_story_title:
+  field_tsws_story_title:
     type: string
     label: above
     settings:
@@ -108,14 +108,14 @@ content:
     third_party_settings: {  }
     weight: 110
     region: content
-  field_tsd_story_use:
+  field_tsws_story_use:
     type: basic_string
     label: above
     settings: {  }
     third_party_settings: {  }
     weight: 101
     region: content
-  field_tsd_story_year_of_birth:
+  field_tsws_story_year_of_birth:
     type: string
     label: above
     settings:

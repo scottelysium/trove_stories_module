@@ -1,0 +1,48 @@
+uuid: aee3e221-9b09-4e1d-8812-76944df61c34
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.trove_story_web_story.field_tsws_story_about
+    - field.field.node.trove_story_web_story.field_tsws_story_author
+    - field.field.node.trove_story_web_story.field_tsws_story_category
+    - field.field.node.trove_story_web_story.field_tsws_story_email
+    - field.field.node.trove_story_web_story.field_tsws_story_images
+    - field.field.node.trove_story_web_story.field_tsws_story_inspiration
+    - field.field.node.trove_story_web_story.field_tsws_story_links
+    - field.field.node.trove_story_web_story.field_tsws_story_name
+    - field.field.node.trove_story_web_story.field_tsws_story_postcode
+    - field.field.node.trove_story_web_story.field_tsws_story_title
+    - field.field.node.trove_story_web_story.field_tsws_story_use
+    - field.field.node.trove_story_web_story.field_tsws_story_year_of_birth
+    - node.type.trove_story_web_story
+  module:
+    - user
+_core:
+  default_config_hash: WsjIxR08usTqZXppnRsEWFR4UfakN7YZ8kFVObwsYMM
+id: node.trove_story_web_story.teaser
+targetEntityType: node
+bundle: trove_story_web_story
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_tsws_story_about: true
+  field_tsws_story_author: true
+  field_tsws_story_category: true
+  field_tsws_story_email: true
+  field_tsws_story_images: true
+  field_tsws_story_inspiration: true
+  field_tsws_story_links: true
+  field_tsws_story_name: true
+  field_tsws_story_postcode: true
+  field_tsws_story_title: true
+  field_tsws_story_use: true
+  field_tsws_story_year_of_birth: true
+  langcode: true
+  search_api_excerpt: true

@@ -1,11 +1,11 @@
-uuid: 1bda7d1c-9734-4ad6-a22f-987427d57b8b
+uuid: c9907207-0d15-4b1b-8c94-7ec06ad85879
 langcode: en
 status: true
 dependencies:
   module:
     - node
-id: node.field_tsd_story_author
-field_name: field_tsd_story_author
+id: node.field_tsws_story_year_of_birth
+field_name: field_tsws_story_year_of_birth
 entity_type: node
 type: string
 settings:
