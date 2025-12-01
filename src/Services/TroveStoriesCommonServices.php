@@ -16,6 +16,8 @@ class TroveStoriesCommonServices {
         $webform = $route_match->getParameter('webform'); //this can return an object OR a simple id string.
         $selected_form_id = $this->getTroveStoriesFormId();
 
+        //echo $route_name;
+
         if (strpos($route_name, 'entity.webform.') === 0 || strpos($route_name, 'entity.webform_submission.') === 0) { //check if form in general
 
             if (
@@ -29,7 +31,4 @@ class TroveStoriesCommonServices {
         return false;
     }
 
-    // public function sharedFunctionTwo($arg) {
-    
-    // }
 }

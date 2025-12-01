@@ -31,17 +31,37 @@ trove_stories.content:
 #In Drupal, the route name of a Views page display follows a specific pattern: view.VIEW_MACHINE_NAME.PAGE_MACHINE_NAME.
 
 
-trove_stories.content.tabs:
-  title: 'Manage content'
+# trove_stories.content.viewall:
+#   title: 'View all'
+#   route_name: 'view.trove_stories_views.page_1'
+#   parent: trove_stories.content
+
+trove_stories.content.story_submissions:
+  title: 'View Submissions'
   route_name: 'view.trove_stories_views.page_1'
   parent: trove_stories.content
+
+trove_stories.content.story_webitems:
+  title: 'View Website Stories'
+  route_name: 'view.trove_stories_views.page_2'
+  parent: trove_stories.content
+
+trove_stories.content.story_form:
+  title: 'View Form'
+  # route_name: 'entity.webform.canonical'
+  # route_parameters:
+  #   webform: 'trove-story'
+  url: 'internal:/form/trove-story'
+  parent: trove_stories.content
+
+
 
 # trove_stories.content.tabs:
 #   title: 'Settings'
 #   route_name: 'view.trove_stories_views.page_1'
 #   parent: trove_stories.content
 
-#list submissions
+#list submissions / view submissions / view stories / Edit Form / View form
 #list website stories "trove_story_web_story"
 #view public form
 #view public site
