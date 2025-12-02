@@ -15,11 +15,11 @@ trove_stories.content:
   requirements:
     _permission: 'trove_editor'
 
-trove_stories.webform_submission.create_trove_story_display:
-  path: '/admin/trove_stories/create_trove_story_display'
+trove_stories.webform_submission.create_trove_story_web_story:
+  path: '/admin/trove_stories/create_trove_story_web_story'
   defaults:
     _title: ""
-    _controller: '\Drupal\trove_stories\Controller\CreateTroveStoryDisplayController::createStory'
+    _controller: '\Drupal\trove_stories\Controller\CreateTroveStoryWebStoryController::createStory'
   requirements:
     _permission: 'trove_editor'
 

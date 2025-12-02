@@ -16,13 +16,17 @@
 
 /**** general admin area ****/
 
-.troveStories .storiesTitleAlert {
+/* .troveStories .storiesTitleAlert {
     border: 1px solid #73b355;
     background-color: #f0ffeb;
     margin: 0px 20px 20px 20px;
     border-radius: 4px;
     padding: 15px 15px 15px 15px;
     font-weight: bold;
+} */
+
+.troveStories .messages.messages--error { /** ONLT TEMP TO SAVE MY SANITY **/
+    display: none;
 }
 
 /**** admin area fixing bootstrap/adminimal css bugs ****/

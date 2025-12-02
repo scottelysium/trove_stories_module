@@ -1,8 +1,5 @@
 <?php
 use Drupal\Core\Url;
-// use Drupal\views\ViewExecutable;
-// //use Drupal\menu_link_content\Plugin\Menu;
-// use Drupal\menu_link_content\Entity\MenuLinkContent;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
@@ -16,41 +13,21 @@ function trove_stories_theme($existing, $type, $theme, $path) {
     'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
       'base hook' => 'webform',
     ],
-    // 'block__trove_admin_page_title' => [
+    // 'block__trove_stories_admin_page_title' => [ //add custom template into admin page title
     //   'base hook' => 'block',
     // ],
-    'block__trove_stories_admin_page_title' => [
-      'base hook' => 'block',
-    ],
   ];
 }
 
 /* We add a custom template into the page title area */
-function trove_stories_theme_suggestions_block_alter(array &$suggestions, array &$variables) {
-    //$suggestions[] = 'block__trove_stories_admin_page_title';
-    // $b = \Drupal::service('theme.manager')->getActiveTheme()->getName();
+// function trove_stories_theme_suggestions_block_alter(array &$suggestions, array &$variables) {
 
-    if ($variables['elements']['#base_plugin_id'] === 'page_title_block') {
-
-        if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) { 
-            $suggestions[] = 'block__trove_stories_admin_page_title';
-        }
-        
-    }
-
-    // $parent_menu_link = \Drupal::entityTypeManager()->getStorage('menu_link_content')->loadByProperties(['menu_name' => 'admin']);
-    
-    // $menu_link = MenuLinkContent::create(array(
-    //     'title' => 'Form2',
-    //     'link' => ['uri' => 'internal:/form/trove-story'],
-    //     'menu_name' => 'admin',
-    //     'weight' => 0,
-    //     //'external' => TRUE,
-    //     'parent' => 'trove_stories.content',
-    //     'bundle' => 'menu_link_content',
-    //     ));
-    // $menu_link->save();
-}
+//     if ($variables['elements']['#base_plugin_id'] === 'page_title_block') {
+//         if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) { 
+//             $suggestions[] = 'block__trove_stories_admin_page_title';
+//         }
+//     }
+// }
 
 /* We add a custom template into the trove stories form  */
 function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {
@@ -70,7 +47,7 @@ function trove_stories_theme_suggestions_webform_alter(array &$suggestions, arra
 function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
 
     if ($webform_submission->getEntityTypeId() === 'webform_submission') {
-        if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) {
+        if (\Drupal::service('trove_stories.common_services')->isTroveStoryArea()) {
 
             //create trove story submission content
             $submissionData = $webform_submission->getData();
@@ -190,15 +167,7 @@ function trove_stories_entity_access(Drupal\Core\Entity\EntityInterface $entity,
 */
 function trove_stories_preprocess_html(&$variables) {
 
-    // $config = \Drupal::config('trove_stories.settings');
-    // $selected_form_id = $config->get('trove_stories_selected_form');
-    // $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
-
-    // //check if on page with a webform (extend this to cover page and submissions?)
-    // $route_match = \Drupal::routeMatch();
-    // $route_name = $route_match->getRouteName();
-
-    if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) { 
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryArea()) { 
         $variables['#attached']['library'][] = 'trove_stories/trove_stories_library'; //add our stylesheet
         $variables['attributes']['class'][] = 'troveStories'; //add body class
     }
@@ -249,23 +218,31 @@ function trove_stories_preprocess_html(&$variables) {
 /*
     We add a button "convert to trove story" on individual submission pages.
 */
-function trove_stories_webform_submission_view_alter(&$build, \Drupal\Core\Entity\EntityInterface $node, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+function trove_stories_node_view_alter(array &$build, \Drupal\Core\Entity\EntityInterface $entity) {
     
+        if ($entity->bundle() !== 'trove_story_submission') {
+            return;
+        }
 
-    if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) {
+        // Check if the display is 'full' (the standard node view).
+        // This is done to ensure it only appears on the node's individual page.
+        // if ($display->getMode() !== 'full') {
+        //     return;
+        // }
+    
 
         // add current url to query string 'destination'
         $query_string_options = \Drupal::destination()->getAsArray();
 
-        // Also ddd the submissin ID to the query options.
-        $query_string_options['submission_id'] = $node->id();
+        // // Also ddd the submissin ID to the query options.
+        $query_string_options['submission_id'] = $entity->id();
 
-        $route_url = Url::fromRoute('trove_stories.webform_submission.create_trove_story_display');
+        $route_url = Url::fromRoute('trove_stories.webform_submission.create_trove_story_web_story');
         $route_url->setOption('query', $query_string_options);
 
-        $build['convert_to_trove_story_button'] = [
+        $build['convert_to_trove_story_web_story_button'] = [
             '#type' => 'link',
-            '#title' => \Drupal::service('string_translation')->translate('Convert to Trove Story Display item'),
+            '#title' => \Drupal::service('string_translation')->translate('Convert to Trove Story Website Story'),
             '#url' => $route_url,
             '#attributes' => [
                 'class' => ['button', 'button--primary'],
@@ -273,8 +250,8 @@ function trove_stories_webform_submission_view_alter(&$build, \Drupal\Core\Entit
         ];
 
         //$build['convert_to_trove_story_button']['#weight'] = -10;
-        $build['convert_to_trove_story_button']['#weight'] = 50;
-    }
+        $build['convert_to_trove_story_web_story_button']['#weight'] = 50;
+    
 
 }
 
@@ -301,24 +278,22 @@ function trove_stories_install() {
         to set custom columns, get the full form from state API, then
         update the array 'results.custom.columns' with the preferred column keys to display.
     ****/
-    $state = \Drupal::state();
-    $form_data = $state->get('webform.webform.trove_story', []); 
-    $diplayed_cols = [ // these keys can be found by debugging /WebformResultsCustomForm.php
-        'serial',
-        'element__email',
-        'element__story_title',
-        'element__name',
-        'element__year_of_birth',
-        'element__display_name_story_author',
-        //'sid',
-        'created',
-        'operations'
-    ];
+    // $state = \Drupal::state();
+    // $form_data = $state->get('webform.webform.trove_story', []); 
+    // $diplayed_cols = [ // these keys can be found by debugging /WebformResultsCustomForm.php
+    //     'serial',
+    //     'element__email',
+    //     'element__story_title',
+    //     'element__name',
+    //     'element__year_of_birth',
+    //     'element__display_name_story_author',
+    //     //'sid',
+    //     'created',
+    //     'operations'
+    // ];
     
-    $form_data['results.custom.columns'] = $diplayed_cols;
-    //$state->set('results.custom.columns', array_keys($available_columns));
-    $state->set('webform.webform.trove_story', $form_data);
-
+    // $form_data['results.custom.columns'] = $diplayed_cols;
+    // $state->set('webform.webform.trove_story', $form_data);
 
     /***
         set new action 'create_trove_story_action' to 'on' in the 'admin/structure/webform/config/submissions' area.
@@ -352,46 +327,45 @@ function trove_stories_install() {
 /**
  * Implements hook_form_alter().
  */
-function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+// function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
    
-    /** submissions page - if we are NOT on the trove story submissions/results page then remove the 'create_trove_story_action' option */
-    if ($form_id === 'webform_submission_bulk_form') {
+//     /** submissions page - if we are NOT on the trove story submissions/results page then remove the 'create_trove_story_action' option */
+//     if ($form_id === 'webform_submission_bulk_form') {
 
-        $config = \Drupal::config('trove_stories.settings');
-        $selected_form_id = $config->get('trove_stories_selected_form');
+//         $config = \Drupal::config('trove_stories.settings');
+//         $selected_form_id = $config->get('trove_stories_selected_form');
+//         //check if on page with a webform 
+//         $route_match = \Drupal::routeMatch();
+//         $route_name = $route_match->getRouteName();
 
-        //check if on page with a webform 
-        $route_match = \Drupal::routeMatch();
-        $route_name = $route_match->getRouteName();
-
-        if (strpos($route_name, 'entity.webform.') === 0) { //check if form in general
-            $webform = $route_match->getParameter('webform'); //this can return an object OR a simple id string.
+//         if (strpos($route_name, 'entity.webform.') === 0) { //check if form in general
+//             $webform = $route_match->getParameter('webform'); //this can return an object OR a simple id string.
             
-            //if we are not on trove story, remove the create trove story action.
-            if (
-                ($webform instanceof \Drupal\webform\WebformInterface && $webform->id() !== $selected_form_id) //if an object we need to check id
-                || 
-                (is_string($webform) && $webform !== $selected_form_id)) //if a string we assume it must be the id.
-                { 
-                unset($form['operations']['action']['#options']['create_trove_story_action']);
-            }
-        }
+//             //if we are not on trove story, remove the create trove story action.
+//             if (
+//                 ($webform instanceof \Drupal\webform\WebformInterface && $webform->id() !== $selected_form_id) //if an object we need to check id
+//                 || 
+//                 (is_string($webform) && $webform !== $selected_form_id)) //if a string we assume it must be the id.
+//                 { 
+//                 unset($form['operations']['action']['#options']['create_trove_story_action']);
+//             }
+//         }
 
 
        
-        //getState('results.custom.columns', array_keys($available_columns)); //you need to pass in all of the columns
+//         //getState('results.custom.columns', array_keys($available_columns)); //you need to pass in all of the columns
 
-        //avialbe columns:
-        //$available_columns = $this->getSubmissionStorage()->getColumns($this->webform, $this->sourceEntity, NULL, TRUE);
+//         //avialbe columns:
+//         //$available_columns = $this->getSubmissionStorage()->getColumns($this->webform, $this->sourceEntity, NULL, TRUE);
 
-        //get custom columns
-        //$custom_columns = $this->getData('columns', array_keys($available_columns));
+//         //get custom columns
+//         //$custom_columns = $this->getData('columns', array_keys($available_columns));
 
-        //$custom_columns = $this->getData('columns', array_keys($available_columns));
-    }
+//         //$custom_columns = $this->getData('columns', array_keys($available_columns));
+//     }
 
     
-}
+// }
 
 //         $entity = $formObject->getEntity();
 

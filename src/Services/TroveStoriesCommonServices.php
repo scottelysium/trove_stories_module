@@ -1,5 +1,6 @@
 <?php
 namespace Drupal\trove_Stories\Services;
+use Drupal\node\NodeInterface;
 
 class TroveStoriesCommonServices {
 
@@ -9,17 +10,21 @@ class TroveStoriesCommonServices {
         return $selected_form_id;
     }
 
-    public function isTroveStoryRoute() {
+    /** This is common function to check if this is a trove_stories controlled area */
+    public function isTroveStoryArea() {
 
         $route_match = \Drupal::routeMatch();
         $route_name = $route_match->getRouteName();
+        
         $webform = $route_match->getParameter('webform'); //this can return an object OR a simple id string.
         $selected_form_id = $this->getTroveStoriesFormId();
 
-        //echo $route_name;
+       // echo $route_name;
 
-        if (strpos($route_name, 'entity.webform.') === 0 || strpos($route_name, 'entity.webform_submission.') === 0) { //check if form in general
+       //if (strpos($route_name, 'entity.webform.') === 0 || strpos($route_name, 'entity.webform_submission.') === 0) {
 
+        //This checks if we are on the trove stories form
+        if (strpos($route_name, 'entity.webform.') === 0) {
             if (
                 ($webform instanceof \Drupal\webform\WebformInterface && $webform->id() === $selected_form_id) //if an object we need to check id
                 || 
@@ -28,6 +33,15 @@ class TroveStoriesCommonServices {
                 return true;
             }
         }
+        
+        //This checks if we are on a trove stories content type
+        $route_node = $route_match->getParameter('node');
+        if ($route_node instanceof NodeInterface) {
+            if ($route_node->bundle() === 'trove_story_submission') {
+                return true;
+            }
+        }
+
         return false;
     }
 

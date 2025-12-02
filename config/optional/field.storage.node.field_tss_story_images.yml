@@ -5,6 +5,8 @@ dependencies:
   module:
     - media
     - node
+_core:
+  default_config_hash: odiI-fTKxz-2gbfaT0iNQsqv2Uxzn1l9nTdSymkqE64
 id: node.field_tss_story_images
 field_name: field_tss_story_images
 entity_type: node
@@ -13,7 +15,7 @@ settings:
   target_type: media
 module: core
 locked: false
-cardinality: 1
+cardinality: 4
 translatable: true
 indexes: {  }
 persist_with_no_fields: false
