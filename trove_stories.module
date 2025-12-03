@@ -10,12 +10,18 @@ use Drupal\Core\Access\AccessResult;
 */
 function trove_stories_theme($existing, $type, $theme, $path) {
   return [
-    'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
-      'base hook' => 'webform',
-    ],
-    // 'block__trove_stories_admin_page_title' => [ //add custom template into admin page title
-    //   'base hook' => 'block',
+    // 'field__node__title__custom_content_type' => [
+    //     'template' => 'field--node--title--custom-content-type',
+    //     'base hook' => 'field',
     // ],
+  
+    'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
+        'base hook' => 'webform',
+    ],
+    'field__node__title__trove_story_submission' => [
+        'template' => 'field--node--title--trove-story-submission',
+        'base hook' => 'field',
+    ],
   ];
 }
 
@@ -56,7 +62,7 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
 
             foreach($submissionData["upload_images"] as $file_id) {
                 
-                $file = File::load($file_id);
+                $file = File::load($file_id); 
                 $media = Media::create([
                 'bundle' => 'image',
                 'uid' => \Drupal::currentUser()->id(),
@@ -244,13 +250,15 @@ function trove_stories_node_view_alter(array &$build, \Drupal\Core\Entity\Entity
             '#type' => 'link',
             '#title' => \Drupal::service('string_translation')->translate('Convert to Trove Story Website Story'),
             '#url' => $route_url,
+            '#prefix' => '<div class="trove-story-web-story-button-wrapper">',
+            '#suffix' => '</div>',
             '#attributes' => [
                 'class' => ['button', 'button--primary'],
             ],
         ];
 
         //$build['convert_to_trove_story_button']['#weight'] = -10;
-        $build['convert_to_trove_story_web_story_button']['#weight'] = 50;
+        $build['convert_to_trove_story_web_story_button']['#weight'] = 150;
     
 
 }

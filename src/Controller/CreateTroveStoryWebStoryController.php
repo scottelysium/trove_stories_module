@@ -48,33 +48,7 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
         $webStoryLinks = $storySubmissionNode->get('field_tss_story_links')->getValue();
 
         //get images
-        $webStoryImages = $storySubmissionNode->get('field_tss_story_images')->getValue();
-
-        $uploaded_media_ids = [];
-
-        foreach($webStoryImages as $file_id) {
-
-            $file = File::load($file_id['target_id']);
-            $rt = $file->getFilename();
-            $media = Media::create([
-            'bundle' => 'image',
-            'uid' => \Drupal::currentUser()->id(),
-            'status' => 1,
-            'name' => $file->getFilename(),
-            'field_media_image' => [
-                'target_id' => $file->id(),
-                'alt' => $file->getFilename(),
-                'title' => $file->getFilename(),
-                ],
-            ]);
-
-            $media->save();
-
-            $mid = $media->id();
-
-            $uploaded_media_ids[] = ['target_id' => $media->id()];
-        }
-        
+        $webStoryImages = $storySubmissionNode->get('field_tss_story_images')->getValue(); //this has the media ids already set no extra porcessing needed.
 
         $trove_story_web_story = Node::create(array(
             'type' => 'trove_story_web_story',
@@ -87,7 +61,7 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
             'field_tsws_story_links' => $webStoryLinks, //might not work
             'field_tsws_story_author' => $webStoryAuthor,
             'field_tsws_story_email' => $webStoryEmail,
-            'field_tsws_story_images' => $uploaded_media_ids,
+            'field_tsws_story_images' => $webStoryImages,
             'field_tsws_story_inspiration' => $webStoryInspiration,
             'field_tsws_story_name' => $webStoryName,
             //'field_tsws_story_category' => //Category field defaults to 'none'

@@ -4,20 +4,22 @@ status: true
 dependencies:
   config:
     - field.field.node.trove_story_submission.field_tss_story_about
-    - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_author
     - field.field.node.trove_story_submission.field_tss_story_email
     - field.field.node.trove_story_submission.field_tss_story_images
     - field.field.node.trove_story_submission.field_tss_story_inspiration
+    - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_name
     - field.field.node.trove_story_submission.field_tss_story_postcode
     - field.field.node.trove_story_submission.field_tss_story_title
-    - field.field.node.trove_story_submission.field_tss_story_year_of_birth
     - field.field.node.trove_story_submission.field_tss_story_use
+    - field.field.node.trove_story_submission.field_tss_story_year_of_birth
     - node.type.trove_story_submission
   module:
     - link
     - user
+_core:
+  default_config_hash: xyl78hzu0BE3hQ2EEut9MYDMGs1by7Qnx_EBeDX1fMk
 id: node.trove_story_submission.default
 targetEntityType: node
 bundle: trove_story_submission
@@ -28,7 +30,38 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 102
+    weight: 4
+    region: content
+  field_tss_story_author:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_tss_story_email:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_tss_story_images:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: full
+      link: false
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_tss_story_inspiration:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
     region: content
   field_tss_story_links:
     type: link
@@ -40,38 +73,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 103
-    region: content
-  field_tss_story_author:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 104
-    region: content
-  field_tss_story_email:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 105
-    region: content
-  field_tss_story_images:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: false
-    third_party_settings: {  }
-    weight: 106
-    region: content
-  field_tss_story_inspiration:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 107
+    weight: 5
     region: content
   field_tss_story_name:
     type: string
@@ -79,7 +81,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 108
+    weight: 8
     region: content
   field_tss_story_postcode:
     type: string
@@ -87,7 +89,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 109
+    weight: 9
     region: content
   field_tss_story_title:
     type: string
@@ -95,7 +97,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 110
+    weight: 2
+    region: content
+  field_tss_story_use:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
     region: content
   field_tss_story_year_of_birth:
     type: string
@@ -103,19 +112,12 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 111
-    region: content
-  field_tss_story_use:
-    type: basic_string
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 101
+    weight: 10
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 100
+    weight: 0
     region: content
 hidden:
   langcode: true
