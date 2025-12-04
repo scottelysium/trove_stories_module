@@ -222,7 +222,7 @@ function trove_stories_preprocess_html(&$variables) {
  * Implements hook_node_view_alter().
  */
 /*
-    We add a button "convert to trove story" on individual submission pages.
+    Individual submission pages - add extra buttons
 */
 function trove_stories_node_view_alter(array &$build, \Drupal\Core\Entity\EntityInterface $entity) {
     
@@ -230,35 +230,52 @@ function trove_stories_node_view_alter(array &$build, \Drupal\Core\Entity\Entity
             return;
         }
 
-        // Check if the display is 'full' (the standard node view).
-        // This is done to ensure it only appears on the node's individual page.
-        // if ($display->getMode() !== 'full') {
-        //     return;
-        // }
-    
+        //create a fieldset for the buttons
+        $build['trove_story_submissions_buttons'] = [
+            '#type' => 'fieldset',
+            '#title' => '',
+            '#description' => '',
+            '#attributes' => [
+                'class' => ['trove_story_submission_buttons'],
+            ],
+            '#weight' => -10
+        ];
 
-        // add current url to query string 'destination'
-        $query_string_options = \Drupal::destination()->getAsArray();
-
-        // // Also ddd the submissin ID to the query options.
-        $query_string_options['submission_id'] = $entity->id();
-
-        $route_url = Url::fromRoute('trove_stories.webform_submission.create_trove_story_web_story');
-        $route_url->setOption('query', $query_string_options);
-
-        $build['convert_to_trove_story_web_story_button'] = [
+        //create the 'back to submissions' button
+        $submissions_route_url = Url::fromRoute('view.trove_stories_views.page_1');
+        
+        $build['trove_story_submissions_buttons']['back_to_trove_story_submissions_button'] = [
             '#type' => 'link',
-            '#title' => \Drupal::service('string_translation')->translate('Convert to Trove Story Website Story'),
-            '#url' => $route_url,
+            '#title' => \Drupal::service('string_translation')->translate('< Back to trove story submissions'),
+            '#url' => $submissions_route_url,
             '#prefix' => '<div class="trove-story-web-story-button-wrapper">',
             '#suffix' => '</div>',
+            '#attributes' => [
+                'class' => ['button', 'button--primary'],
+            ],
+            '#weight' => -10
+        ];
+
+        //create the 'convert to trove story' button
+       // $query_string_options = \Drupal::destination()->getAsArray();
+        $query_string_options['submission_id'] = $entity->id();
+        $convert_route_url = Url::fromRoute('trove_stories.webform_submission.create_trove_story_web_story');
+        $convert_route_url->setOption('query', $query_string_options);
+
+        $build['trove_story_submissions_buttons']['convert_to_trove_story_web_story_button'] = [
+            '#type' => 'link',
+            '#title' => \Drupal::service('string_translation')->translate('Convert to Trove Story Website Story'),
+            '#url' => $convert_route_url,
+            '#prefix' => '<div class="trove-story-web-story-button-wrapper btn2">',
+            '#suffix' => '</div>',
+            '#weight' => -10,
             '#attributes' => [
                 'class' => ['button', 'button--primary'],
             ],
         ];
 
         //$build['convert_to_trove_story_button']['#weight'] = -10;
-        $build['convert_to_trove_story_web_story_button']['#weight'] = 150;
+        //$build['convert_to_trove_story_web_story_button']['#weight'] = 150;
     
 
 }

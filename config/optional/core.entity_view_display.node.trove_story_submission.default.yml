@@ -19,7 +19,7 @@ dependencies:
     - link
     - user
 _core:
-  default_config_hash: xyl78hzu0BE3hQ2EEut9MYDMGs1by7Qnx_EBeDX1fMk
+  default_config_hash: Gstdz_HmfGArklxtlLzwKqJ52MIujlMEwSAPu74hqeA
 id: node.trove_story_submission.default
 targetEntityType: node
 bundle: trove_story_submission

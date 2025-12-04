@@ -6,21 +6,6 @@ trove_stories.settings:
   parent: system.admin_config_content
   weight: 100
 
-# trove_stories.settings_form:
-#   title: 'Settings'
-#   parent: trove_stories.settings
-#   description: 'Configure settings for Trove Stories'
-#   route_name: trove_stories.settings
-#   weight: 101
-
-# trove_stories.settings_update:
-#   title: 'Update configuration'
-#   parent: trove_stories.settings
-#   description: 'Update configuration'
-#   route_name: trove_stories.update
-#   weight: 101
-  
-
 #main content menu item
 trove_stories.content:
   title: 'Trove Stories'
@@ -30,27 +15,21 @@ trove_stories.content:
 
 #In Drupal, the route name of a Views page display follows a specific pattern: view.VIEW_MACHINE_NAME.PAGE_MACHINE_NAME.
 
-
-# trove_stories.content.viewall:
-#   title: 'View all'
-#   route_name: 'view.trove_stories_views.page_1'
-#   parent: trove_stories.content
-
+#Content > Trove Stories > View Submissions
 trove_stories.content.story_submissions:
   title: 'View Submissions'
   route_name: 'view.trove_stories_views.page_1'
   parent: trove_stories.content
 
+#Content > Trove Stories > View Website Stories
 trove_stories.content.story_webitems:
   title: 'View Website Stories'
   route_name: 'view.trove_stories_views.page_2'
   parent: trove_stories.content
 
+#Content > Trove Stories > View Form
 trove_stories.content.story_form:
   title: 'View Form'
-  # route_name: 'entity.webform.canonical'
-  # route_parameters:
-  #   webform: 'trove-story'
   url: 'internal:/form/trove-story'
   parent: trove_stories.content
 

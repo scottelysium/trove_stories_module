@@ -20,18 +20,12 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
         $submission_id = $request->query->get('submission_id');
         
         $destination = $request->query->get('destination');
-        
-        //$submissionEntity = \Drupal::entityTypeManager()->getStorage('node')->load($submission_id);
 
         $storySubmissionNode = Node::load($submission_id);
-
-        //$bundle = $node->bundle();
 
         if ($storySubmissionNode->bundle() !== 'trove_story_submission') {
             return new RedirectResponse($destination);
         }
-        //$tg = $submissionEntity->get();
-      
 
         $webStoryNodeTitle = $storySubmissionNode->get('title')->value;
         $webStoryTitle = $storySubmissionNode->get('field_tss_story_title')->value; //note different from default title
@@ -72,103 +66,20 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
 
         $trove_story_web_story->save();
 
+        
+        $trove_story_web_story_edit_link = $trove_story_web_story->toUrl('edit-form')->toString();
         $trove_story_web_story_link = $trove_story_web_story->toUrl()->toString();
 
         $this->messenger()->addStatus("The story submission has been turned into a new <strong><a href='" . 
         $trove_story_web_story_link . "'>trove website story</a> item</strong>");
 
-        if ($destination) {
-            return new RedirectResponse($destination);
-        }
-          
+        //return $this->redirect($trove_story_web_story_link);
+        return new RedirectResponse($trove_story_web_story_edit_link);
 
-                // $trove_story_display->save();
-
-        // $trove_story_display_link = $trove_story_display->toUrl()->toString();
-
-        // //get the original page url that sent the request so we can send them back there
-        // $destination = $request->query->get('destination');
-
-        // $this->messenger()->addStatus("The webform submission has been turned into a new <strong><a href='" . $trove_story_display_link . "'>trove story</a></strong>");
-          
-
-        echo "1";
-
-        // $submissionData = $submission->getData();
-
-        // $uploaded_media_ids = [];
-
-        // foreach($submissionData["upload_images"] as $file_id) {
-            
-        //     $file = File::load($file_id);
-        //     $media = Media::create([
-        //     'bundle' => 'image',
-        //     'uid' => \Drupal::currentUser()->id(),
-        //     'status' => 1,
-        //     'name' => $file->getFilename(),
-        //     'field_media_image' => [
-        //         'target_id' => $file->id(),
-        //         'alt' => $file->getFilename(),
-        //         'title' => $file->getFilename(),
-        //         ],
-        //     ]);
-
-        //     $media->save();
-
-        //     $uploaded_media_ids[] = ['target_id' => $media->id()];
-        // }
-
-        // /*
-        // 2471, 2472,2473 these are stored in the file_managed table, and the ids reference these.
-        // $submissionData["upload_images"]
-        // $submissionData["trove_urls"]
-        // $submissionData["display_name_story_author"]
-        // $submissionData["email"]
-        // $submissionData["name"]
-        // $submissionData["postcode"]
-        // $submissionData["story_title"]
-        // $submissionData["tell_us_about_your_story"]
-        // $submissionData["use_trove"]
-        // $submissionData["what_inspired_you_to_make_this_project"]
-        // $submissionData["year_of_birth"]
-        // */
-
-        
-        // //create new trove story display from the data
-        // $trove_story_display = Node::create(array(
-        //     'type' => 'trove_story_display',
-        //     'title' => $submissionData["story_title"],
-        //     'langcode' => 'en',
-        //     'uid' => \Drupal::currentUser()->id(), 
-        //     'status' => 0,
-        //     'field_tsd_story_use' => $submissionData["use_trove"],
-        //     'field_tsd_story_about' => $submissionData["tell_us_about_your_story"],
-        //     'field_tsd_story_links' => $submissionData["trove_urls"],
-        //     'field_tsd_story_author' => $submissionData["display_name_story_author"],
-        //     'field_tsd_story_email' => $submissionData["email"],
-        //     'field_tsd_story_images' => $uploaded_media_ids,
-        //     'field_tsd_story_inspiration' => $submissionData["what_inspired_you_to_make_this_project"],
-        //     'field_tsd_story_name' => $submissionData["name"],
-        //     //DONT FORGET CATEGORY
-        //     'field_tsd_story_postcode' => $submissionData["postcode"],
-        //     'field_tsd_story_title' => $submissionData["story_title"],
-        //     'field_tsd_story_year_of_birth' => $submissionData["year_of_birth"]
-        // ));
-
-        // $trove_story_display->save();
-
-        // $trove_story_display_link = $trove_story_display->toUrl()->toString();
-
-        // //get the original page url that sent the request so we can send them back there
-        // $destination = $request->query->get('destination');
-
-        // $this->messenger()->addStatus("The webform submission has been turned into a new <strong><a href='" . $trove_story_display_link . "'>trove story</a></strong>");
-        
         // if ($destination) {
         //     return new RedirectResponse($destination);
         // }
 
-        // $this->redirect('system.admin_content');
     }
 }
 

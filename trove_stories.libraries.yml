@@ -2,3 +2,4 @@ trove_stories_library:
   css:
     theme:
       css/trove_stories.css: {}
+      css/node__type_trove_story_submission.css: {}
