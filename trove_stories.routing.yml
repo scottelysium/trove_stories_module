@@ -4,8 +4,7 @@ trove_stories.settings:
     _form: '\Drupal\trove_stories\Form\TroveStoriesSettingsForm'
     _title: 'Trove Stories Settings'
   requirements:
-    #_permission: 'administer site configuration' #this should change to standard authors
-    _permission: 'trove_editor' #editor seems to have higher privalge than author
+    _role: 'trove_editor+trove_author+trove_administrator+administrator'
 
 
 trove_stories.content:
@@ -13,7 +12,7 @@ trove_stories.content:
   defaults:
     _title: 'Trove Stories Content'
   requirements:
-    _permission: 'trove_editor'
+    _role: 'trove_editor+trove_author+trove_administrator+administrator'
 
 trove_stories.webform_submission.create_trove_story_web_story:
   path: '/admin/trove_stories/create_trove_story_web_story'
@@ -21,7 +20,7 @@ trove_stories.webform_submission.create_trove_story_web_story:
     _title: ""
     _controller: '\Drupal\trove_stories\Controller\CreateTroveStoryWebStoryController::createStory'
   requirements:
-    _permission: 'trove_editor'
+    _role: 'trove_editor+trove_author+trove_administrator+administrator' # plus means 'or'
 
 #The controller that reinstalls the config files in config/optional
 # trove_stories.update_trove_stories_config:

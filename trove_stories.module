@@ -294,7 +294,44 @@ function trove_stories_install() {
         $config = \Drupal::getContainer()->get('config.factory')->getEditable('trove_stories.settings');
         $config->set('trove_stories_selected_form', 'trove_story');
         $config->save();
+    }
 
+    /***** 
+        set access permissions for new content types, these are set at:
+        admin/structure/types/manage/trove_story_submission/permissions
+        admin/structure/types/manage/trove_story_web_story/permissions
+        We do this in the hook_install because the yml config files
+        require ALL permissions to be set and we don't want to accidently
+        edit or change any current permissions outside the scope of this modules
+        content types.
+    ****/
+    $roles = ['trove_editor', 'trove_author', 'trove_administrator'];
+
+    foreach($roles as $role) {
+        /** @var \Drupal\user\RoleInterface $loadedRole */
+        $loadedRole = \Drupal::entityTypeManager()->getStorage('user_role')->load($role);
+
+        /** trove_story_submission  **/
+        $loadedRole->grantPermission('create trove_story_submission content');
+        $loadedRole->grantPermission('delete any trove_story_submission content');
+        $loadedRole->grantPermission('delete own trove_story_submission content');
+        $loadedRole->grantPermission('delete trove_story_submission revisions');
+        $loadedRole->grantPermission('edit any trove_story_submission content');
+        $loadedRole->grantPermission('edit own trove_story_submission content');
+        $loadedRole->grantPermission('revert trove_story_submission revisions');
+        $loadedRole->grantPermission('view trove_story_submission revisions');
+
+        /** trove_story_web_story  **/
+        $loadedRole->grantPermission('create trove_story_web_story content');
+        $loadedRole->grantPermission('delete any trove_story_web_story content');
+        $loadedRole->grantPermission('delete own trove_story_web_story content');
+        $loadedRole->grantPermission('delete trove_story_web_story revisions');
+        $loadedRole->grantPermission('edit any trove_story_web_story content');
+        $loadedRole->grantPermission('edit own trove_story_web_story content');
+        $loadedRole->grantPermission('revert trove_story_web_story revisions');
+        $loadedRole->grantPermission('view trove_story_web_story revisions');
+
+        $loadedRole->save();
     }
 
 
@@ -348,110 +385,4 @@ function trove_stories_install() {
 }
 
 
-
-/**
- * Implements hook_form_alter().
- */
-// function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-   
-//     /** submissions page - if we are NOT on the trove story submissions/results page then remove the 'create_trove_story_action' option */
-//     if ($form_id === 'webform_submission_bulk_form') {
-
-//         $config = \Drupal::config('trove_stories.settings');
-//         $selected_form_id = $config->get('trove_stories_selected_form');
-//         //check if on page with a webform 
-//         $route_match = \Drupal::routeMatch();
-//         $route_name = $route_match->getRouteName();
-
-//         if (strpos($route_name, 'entity.webform.') === 0) { //check if form in general
-//             $webform = $route_match->getParameter('webform'); //this can return an object OR a simple id string.
-            
-//             //if we are not on trove story, remove the create trove story action.
-//             if (
-//                 ($webform instanceof \Drupal\webform\WebformInterface && $webform->id() !== $selected_form_id) //if an object we need to check id
-//                 || 
-//                 (is_string($webform) && $webform !== $selected_form_id)) //if a string we assume it must be the id.
-//                 { 
-//                 unset($form['operations']['action']['#options']['create_trove_story_action']);
-//             }
-//         }
-
-
-       
-//         //getState('results.custom.columns', array_keys($available_columns)); //you need to pass in all of the columns
-
-//         //avialbe columns:
-//         //$available_columns = $this->getSubmissionStorage()->getColumns($this->webform, $this->sourceEntity, NULL, TRUE);
-
-//         //get custom columns
-//         //$custom_columns = $this->getData('columns', array_keys($available_columns));
-
-//         //$custom_columns = $this->getData('columns', array_keys($available_columns));
-//     }
-
-    
-// }
-
-//         $entity = $formObject->getEntity();
-
-//         if ($entity->getEntityTypeId() === 'webform_submission' && in_array($entity->bundle(), ['trove_story'])) {
-//             //$form['#attached']['library'][] = 'trove_stories/trove_stories_library';
-//         }
-//     }
-// }
-
-//function trove_stories_preprocess_webform__trove_story(array &$variables) {
-//function trove_stories_preprocess_webform(array &$variables) {
-    
-    //echo "hello";
-   //// $webform = $variables['webform'];
-
-  // Manually build the form's render array. This is what populates {{ form }}.
-  //$form = \Drupal::formBuilder()->getForm('Drupal\webform\WebformSubmissionForm', $webform);
-  //$variables['form'] = $form;
-  
-  // To get the elements specifically.
-  //$variables['elements'] = $form['elements'];
-  
-  // The 'children' variable is not a standard variable for webform.html.twig.
-  // We explicitly create it here for your template.
-  //$variables['children'] = $form['elements'];
-  
-  // You may also need to manually get and assign other variables if needed.
-  // For example, getting the form title.
- // $variables['title'] = $webform->label();
-    
-   // echo "AHOY";
-   // $node = \Drupal::routeMatch()->getParameter('node');
-   // $entity_reference_manager = \Drupal::service('webform.entity_reference_manager');
-    // $webforms = $entity_reference_manager->getWebforms('trove_story');
-   // var_dump($variables['element']['#webform_id']);
-
-    //$webform = \Drupal::service('entity_type.manager')->getStorage('webform')->load($variables['element']['#webform_id']);
-    //var_dump($webform);
-    //$element = $variables['children'];
-    // Buttons include submit, previous, next, and draft.
-    // foreach (Element::children($element) as $key) {
-    //     $variables[$key] = $element[$key];
-    // }
-    //exit;
-//   $node = $variables['node'];
-//   if ($node->getType() == 'article') {
-//     // The default 'content' variable is often empty in custom hooks.
-//     // We need to build it manually.
-//     $view_builder = \Drupal::entityTypeManager()->getViewBuilder('node');
-//     $variables['content'] = $view_builder->view($node);
-//   }
-
-//}
-
-// function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {
-//     //echo "snow";
-//     //var_dump($variables['elements']['#node']);
-//     var_dump($suggestions);
-//     echo "orange";
-//     // if (\Drupal::currentUser()->isAuthenticated()) {
-//     //     $suggestions[] = 'node__logged_in';
-//     // }
-// }
 

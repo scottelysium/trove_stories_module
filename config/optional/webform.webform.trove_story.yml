@@ -1,7 +1,9 @@
-uuid: #f23477c5-f2c5-4154-b273-4c2e702c26d7
+uuid: 03f65d0a-b521-4dcb-90eb-80f055139900
 langcode: en
 status: open
 dependencies: {  }
+_core:
+  default_config_hash: sQkAqU7zONduCYIWvsGE5WkFoV66EVRvJ3v6lWm9KK4
 weight: 0
 open: null
 close: null
@@ -16,13 +18,13 @@ elements: |-
   use_trove:
     '#type': textarea
     '#title': 'Tell us how you use Trove'
+    '#required': true
     '#counter_type': word
     '#counter_minimum': 1
     '#counter_maximum': 250
     '#label_attributes':
       class:
         - heading
-    '#required': true
   markup:
     '#type': webform_markup
     '#markup': |-
@@ -270,7 +272,11 @@ access:
     users: {  }
     permissions: {  }
   administer:
-    roles: {  }
+    roles:
+      - trove_author
+      - trove_editor
+      - trove_administrator
+      - administrator
     users: {  }
     permissions: {  }
   test:

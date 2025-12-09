@@ -5,3 +5,4 @@ type: module
 core_version_requirement: ^10
 dependencies:
   - webform
+  - views_data_export
