@@ -31,19 +31,13 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
         $select_form_ids = [];
 
         foreach ($formsList as $currentform) {
-            //echo $currentform->label() . "<br>";
-            //echo $currentform->id() . "<br>";
             if (!str_contains($currentform->id(), "template_")) { //filter out the 'template' forms
                 $select_form_ids[$currentform->id()] = $currentform->label();
             }
-            
         }
 
         
-        
-
         $form['trove_stories_selected_form'] = [
-
             '#type' => 'select',
             '#title' => $this->t('Choose webform'),
             '#description' => $this->t('Select a form to use for Trove Stories'),
@@ -52,9 +46,27 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
                 ...$select_form_ids
             ],
             '#default_value' => $config->get('trove_stories_selected_form'),
-
         ];
 
+        $form['trove_stories_recaptcha_fieldset'] = [
+            '#type' => 'fieldset',
+            '#title' => $this->t('Recaptcha site keys'),
+            '#description' => $this->t('Provide your recaptcha site key to protect the form from spam and bots'),
+        ];
+
+        $form['trove_stories_recaptcha_fieldset']['trove_stories_recaptcha_site_key'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Recaptcha site key'),
+            //'#description' => $this->t('Provide your recaptcha site key to protect the form from spam and bots'),
+            '#default_value' => $config->get('trove_stories_recaptcha_site_key'),
+        ];
+
+        $form['trove_stories_recaptcha_fieldset']['trove_stories_recaptcha_secret_key'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Recaptcha SECRET key'),
+            //'#description' => $this->t('Provide your recaptcha site key to protect the form from spam and bots'),
+            '#default_value' => $config->get('trove_stories_recaptcha_secret_key'),
+        ];
         //NOTE: this is no longer used
         // $form['trove_stories_update_settings'] = [
         //     '#type' => 'fieldset',

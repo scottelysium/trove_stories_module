@@ -35,19 +35,7 @@ function trove_stories_theme($existing, $type, $theme, $path) {
 //     }
 // }
 
-/* We add a custom template into the trove stories form  */
-function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {
 
-    // $config = \Drupal::config('trove_stories.settings');
-    // $selected_form_id = $config->get('trove_stories_selected_form');
-    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
-
-    //if ($variables['element']['#webform_id'] == 'trove_story') {
-    if ($variables['element']['#webform_id'] == $selected_form_id) {
-        //look for this 'webform--trove-stories.html' template in modules/trove_stories/templates
-        $suggestions[] = 'webform__trove_stories'; 
-    }
-}
 
 //hook into the form submission and create a new trove webform submission entry.
 function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
@@ -169,7 +157,7 @@ function trove_stories_entity_access(Drupal\Core\Entity\EntityInterface $entity,
 * Implements hook_preprocess_html().
 */
 /*
-    Add custom style sheets and body class for Trove Stories admin pages.
+    Add custom css style sheets and body class for Trove Stories admin pages.
 */
 function trove_stories_preprocess_html(&$variables) {
 
@@ -177,7 +165,81 @@ function trove_stories_preprocess_html(&$variables) {
         $variables['#attached']['library'][] = 'trove_stories/trove_stories_library'; //add our stylesheet
         $variables['attributes']['class'][] = 'troveStories'; //add body class
     }
+}
 
+/**
+ * Implements hook_library_info_build().
+ * This is to add the recaptcha API library from google
+ * with the parameter reCAPTCHA_site_key fetched from settings.
+ */
+function trove_stories_library_info_build() {
+    
+    $config = \Drupal::config('my_module.settings');
+  /*$recaptcha_site_key = $config->get('recaptcha_site_key');*/
+  /*
+    $config = \Drupal::config('my_module.settings');
+  $recaptcha_site_key = $config->get('recaptcha_site_key');
+  */
+    
+
+    $recaptcha_site_key = "test_site_recpatcha_key";
+    if (empty($recaptcha_site_key)) {
+        // If the key is not set, return an empty array for this library.
+        return [];
+    }
+
+    $recapta_url = 'https://www.google.com/recaptcha/api.js?render=' . $recaptcha_site_key;
+
+    $libraries['trove_recaptcha_api'] = [
+        //'version' => '',
+        'header' => TRUE, // Load in the <head>
+        'js' => [
+            // The dynamically generated URL is used as the key.
+            $recapta_url => [
+                'type' => 'external',
+                'minified' => TRUE,
+                // 'attributes' => [
+                //     'async' => TRUE,
+                // ],
+            ],
+        ],
+        // 3. Set the cache tags so the library is rebuilt when the key changes.
+        // 'metadata' => [
+        //     'cache' => [
+        //         'tags' => $config->getCacheTags(),
+        //     ],
+        // ],
+    ];
+
+    return $libraries;
+
+}
+
+/**
+ * Implements hook_form_alter().
+ * We add in custom js/css from the module library into this specific form
+ */
+function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+
+    if (!empty($form['#webform_id']) && $selected_form_id === $form['#webform_id']) {
+        $form['#attached']['library'][] = 'trove_stories/trove_recaptcha_api'; //this is a dynamically created libray in hook_library_info_build
+        //$form['#attached']['library'][] = 'trove_stories/trove_stories_recaptcha';
+    }
+    
+}
+
+/* We add a custom template into the trove stories form  */
+function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {
+
+    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+
+    //if ($variables['element']['#webform_id'] == 'trove_story') {
+    if ($variables['element']['#webform_id'] == $selected_form_id) {
+        //look for this 'webform--trove-stories.html' template in modules/trove_stories/templates
+        $suggestions[] = 'webform__trove_stories';
+    }
 }
 
 /**
@@ -257,7 +319,6 @@ function trove_stories_node_view_alter(array &$build, \Drupal\Core\Entity\Entity
         ];
 
         //create the 'convert to trove story' button
-       // $query_string_options = \Drupal::destination()->getAsArray();
         $query_string_options['submission_id'] = $entity->id();
         $convert_route_url = Url::fromRoute('trove_stories.webform_submission.create_trove_story_web_story');
         $convert_route_url->setOption('query', $query_string_options);

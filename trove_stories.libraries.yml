@@ -3,3 +3,15 @@ trove_stories_library:
     theme:
       css/trove_stories.css: {}
       css/node__type_trove_story_submission.css: {}
+
+
+# trove_recaptcha_api: #this needs to be dynamically generated for the reCAPTCHA_site_key'
+#   header: true  # stick it in the header pls
+#   js:
+#     'https://www.google.com/recaptcha/api.js?render=reCAPTCHA_site_key':
+#       type: external # Required for non-local files
+#       minified: true # Optional: indicates the script is already minified
+
+trove_stories_recaptcha:
+    js:
+      js/trove_stories_recaptcha.js: {}
