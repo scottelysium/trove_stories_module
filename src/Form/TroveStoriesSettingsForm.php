@@ -101,10 +101,16 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
+
         $config = $this->config('trove_stories.settings');
-       // $config->set('trove_stories.trove_stories_selected_form', $form_state->getValue('trove_stories_selected_form'));
+
         $config->set('trove_stories_selected_form', $form_state->getValue('trove_stories_selected_form'));
+        $config->set('trove_stories_recaptcha_site_key', $form_state->getValue('trove_stories_recaptcha_site_key'));
+        $config->set('trove_stories_recaptcha_secret_key', $form_state->getValue('trove_stories_recaptcha_secret_key'));
+
         $config->save();
+
+
         return parent::submitForm($form, $form_state);
     }
 

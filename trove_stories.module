@@ -174,15 +174,9 @@ function trove_stories_preprocess_html(&$variables) {
  */
 function trove_stories_library_info_build() {
     
-    $config = \Drupal::config('my_module.settings');
-  /*$recaptcha_site_key = $config->get('recaptcha_site_key');*/
-  /*
-    $config = \Drupal::config('my_module.settings');
-  $recaptcha_site_key = $config->get('recaptcha_site_key');
-  */
-    
+    $config = \Drupal::config('trove_stories.settings');
+    $recaptcha_site_key = $config->get('trove_stories_recaptcha_site_key');
 
-    $recaptcha_site_key = "test_site_recpatcha_key";
     if (empty($recaptcha_site_key)) {
         // If the key is not set, return an empty array for this library.
         return [];
@@ -198,21 +192,31 @@ function trove_stories_library_info_build() {
             $recapta_url => [
                 'type' => 'external',
                 'minified' => TRUE,
-                // 'attributes' => [
-                //     'async' => TRUE,
-                // ],
             ],
         ],
-        // 3. Set the cache tags so the library is rebuilt when the key changes.
-        // 'metadata' => [
-        //     'cache' => [
-        //         'tags' => $config->getCacheTags(),
-        //     ],
-        // ],
+        //Set the cache tags so the library is rebuilt when the key changes.
+        'metadata' => [
+            'cache' => [
+                'tags' => $config->getCacheTags(),
+            ],
+        ],
     ];
 
     return $libraries;
+}
 
+/**
+ * Implements hook_page_attachments().
+ * we use this to insert the recaptcha key from the config into the javascript libray/file that executes the recaptcha api call.
+ */
+function trove_stories_page_attachments(array &$attachments) {
+    $recaptcha_site_key = \Drupal::config('trove_stories.settings')->get('trove_stories_recaptcha_site_key');
+
+    // Attach the value to drupalSettings under your module's namespace.
+    $attachments['#attached']['drupalSettings']['trove_stories']['trove_stories_recaptcha_site_key'] = $recaptcha_site_key;
+
+    // Also attach your JavaScript library.
+    $attachments['#attached']['library'][] = 'trove_stories/trove_stories_recaptcha';
 }
 
 /**
@@ -225,7 +229,7 @@ function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
 
     if (!empty($form['#webform_id']) && $selected_form_id === $form['#webform_id']) {
         $form['#attached']['library'][] = 'trove_stories/trove_recaptcha_api'; //this is a dynamically created libray in hook_library_info_build
-        //$form['#attached']['library'][] = 'trove_stories/trove_stories_recaptcha';
+        $form['#attached']['library'][] = 'trove_stories/trove_stories_recaptcha';
     }
     
 }
@@ -241,44 +245,6 @@ function trove_stories_theme_suggestions_webform_alter(array &$suggestions, arra
         $suggestions[] = 'webform__trove_stories';
     }
 }
-
-/**
- * Implements hook_entity_operation().
- */
-/*
-    On the submissions page for trove stories we add the function 'Convert to Trove Story' operation link dropdown
-*/
-// function trove_stories_entity_operation(Drupal\Core\Entity\EntityInterface $entity) {
-    
-//     $operations = [];
-
-//     // Check if the entity is of a specific type (e.g., 'node').
-//     if ($entity->getEntityTypeId() === 'webform_submission') {
-
-//         if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) {
-
-//             $rd = $entity->id();
-//             // add current url to query string 'destination'
-//             $query_string_options = \Drupal::destination()->getAsArray();
-
-//             // Also ddd the submissin ID to the query options.
-//             $query_string_options['submission_id'] = $entity->id();
-
-//             $route_url = Url::fromRoute('trove_stories.webform_submission.create_trove_story');
-//             // Add the 'destination' query parameter with the current page's URL.
-//             $route_url->setOption('query', $query_string_options);
-
-//             $operations['create_trove_story'] = [
-//                 'title' => \Drupal::service('string_translation')->translate('Convert to Trove Story'),
-//                 'url' => $route_url,
-//                 'weight' => -10, // Adjust weight to control order.
-//             ];
-//         }
-        
-//     }
-    
-//     return $operations;
-// }
 
 /**
  * Implements hook_node_view_alter().
