@@ -30,7 +30,8 @@ function trove_stories_theme($existing, $type, $theme, $path) {
 
 //     if ($variables['elements']['#base_plugin_id'] === 'page_title_block') {
 //         if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) { 
-//             $suggestions[] = 'block__trove_stories_admin_page_title';
+//             //$suggestions[] = 'block__trove_stories_admin_page_title';
+//             $suggestions[] = 'trove_stories_input__submit.html';
 //         }
 //     }
 // }
@@ -210,6 +211,10 @@ function trove_stories_library_info_build() {
  * we use this to insert the recaptcha key from the config into the javascript libray/file that executes the recaptcha api call.
  */
 function trove_stories_page_attachments(array &$attachments) {
+
+    $isTroveForm = \Drupal::service('trove_stories.common_services')->isTroveStoryArea();
+    if (!$isTroveForm) return;
+
     $recaptcha_site_key = \Drupal::config('trove_stories.settings')->get('trove_stories_recaptcha_site_key');
 
     // Attach the value to drupalSettings under your module's namespace.
@@ -226,6 +231,8 @@ function trove_stories_page_attachments(array &$attachments) {
 function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
     $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+
+    //$current_form = $form['#webform_id'];
 
     if (!empty($form['#webform_id']) && $selected_form_id === $form['#webform_id']) {
         $form['#attached']['library'][] = 'trove_stories/trove_recaptcha_api'; //this is a dynamically created libray in hook_library_info_build
