@@ -8,22 +8,64 @@ use Drupal\Core\Access\AccessResult;
 /**
 * Implements hook_theme().
 */
-function trove_stories_theme($existing, $type, $theme, $path) {
-  return [
-    // 'field__node__title__custom_content_type' => [
-    //     'template' => 'field--node--title--custom-content-type',
-    //     'base hook' => 'field',
-    // ],
-  
-    'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
-        'base hook' => 'webform',
-    ],
-    'field__node__title__trove_story_submission' => [
-        'template' => 'field--node--title--trove-story-submission',
-        'base hook' => 'field',
-    ],
-  ];
+function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do runtime logic here
+
+        return [
+            // 'field__node__title__custom_content_type' => [
+            //     'template' => 'field--node--title--custom-content-type',
+            //     'base hook' => 'field',
+            // ],
+        
+            'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
+                'base hook' => 'webform',
+            ],
+            'field__node__title__trove_story_submission' => [ //check if these templates used on other forms
+                'template' => 'field--node--title--trove-story-submission',
+                'base hook' => 'field',
+            ],
+            // 'input__submit' => [ //this is now used on other forms??
+            //     'template' => 'input--submit',
+            //     'base hook' => 'input__submit',
+            // ]
+            'input__submit_trove_stories' => [ //register new hook suggestion implemented in trove_stories_theme_suggestions_input_alter()
+                'base hook' => 'input__submit',
+            ]
+        ];
 }
+
+/*
+We override the submit button template for the trove stories form, note there are multiple 
+submit buttons, so we directly check the id for 'edit-submit' which is the main form submission button.
+*/
+function trove_stories_theme_suggestions_input_alter(array &$suggestions, array $variables) {
+
+    if (empty($variables['element']['#id'])) return;
+    
+    $id = $variables['element']['#id'];
+
+    if ($variables['theme_hook_original'] === 'input__submit' && $id === 'edit-submit') {
+       
+        if (\Drupal::service('trove_stories.common_services')->isTroveStoryArea()) {
+
+            $suggestions[] = 'input__submit_trove_stories';
+        }
+    }
+    
+}
+
+/* We add a custom template into the trove stories form  */
+function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {
+
+    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+
+    //if ($variables['element']['#webform_id'] == 'trove_story') {
+    if ($variables['element']['#webform_id'] == $selected_form_id) {
+        //look for this 'webform--trove-stories.html' template in modules/trove_stories/templates
+        $suggestions[] = 'webform__trove_stories';
+    }
+}
+
+
 
 /* We add a custom template into the page title area */
 // function trove_stories_theme_suggestions_block_alter(array &$suggestions, array &$variables) {
@@ -241,17 +283,7 @@ function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
     
 }
 
-/* We add a custom template into the trove stories form  */
-function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {
 
-    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
-
-    //if ($variables['element']['#webform_id'] == 'trove_story') {
-    if ($variables['element']['#webform_id'] == $selected_form_id) {
-        //look for this 'webform--trove-stories.html' template in modules/trove_stories/templates
-        $suggestions[] = 'webform__trove_stories';
-    }
-}
 
 /**
  * Implements hook_node_view_alter().

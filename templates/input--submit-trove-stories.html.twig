@@ -1,0 +1,11 @@
+{# SUBMIT BUTTON
+{{ dump(attributes) }}
+{{ dump(attributes['id']) }}
+{{ dump(attributes['id']) }} #}
+{# {{ attributes['id'] }} #}
+{# {% if attributes['id'] == 'edit-submit' %}
+    BOTTOM SUBMIT ONLY
+{% else %}
+   bubble <button{{ attributes }}>{{ safe_value_label | raw }}</button>{{ children }}
+{% endif %} #}
+<button{{ attributes }}>{{ safe_value_label | raw }}</button>
