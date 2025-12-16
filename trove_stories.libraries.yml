@@ -1,10 +1,19 @@
-trove_stories_library:
+trove_stories_css_library:
   css:
     theme:
       css/trove_stories.css: {}
+
+trove_stories_submission_css_library:
+  css:
+    theme:
       css/node__type_trove_story_submission.css: {}
 
-#this is not the api, this is the implementation the relies on the api, the api is inserted in the main .module via a hook.
+trove_stories_form_css_library:
+  css:
+    theme:
+      css/webform__trove_stories.css: {}
+
+#this is not the api, this is the implementation the relies on the api, the api is inserted in the trove_stories.module file via a hook.
 trove_stories_recaptcha: 
     js:
       js/trove_stories_recaptcha.js: {}

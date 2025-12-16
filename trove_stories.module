@@ -4,7 +4,7 @@ use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\Core\Access\AccessResult;
-
+use Drupal\Core\Form\FormStateInterface;
 /**
 * Implements hook_theme().
 */
@@ -45,7 +45,7 @@ function trove_stories_theme_suggestions_input_alter(array &$suggestions, array 
 
     if ($variables['theme_hook_original'] === 'input__submit' && $id === 'edit-submit') {
        
-        if (\Drupal::service('trove_stories.common_services')->isTroveStoryArea()) {
+        if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) {
 
             $suggestions[] = 'input__submit_trove_stories';
         }
@@ -83,8 +83,8 @@ function trove_stories_theme_suggestions_webform_alter(array &$suggestions, arra
 //hook into the form submission and create a new trove webform submission entry.
 function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
 
-    if ($webform_submission->getEntityTypeId() === 'webform_submission') {
-        if (\Drupal::service('trove_stories.common_services')->isTroveStoryArea()) {
+    if ($webform_submission->getEntityTypeId() === 'webform_submission') { //note this is the webform submission content type, not the trove stories submission content type
+        if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) {
 
             //create trove story submission content
             $submissionData = $webform_submission->getData();
@@ -133,7 +133,6 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
 
             $trove_story_submission->save();
 
-
         }
         
         echo "test";
@@ -164,38 +163,6 @@ function trove_stories_entity_access(Drupal\Core\Entity\EntityInterface $entity,
     return AccessResult::neutral();
 }
 
-// function trove_stories_views_pre_view(ViewExecutable $view, $display_id) {
-//     if ($view->id() === 'trove_stories_submissions' && $display_id === 'page_1') {
-//         echo "test";
-//         $newfield = array();
-//         $newfield['id'] = 'field_whatever';
-//         $newfield['table'] = 'node.field_whatever';
-//         $newfield['field'] = 'field_whatever';
-//         $view->setHandler($view->current_display, 'field', 'field_whatever', $newfield);
-//     }
-   
-// }
-
-/**
- * Implements hook_views_pre_render().
- */
-// function trove_stories_views_pre_render(ViewExecutable $view) {
-    
-//     if ($view->id() === 'trove_stories_submissions' && $view->current_display === 'page_1') {
-//        // echo "test";
-
-//        $columns = $view->field;
-//         foreach ($view->result as $row) {
-//             $row->my_custom_column = "testcustom column";
-//             $fields = $row->field;
-//             echo "1";
-//         }
-
-//         echo "here";
-//   }
-
-// }
-
 /**
 * Implements hook_preprocess_html().
 */
@@ -204,9 +171,18 @@ function trove_stories_entity_access(Drupal\Core\Entity\EntityInterface $entity,
 */
 function trove_stories_preprocess_html(&$variables) {
 
-    if (\Drupal::service('trove_stories.common_services')->isTroveStoryArea()) { 
-        $variables['#attached']['library'][] = 'trove_stories/trove_stories_library'; //add our stylesheet
-        $variables['attributes']['class'][] = 'troveStories'; //add body class
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm() 
+        || \Drupal::service('trove_stories.common_services')->isTroveStorySubmission()) { 
+        $variables['#attached']['library'][] = 'trove_stories/trove_stories_css_library'; //add our main stylesheet
+        $variables['attributes']['class'][] = 'troveStories'; //add body class to all trove stories areas
+    }
+
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) { 
+        $variables['#attached']['library'][] = 'trove_stories/trove_stories_form_css_library'; //add our form css file only for trove form page
+    }
+
+    if (\Drupal::service('trove_stories.common_services')->isTroveStorySubmission()) { 
+        $variables['#attached']['library'][] = 'trove_stories/trove_stories_submission_css_library'; //add our submission page style sheet.
     }
 }
 
@@ -254,7 +230,7 @@ function trove_stories_library_info_build() {
  */
 function trove_stories_page_attachments(array &$attachments) {
 
-    $isTroveForm = \Drupal::service('trove_stories.common_services')->isTroveStoryArea();
+    $isTroveForm = \Drupal::service('trove_stories.common_services')->isTroveStoryForm();
     if (!$isTroveForm) return;
 
     $recaptcha_site_key = \Drupal::config('trove_stories.settings')->get('trove_stories_recaptcha_site_key');
@@ -283,7 +259,27 @@ function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
     
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * trove-story === webform-submission-trove-story-add-form
+ */
+/*NOTE THIS RUN ON FORM LOAD, NOT SUBMISSIOn
+ 
+    Here we create a custom validation function for the form so we can validate the recaptcha code.
+  */
+ function trove_stories_form_webform_submission_trove_story_add_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
+  // Add a custom validation function to the list of validators.
+  //echo "test";
+    $form['#validate'][] = '_trove_stories_webform_validate'; //we tell the form that we have a custom validation function
+}
 
+//this is our implementation of the custom form validation function.
+function _trove_stories_webform_validate(array &$form, FormStateInterface $form_state) {
+    $recaptcha_hidden_token = $form_state->getValue('tswf_recaptcha_token');
+    if (empty($recaptcha_hidden_token)) {
+        $form_state->setErrorByName(NULL, 'Invalid form submission!!!!!!');
+    }
+}
 
 /**
  * Implements hook_node_view_alter().

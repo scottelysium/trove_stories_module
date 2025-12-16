@@ -10,8 +10,8 @@ class TroveStoriesCommonServices {
         return $selected_form_id;
     }
 
-    /** This is common function to check if this is a trove_stories controlled area */
-    public function isTroveStoryArea() {
+  
+    public function isTroveStoryForm() {
 
         $route_match = \Drupal::routeMatch();
         $route_name = $route_match->getRouteName();
@@ -33,9 +33,16 @@ class TroveStoriesCommonServices {
                 return true;
             }
         }
+
+        return false;
+    }
+
+
+    public function isTroveStorySubmission() {
         
-        //This checks if we are on a trove stories content type
+        $route_match = \Drupal::routeMatch();
         $route_node = $route_match->getParameter('node');
+        
         if ($route_node instanceof NodeInterface) {
             if ($route_node->bundle() === 'trove_story_submission') {
                 return true;

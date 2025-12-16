@@ -110,6 +110,13 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
 
         $config->save();
 
+        /*IMPORTANT: 
+            because out module relies on hook_library_info_build(),
+            which is heavily cached, to dynamically
+            insert the recaptcha api, we need to ensure a library cache clear so
+            the recent values in this form are used in the hook.
+        */
+        \Drupal::service('library.discovery')->clearCachedDefinitions();
 
         return parent::submitForm($form, $form_state);
     }
