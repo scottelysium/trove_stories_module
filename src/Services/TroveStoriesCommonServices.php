@@ -19,20 +19,24 @@ class TroveStoriesCommonServices {
         $webform = $route_match->getParameter('webform'); //this can return an object OR a simple id string.
         $selected_form_id = $this->getTroveStoriesFormId();
 
+        if ($route_name === 'entity.webform.canonical' && $webform->id() === $selected_form_id) {
+            return true;
+        }
+
        // echo $route_name;
 
        //if (strpos($route_name, 'entity.webform.') === 0 || strpos($route_name, 'entity.webform_submission.') === 0) {
 
         //This checks if we are on the trove stories form
-        if (strpos($route_name, 'entity.webform.') === 0) {
-            if (
-                ($webform instanceof \Drupal\webform\WebformInterface && $webform->id() === $selected_form_id) //if an object we need to check id
-                || 
-                (is_string($webform) && $webform === $selected_form_id)) //if a string we assume it must be the id.
-            { 
-                return true;
-            }
-        }
+        // if (strpos($route_name, 'entity.webform.') === 0) {
+        //     if (
+        //         ($webform instanceof \Drupal\webform\WebformInterface && $webform->id() === $selected_form_id) //if an object we need to check id
+        //         || 
+        //         (is_string($webform) && $webform === $selected_form_id)) //if a string we assume it must be the id.
+        //     { 
+        //         return true;
+        //     }
+        // }
 
         return false;
     }

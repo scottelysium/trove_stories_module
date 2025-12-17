@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: sQkAqU7zONduCYIWvsGE5WkFoV66EVRvJ3v6lWm9KK4
+  default_config_hash: EPa8r5bPKAAqV1sQ3YPBFohUMEcSIDph3eURKO314cw
 weight: 0
 open: null
 close: null
@@ -15,7 +15,7 @@ title: 'Trove Story'
 description: ''
 categories: {  }
 elements: |-
-  use_trove:
+  tswf_how_you_use_trove:
     '#type': textarea
     '#title': 'Tell us how you use Trove'
     '#required': true
@@ -25,40 +25,44 @@ elements: |-
     '#label_attributes':
       class:
         - heading
-  markup:
+  tswf_intro_message:
     '#type': webform_markup
     '#markup': |-
-      <p><h2>Want to share your Story?</h2></p>
+      <p>&nbsp;</p>
+
+      <h2>Want to share your Story?</h2>
+
+      <p>&nbsp;</p>
 
       <p>If you’ve made a project using Trove, please share it with us below. You can upload images and videos.</p>
-  story_title:
+  tswf_story_title:
     '#type': textfield
     '#title': 'Story Title'
     '#required': true
-  display_name_story_author:
+  tswf_display_name_story_author:
     '#type': textfield
     '#title': 'Display Name/Story Author'
     '#required': true
-  tell_us_about_your_story:
+  tswf_about_your_story:
     '#type': textarea
     '#title': 'Tell us about your story'
+    '#required': true
     '#counter_type': word
     '#counter_minimum': 1
     '#counter_maximum': 500
     '#counter_maximum_message': 'You have exceeded the limit of words'
-    '#required': true
-  upload_images:
+  tswf_upload_images:
     '#type': webform_image_file
     '#title': 'Upload images'
     '#multiple': 4
     '#file_extensions': 'gif jpg png jpeg'
-  what_inspired_you_to_make_this_project:
+  tswf_inspired:
     '#type': textarea
     '#title': 'What inspired you to make this project?'
     '#counter_type': word
     '#counter_minimum': 1
     '#counter_maximum': 100
-  trove_urls:
+  tswf_links:
     '#type': url
     '#title': 'Link articles used from the Trove archive'
     '#multiple': true
@@ -71,35 +75,38 @@ elements: |-
       https://webarchive.nla.gov.au</p>
     '#pattern': '^(?i)(?=.*?\bnla.gov.au\b).*$'
     '#pattern_error': 'Link must be a valid trove URL'
-  user_details:
+  tswf_about_message:
     '#type': label
     '#title': 'A few things about you'
-  name:
+  tswf_name:
     '#type': textfield
     '#title': Name
     '#required': true
-  email:
+  tswf_email:
     '#type': email
     '#title': Email
     '#description': '<p>Your email address, year of birth and postcode will not be posted with your Trove Story.</p>'
     '#required': true
   flexbox:
     '#type': webform_flexbox
-    year_of_birth:
+    tswf_year_of_birth:
       '#type': number
       '#title': 'Year of birth'
       '#min': 1900
       '#max': 3000
       '#step': 1
-    postcode:
+    tswf_postcode:
       '#type': textfield
       '#title': Postcode
-  privacy_notice:
+  tswf_privacy_message:
     '#type': webform_markup
     '#markup': |-
       <h2>Trove Privacy Collection Notice</h2>
 
       <p><strong>By clicking submit, you consent to the work being collected, held, used and disclosed in accordance with the <a href="https://trove.nla.gov.au/about/policies/privacy">Trove privacy notice</a> and the <a href="https://www.library.gov.au/visit/about-us/corporate-information/library-services-policies-and-plans/privacy-policy">National Library’s Privacy Policy</a></strong>. We will only use and disclose your personal information as described in the Trove Privacy notice and the National Library’s Privacy Policy, and you provide consent. You may contact the Library at any time to withdraw consent.</p>
+  tswf_recaptcha_token:
+    '#type': hidden
+    '#title': 'Hidden reCAPTCHA Token'
 css: ''
 javascript: ''
 settings:
@@ -273,8 +280,6 @@ access:
     permissions: {  }
   administer:
     roles:
-      - trove_author
-      - trove_editor
       - trove_administrator
       - administrator
     users: {  }

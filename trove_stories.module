@@ -91,7 +91,7 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
 
             $uploaded_media_ids = [];
 
-            foreach($submissionData["upload_images"] as $file_id) {
+            foreach($submissionData["tswf_upload_images"] as $file_id) {
                 
                 $file = File::load($file_id); 
                 $media = Media::create([
@@ -114,21 +114,21 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
             //create new trove story display from the data
             $trove_story_submission = Node::create(array(
                 'type' => 'trove_story_submission',
-                'title' => $submissionData["story_title"],
+                'title' => $submissionData["tswf_story_title"],
                 'langcode' => 'en',
                 'uid' => \Drupal::currentUser()->id(), 
                 'status' => 0,
-                'field_tss_story_use' => $submissionData["use_trove"],
-                'field_tss_story_about' => $submissionData["tell_us_about_your_story"],
-                'field_tss_story_links' => $submissionData["trove_urls"],
-                'field_tss_story_author' => $submissionData["display_name_story_author"],
-                'field_tss_story_email' => $submissionData["email"],
+                'field_tss_story_use' => $submissionData["tswf_how_you_use_trove"],
+                'field_tss_story_about' => $submissionData["tswf_about_your_story"],
+                'field_tss_story_links' => $submissionData["tswf_links"],
+                'field_tss_story_author' => $submissionData["tswf_display_name_story_author"],
+                'field_tss_story_email' => $submissionData["tswf_email"],
                 'field_tss_story_images' => $uploaded_media_ids,
-                'field_tss_story_inspiration' => $submissionData["what_inspired_you_to_make_this_project"],
-                'field_tss_story_name' => $submissionData["name"],
-                'field_tss_story_postcode' => $submissionData["postcode"],
-                'field_tss_story_title' => $submissionData["story_title"],
-                'field_tss_story_year_of_birth' => $submissionData["year_of_birth"]
+                'field_tss_story_inspiration' => $submissionData["tswf_inspired"],
+                'field_tss_story_name' => $submissionData["tswf_name"],
+                'field_tss_story_postcode' => $submissionData["tswf_postcode"],
+                'field_tss_story_title' => $submissionData["tswf_story_title"],
+                'field_tss_story_year_of_birth' => $submissionData["tswf_year_of_birth"]
             ));
 
             $trove_story_submission->save();
@@ -167,7 +167,7 @@ function trove_stories_entity_access(Drupal\Core\Entity\EntityInterface $entity,
 * Implements hook_preprocess_html().
 */
 /*
-    Add custom css style sheets and body class for Trove Stories admin pages.
+    Add custom css style sheets and body class for Trove Stories pages.
 */
 function trove_stories_preprocess_html(&$variables) {
 
@@ -261,23 +261,71 @@ function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $
 
 /**
  * Implements hook_form_FORM_ID_alter().
- * trove-story === webform-submission-trove-story-add-form
+ * We hook into the trove story form on load and add a new validation function callback 
+ * the validation function is called only on form submission.
+ * note the form id is not 'trove_story' but 'webform-submission-trove-story-add-form' these are the same forms though.
  */
-/*NOTE THIS RUN ON FORM LOAD, NOT SUBMISSIOn
- 
-    Here we create a custom validation function for the form so we can validate the recaptcha code.
-  */
- function trove_stories_form_webform_submission_trove_story_add_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
-  // Add a custom validation function to the list of validators.
-  //echo "test";
+
+function trove_stories_form_webform_submission_trove_story_add_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
     $form['#validate'][] = '_trove_stories_webform_validate'; //we tell the form that we have a custom validation function
 }
 
 //this is our implementation of the custom form validation function.
 function _trove_stories_webform_validate(array &$form, FormStateInterface $form_state) {
+
     $recaptcha_hidden_token = $form_state->getValue('tswf_recaptcha_token');
+
     if (empty($recaptcha_hidden_token)) {
-        $form_state->setErrorByName(NULL, 'Invalid form submission!!!!!!');
+        $form_state->setErrorByName(NULL, 'Invalid form submission');
+        return;
+    }
+
+    //if we have the token, then send to recaptcha to verify
+    $config = \Drupal::config('trove_stories.settings');
+    $recaptcha_secret_key = $config->get('trove_stories_recaptcha_secret_key');
+
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+
+    $post_data = [
+        'secret' => $recaptcha_secret_key,
+        'response' => $recaptcha_hidden_token,
+    ];
+
+    $ip_address = \Drupal::request()->getClientIp(); //locally this returns the docker container ip.
+
+    if ($ip_address) {
+        $post_data['remoteip'] = $ip_address;
+    }
+
+    $options = [
+        'http' => [
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method'  => 'POST',
+            'content' => http_build_query($post_data),
+        ],
+    ];
+    $context  = stream_context_create($options);
+
+    $result = file_get_contents($url, false, $context);
+
+    if ($result === false) {
+        // Log the error for debugging purposes (optional)
+        $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
+        return;
+    }
+
+    $response_data = json_decode($result, true);
+    // $response_data['success'];
+    // $response_data['challenge_ts'];
+    // $response_data['hostname'];
+    // $response_data['score'];
+    // $response_data['action'];
+
+    if ($response_data && $response_data['success'] === true) {
+        if ($response_data['score'] < 0.5) {
+            $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
+            return;
+        }
     }
 }
 
