@@ -27,7 +27,7 @@
                 const hiddenSubmitButton = trove_form_element.querySelector('#edit-submit');
 
                 recaptchaSubmitButton.addEventListener('click', function (event) {
-                    console.log("recaptcha submit button has been clicked");
+                    
                     grecaptcha.ready(function() {
                         grecaptcha.ready(function() {
                             grecaptcha.execute(settings.trove_stories.trove_stories_recaptcha_site_key, {action: 'submit'}).then(

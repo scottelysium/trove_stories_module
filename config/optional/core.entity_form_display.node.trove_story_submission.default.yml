@@ -4,23 +4,26 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.media_entity_browser
+    - field.field.node.trove_story_submission.field_tss_status
     - field.field.node.trove_story_submission.field_tss_story_about
-    - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_author
     - field.field.node.trove_story_submission.field_tss_story_email
     - field.field.node.trove_story_submission.field_tss_story_images
     - field.field.node.trove_story_submission.field_tss_story_inspiration
+    - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_name
     - field.field.node.trove_story_submission.field_tss_story_postcode
     - field.field.node.trove_story_submission.field_tss_story_title
-    - field.field.node.trove_story_submission.field_tss_story_year_of_birth
     - field.field.node.trove_story_submission.field_tss_story_use
+    - field.field.node.trove_story_submission.field_tss_story_year_of_birth
     - node.type.trove_story_submission
   module:
     - content_moderation
     - entity_browser
     - link
     - path
+_core:
+  default_config_hash: ghFIeWCNFI_zPQG0n4HZB3LT0pcfaKPCMzndwbKwvzk
 id: node.trove_story_submission.default
 targetEntityType: node
 bundle: trove_story_submission
@@ -28,29 +31,27 @@ mode: default
 content:
   created:
     type: datetime_timestamp
-    weight: 10
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_tss_status:
+    type: options_select
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
   field_tss_story_about:
     type: string_textarea
-    weight: 122
+    weight: 13
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_tss_story_links:
-    type: link_default
-    weight: 123
-    region: content
-    settings:
-      placeholder_url: ''
-      placeholder_title: ''
-    third_party_settings: {  }
   field_tss_story_author:
     type: string_textfield
-    weight: 124
+    weight: 15
     region: content
     settings:
       size: 60
@@ -58,7 +59,7 @@ content:
     third_party_settings: {  }
   field_tss_story_email:
     type: email_default
-    weight: 125
+    weight: 16
     region: content
     settings:
       placeholder: ''
@@ -66,7 +67,7 @@ content:
     third_party_settings: {  }
   field_tss_story_images:
     type: entity_browser_entity_reference
-    weight: 126
+    weight: 17
     region: content
     settings:
       entity_browser: media_entity_browser
@@ -80,15 +81,23 @@ content:
     third_party_settings: {  }
   field_tss_story_inspiration:
     type: string_textarea
-    weight: 127
+    weight: 18
     region: content
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_tss_story_links:
+    type: link_default
+    weight: 14
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
   field_tss_story_name:
     type: string_textfield
-    weight: 128
+    weight: 19
     region: content
     settings:
       size: 60
@@ -96,7 +105,7 @@ content:
     third_party_settings: {  }
   field_tss_story_postcode:
     type: string_textfield
-    weight: 129
+    weight: 20
     region: content
     settings:
       size: 60
@@ -104,15 +113,7 @@ content:
     third_party_settings: {  }
   field_tss_story_title:
     type: string_textfield
-    weight: 130
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_tss_story_year_of_birth:
-    type: string_textfield
-    weight: 131
+    weight: 21
     region: content
     settings:
       size: 60
@@ -120,10 +121,18 @@ content:
     third_party_settings: {  }
   field_tss_story_use:
     type: string_textarea
-    weight: 121
+    weight: 12
     region: content
     settings:
       rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_tss_story_year_of_birth:
+    type: string_textfield
+    weight: 22
+    region: content
+    settings:
+      size: 60
       placeholder: ''
     third_party_settings: {  }
   langcode:
@@ -135,45 +144,45 @@ content:
     third_party_settings: {  }
   moderation_state:
     type: moderation_state_default
-    weight: 100
+    weight: 10
     region: content
     settings: {  }
     third_party_settings: {  }
   path:
     type: path
-    weight: 30
+    weight: 8
     region: content
     settings: {  }
     third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 15
+    weight: 6
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   simple_sitemap:
-    weight: 10
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 120
+    weight: 11
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 16
+    weight: 7
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   title:
     type: string_textfield
-    weight: -5
+    weight: 1
     region: content
     settings:
       size: 60
@@ -181,7 +190,7 @@ content:
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 3
     region: content
     settings:
       match_operator: CONTAINS
@@ -190,7 +199,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
   url_redirects:
-    weight: 50
+    weight: 9
     region: content
     settings: {  }
     third_party_settings: {  }

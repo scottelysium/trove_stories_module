@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: EPa8r5bPKAAqV1sQ3YPBFohUMEcSIDph3eURKO314cw
+  default_config_hash: vbn_3kIJuFBGSI6yYeeIBgt0FXPoWy7pOrbprEl_xog
 weight: 0
 open: null
 close: null
@@ -251,7 +251,11 @@ access:
     users: {  }
     permissions: {  }
   view_any:
-    roles: {  }
+    roles:
+      - trove_author
+      - trove_editor
+      - trove_administrator
+      - administrator
     users: {  }
     permissions: {  }
   update_any:

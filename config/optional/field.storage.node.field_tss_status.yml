@@ -1,0 +1,30 @@
+uuid: 55fe0c93-4221-4da1-bcb5-8aec293b05a2
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_tss_status
+field_name: field_tss_status
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: tss_pending
+      label: Pending
+    -
+      value: tss_approved
+      label: Approved
+    -
+      value: tss_denied
+      label: Denied
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
