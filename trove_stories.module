@@ -32,7 +32,7 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
             ]
         ];
 }
-
+ 
 /*
 We override the submit button template for the trove stories form, note there are multiple 
 submit buttons, so we directly check the id for 'edit-submit' which is the main form submission button.
