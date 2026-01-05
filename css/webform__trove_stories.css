@@ -6,3 +6,13 @@
 .trove-stories-form .hidden-submit {
     display: none;
 }
+
+.trove-stories-form .recaptchaInvalid {
+    display: none;
+    background-color: rgb(145, 59, 59);
+    color: #fff;
+}
+
+.trove-stories-form .recaptchaInvalid.show {
+    display: inline-block;
+}

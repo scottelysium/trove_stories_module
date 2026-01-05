@@ -1,13 +1,4 @@
-{# SUBMIT BUTTON
-{{ dump(attributes) }}
-{{ dump(attributes['id']) }}
-{{ dump(attributes['id']) }} #}
-{# {{ attributes['id'] }} #}
-{# {% if attributes['id'] == 'edit-submit' %}
-    BOTTOM SUBMIT ONLY
-{% else %}
-   bubble <button{{ attributes }}>{{ safe_value_label | raw }}</button>{{ children }}
-{% endif %} #}
+{# FORM SUBMIT BUTTON #}
 
 {# We create a psuedo submit button that first fetches the recaptcha code, puts it in the hidden field and then triggers
 the main submit with a .click event. #}
@@ -18,9 +9,10 @@ the main submit with a .click event. #}
     Submit
 </button>
 
-{# <div class="recaptchaInvalid">
-    Error: reCAPTCHA is not defined.
-</div> #}
+{# This only gets shown if the recaptcha function is invalid. #}
+<div class="recaptchaInvalid">
+    Error: reCAPTCHA is not defined - form cannot submit.
+</div>
 
 {# this is the original templated submit button code  #}
 {# <button{{ attributes }}>{{ safe_value_label | raw }}</button> #}

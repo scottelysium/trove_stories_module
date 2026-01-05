@@ -4,7 +4,7 @@ trove_stories.settings:
     _form: '\Drupal\trove_stories\Form\TroveStoriesSettingsForm'
     _title: 'Trove Stories Settings'
   requirements:
-    _role: 'trove_editor+trove_author+trove_administrator+administrator'
+    _role: 'trove_administrator+administrator'
 
 
 trove_stories.content:
@@ -21,12 +21,3 @@ trove_stories.webform_submission.create_trove_story_web_story:
     _controller: '\Drupal\trove_stories\Controller\CreateTroveStoryWebStoryController::createStory'
   requirements:
     _role: 'trove_editor+trove_author+trove_administrator+administrator' # plus means 'or'
-
-#The controller that reinstalls the config files in config/optional
-# trove_stories.update_trove_stories_config:
-#   path: '/admin/trove_stories/update_trove_stories_config'
-#   defaults:
-#     _title: ''
-#     _controller: '\Drupal\trove_stories\Controller\UpdateTroveStoriesConfigController::updateConfig'
-#   requirements:
-#     _permission: 'trove_editor'

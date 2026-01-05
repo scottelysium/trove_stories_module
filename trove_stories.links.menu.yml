@@ -40,3 +40,10 @@ trove_stories.content.story_webitems:
   title: 'View Website Stories'
   route_name: 'view.trove_stories_views.page_2'
   parent: trove_stories.content
+
+#Content > Trove Stories > Settings
+trove_stories.content.settings:
+  title: 'Settings'
+  description: 'Configure settings for Trove Stories'
+  route_name: trove_stories.settings
+  parent: trove_stories.content

@@ -6,6 +6,14 @@
             
             once('trove_stories_form', '#webform-submission-trove-story-add-form').forEach(function (trove_form_element) { //should only loop once, just dealing with array
                 
+                if (typeof grecaptcha === 'undefined') {
+                    console.log("recaptcha is not valid");
+                    const recaptchaWarn = trove_form_element.querySelector('.recaptchaInvalid');
+                    console.log(recaptchaWarn);
+                    recaptchaWarn.classList.add("show");
+                }
+
+
                 /*
                     We have two buttons:
                     1) a 'fake' submission button that first fetches the recaptcha and fills a hidden field for the backend for validate
