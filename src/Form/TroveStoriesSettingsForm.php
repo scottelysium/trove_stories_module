@@ -37,16 +37,16 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
         }
 
         
-        $form['trove_stories_selected_form'] = [
-            '#type' => 'select',
-            '#title' => $this->t('Choose webform'),
-            '#description' => $this->t('Select a form to use for Trove Stories'),
-            '#options' => [
-                'none' => $this->t('None'),
-                ...$select_form_ids
-            ],
-            '#default_value' => $config->get('trove_stories_selected_form'),
-        ];
+        // $form['trove_stories_selected_form'] = [
+        //     '#type' => 'select',
+        //     '#title' => $this->t('Choose webform'),
+        //     '#description' => $this->t('Select a form to use for Trove Stories'),
+        //     '#options' => [
+        //         'none' => $this->t('None'),
+        //         ...$select_form_ids
+        //     ],
+        //     '#default_value' => $config->get('trove_stories_selected_form'),
+        // ];
 
         $form['trove_stories_recaptcha_fieldset'] = [
             '#type' => 'fieldset',
@@ -67,19 +67,6 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
             //'#description' => $this->t('Provide your recaptcha site key to protect the form from spam and bots'),
             '#default_value' => $config->get('trove_stories_recaptcha_secret_key'),
         ];
-        //NOTE: this is no longer used
-        // $form['trove_stories_update_settings'] = [
-        //     '#type' => 'fieldset',
-        //     '#title' => $this->t('Update configurtation'),
-        //     '#description' => $this->t('This is a custom action that will reinstall the configuration for this module after a manual update.'),
-        // ];
-
-        // $form['trove_stories_update_settings']['update_config'] = [
-        //     '#type' => 'submit',
-        //     '#value' => $this->t('Reinstall configuration'),
-        //     '#submit' => ['::submitUpdateConfig'], 
-        //     '#limit_validation_errors' => [],
-        // ];
 
         return $form;
 
@@ -89,9 +76,6 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
  * Custom submit handler for the action button.
  */
     public function submitUpdateConfig(array &$form, FormStateInterface $form_state) {
-        // Redirect to your custom route.
-        // $url = Url::fromRoute('my_module.custom_route'); 
-        // $form_state->setRedirectUrl($url);
         $route_url = Url::fromRoute('trove_stories.update_trove_stories_config');
         $form_state->setRedirectUrl($route_url);
     }
@@ -104,16 +88,16 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
 
         $config = $this->config('trove_stories.settings');
 
-        $config->set('trove_stories_selected_form', $form_state->getValue('trove_stories_selected_form'));
+        //$config->set('trove_stories_selected_form', $form_state->getValue('trove_stories_selected_form'));
         $config->set('trove_stories_recaptcha_site_key', $form_state->getValue('trove_stories_recaptcha_site_key'));
         $config->set('trove_stories_recaptcha_secret_key', $form_state->getValue('trove_stories_recaptcha_secret_key'));
 
         $config->save();
 
-        /*IMPORTANT: 
-            because out module relies on hook_library_info_build(),
-            which is heavily cached, to dynamically
-            insert the recaptcha api, we need to ensure a library cache clear so
+        /*IMPORTANT (for recaptcha): 
+            because out module relies on hook_library_info_build() to dynamically
+            insert the recaptcha api,
+            which is heavily cached, we need to ensure a library cache clear so
             the recent values in this form are used in the hook.
         */
         \Drupal::service('library.discovery')->clearCachedDefinitions();

@@ -11,27 +11,51 @@ use Drupal\Core\Form\FormStateInterface;
 function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do runtime logic here
 
         return [
-            // 'field__node__title__custom_content_type' => [
-            //     'template' => 'field--node--title--custom-content-type',
-            //     'base hook' => 'field',
-            // ],
-        
+            'page__trove_stories_gallery_page' => [ //this is the main content area for /trove-stories - eg, the gallery/listing page.
+                //'variables' => ['title' => NULL, 'data' => []],
+                'variables' => [],
+            ],
             'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
                 'base hook' => 'webform',
             ],
-            'field__node__title__trove_story_submission' => [ //check if these templates used on other forms
+            'field__node__title__trove_story_submission' => [
                 'template' => 'field--node--title--trove-story-submission',
                 'base hook' => 'field',
             ],
-            // 'input__submit' => [ //this is now used on other forms??
-            //     'template' => 'input--submit',
-            //     'base hook' => 'input__submit',
-            // ]
+
             'input__submit_trove_stories' => [ //register new hook suggestion implemented in trove_stories_theme_suggestions_input_alter()
                 'base hook' => 'input__submit',
-            ]
+            ],
+            // 'breadcrumb__trove_stories' => [ //register new hook suggestion used in trove_stories_theme_suggestions_breadcrumb_alter() below
+            //     'base hook' => 'breadcrumb',
+            // ]
         ];
 }
+
+/*
+    On the trove stories gallery listing page, remove the top region that contains the breadcrumbs
+    this is so there is space to put in the banner
+*/
+function trove_stories_preprocess_page(&$variables) {
+    $route_match = \Drupal::routeMatch();
+    $route_name = $route_match->getRouteName();
+    if ($route_name === "trove_stories.trove_stories") {
+        unset($variables['page']['content_top']);
+    }
+
+}
+
+/*
+    The default template breadcrumbs don't show the non-linked breadcrumbs, so we fix this bug just for trove stories.
+    (also most of the prod site overwrites/fixes this with the vue interface which I dont have access to)
+*/
+// function trove_stories_theme_suggestions_breadcrumb_alter(array &$suggestions, array $variables) {
+//     $route_match = \Drupal::routeMatch();
+//     $route_name = $route_match->getRouteName();
+//     if ($route_name === "trove_stories.trove_stories") {
+//         $suggestions[] = 'breadcrumb__trove_stories';
+//     }
+// }
  
 /*
 We override the submit button template for the trove stories form, note there are multiple 
@@ -91,25 +115,27 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
 
             $uploaded_media_ids = [];
 
-            foreach($submissionData["tswf_upload_images"] as $file_id) {
-                
-                $file = File::load($file_id); 
-                $media = Media::create([
-                'bundle' => 'image',
-                'uid' => \Drupal::currentUser()->id(),
-                'status' => 1,
-                'name' => $file->getFilename(),
-                'field_media_image' => [
-                    'target_id' => $file->id(),
-                    'alt' => $file->getFilename(),
-                    'title' => $file->getFilename(),
-                    ],
-                ]);
+            if (!empty($submissionData["tswf_upload_images"])) {
+                foreach($submissionData["tswf_upload_images"] as $file_id) {
+                    $file = File::load($file_id); 
+                    $media = Media::create([
+                    'bundle' => 'image',
+                    'uid' => \Drupal::currentUser()->id(),
+                    'status' => 1,
+                    'name' => $file->getFilename(),
+                    'field_media_image' => [
+                        'target_id' => $file->id(),
+                        'alt' => $file->getFilename(),
+                        'title' => $file->getFilename(),
+                        ],
+                    ]);
 
-                $media->save();
+                    $media->save();
 
-                $uploaded_media_ids[] = ['target_id' => $media->id()];
+                    $uploaded_media_ids[] = ['target_id' => $media->id()];
+                }
             }
+            
 
             //create new trove story display from the data
             $trove_story_submission = Node::create(array(

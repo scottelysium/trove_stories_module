@@ -5,9 +5,10 @@ use Drupal\node\NodeInterface;
 class TroveStoriesCommonServices {
 
     public function getTroveStoriesFormId() {
-        $config = \Drupal::config('trove_stories.settings');
-        $selected_form_id = $config->get('trove_stories_selected_form');
-        return $selected_form_id;
+        // $config = \Drupal::config('trove_stories.settings');
+        // $selected_form_id = $config->get('trove_stories_selected_form');
+        // return $selected_form_id;
+        return "trove_story";
     }
 
   

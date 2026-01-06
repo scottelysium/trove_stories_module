@@ -6,13 +6,29 @@ trove_stories.settings:
   requirements:
     _role: 'trove_administrator+administrator'
 
-
-trove_stories.content:
-  path: '/admin/content/trove-stories'
+#main trove stories gallery page
+trove_stories.trove_stories:
+  path: '/trove-stories'
   defaults:
-    _title: 'Trove Stories Content'
+    _controller: '\Drupal\trove_stories\Controller\TroveStoriesGalleryController::createPage'
+    _title: 'Trove Stories'
   requirements:
-    _role: 'trove_editor+trove_author+trove_administrator+administrator'
+    _permission: 'access content'
+
+#custom rest API endpoint that fetches web story items
+trove_stories.api.website_stories:
+  path: '/trove-stories/api/website_stories'
+  defaults:
+    _controller: '\Drupal\trove_stories\Controller\TroveStoriesApiController::getWebsiteStories'
+  requirements:
+    _permission: 'access content'
+    _format: 'json'
+
+#custom rest API endpoint that SEARCHes web story items
+# trove_stories.api.search_website_stories:
+#   path: '/trove-stories/api/search_website_stories'
+#   defaults:
+#     _controller: '\Drupal\trove_stories\Controller\TroveStoriesApiController::searchWebsiteStories'
 
 trove_stories.webform_submission.create_trove_story_web_story:
   path: '/admin/trove_stories/create_trove_story_web_story'
