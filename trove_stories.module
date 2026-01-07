@@ -115,23 +115,40 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
 
             $uploaded_media_ids = [];
 
+            /*
+            Note: we are creating a new image that is of the 'Media type' > 'image'
+            see: https://trove.ddev.site/admin/structure/media 'image' is a type.
+            We are doing this because the webform does not create image media types for their
+            uploads, only raw files. We convert to media image type so we 
+            can fetch and edit the media via standard entity browsers and such.
+
+            Note that our webform image upload field on the webform is set to 
+            save the file uploads in the private files directory. This is to
+            stop any random uploading dodgy files that the public can then scrape.
+        
+            So even though the 'image' Media content type is has a default setting 
+            set to 'public files' as the upload destination, because we are setting 
+            the target_id of it to the original webform image target_id - it ends up referencing 
+            a private file path.
+            */
             if (!empty($submissionData["tswf_upload_images"])) {
                 foreach($submissionData["tswf_upload_images"] as $file_id) {
-                    $file = File::load($file_id); 
-                    $media = Media::create([
-                    'bundle' => 'image',
-                    'uid' => \Drupal::currentUser()->id(),
-                    'status' => 1,
-                    'name' => $file->getFilename(),
-                    'field_media_image' => [
-                        'target_id' => $file->id(),
-                        'alt' => $file->getFilename(),
-                        'title' => $file->getFilename(),
-                        ],
+                    $file = File::load($file_id); //we load the webform file upload that is stored in the private directory
+                    //$new_file_id = $file->id();
+                    $media = Media::create([ //we create a new 'image' media type that references this privately stored file.
+                        'bundle' => 'image',
+                        'uid' => \Drupal::currentUser()->id(),
+                        'status' => 1,
+                        'name' => $file->getFilename(),
+                        'field_media_image' => [
+                            'target_id' => $file->id(),
+                            'alt' => $file->getFilename(),
+                            'title' => $file->getFilename(),
+                            ],
                     ]);
 
                     $media->save();
-
+                    //$new_media_id = $media->id();
                     $uploaded_media_ids[] = ['target_id' => $media->id()];
                 }
             }
@@ -160,8 +177,6 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
             $trove_story_submission->save();
 
         }
-        
-        echo "test";
     }
 }
 
@@ -274,11 +289,14 @@ function trove_stories_page_attachments(array &$attachments) {
  */
 function trove_stories_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
-    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+    //$selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+
+    //also check route
 
     //$current_form = $form['#webform_id'];
 
-    if (!empty($form['#webform_id']) && $selected_form_id === $form['#webform_id']) {
+    //if (!empty($form['#webform_id']) && $selected_form_id === $form['#webform_id']) {
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) {
         $form['#attached']['library'][] = 'trove_stories/trove_recaptcha_api'; //this is a dynamically created libray in hook_library_info_build
         $form['#attached']['library'][] = 'trove_stories/trove_stories_recaptcha';
     }

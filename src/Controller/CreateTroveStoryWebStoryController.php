@@ -8,6 +8,8 @@ use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 //use Drupal\webform\Entity\WebformSubmission;
+//use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\File\FileExists;
 
 /**
  * Controller for creating a trove story display
@@ -44,6 +46,47 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
         //get images
         $webStoryImages = $storySubmissionNode->get('field_tss_story_images')->getValue(); //this has the media ids already set no extra porcessing needed.
 
+        $newWebStoryImageIds = [];
+
+        //convert the images from private directory to the public
+        foreach($webStoryImages as $webStoryImage) {
+            $target_id = $webStoryImage['target_id'];
+            $source_media = Media::load($target_id);
+
+            $source_file = $source_media->get('field_media_image')->entity;
+
+            if ($source_file instanceof File) { //we want the original File the media points to.
+
+                //Prepare the public destination URI
+                $filename = $source_file->getFilename();
+                $destination = 'public://' . $filename;
+
+                // Use FileRepository to copy the file and create a new File entity
+                // This creates a physical copy and a new entry in the 'file_managed' table
+                /** @var \Drupal\file\FileRepositoryInterface $file_repository */
+                $file_repository = \Drupal::service('file.repository');
+                $new_file = $file_repository->copy($source_file, $destination, FileExists::Rename);
+
+                // Create the new Media entity
+                $new_media = $source_media->createDuplicate();
+
+                // Set the new file entity and any other specific metadata
+                $new_media->set('field_media_image', [
+                    'target_id' => $new_file->id(),
+                    'alt' => $source_media->get('field_media_image')->alt, // Carry over alt text if it's an image
+                    'title' => $source_media->get('field_media_image')->title,
+                ]);
+
+                $new_media->setName('trove_story_' . $source_media->getName()); //this is the media name - not the actual file name
+                $new_media->setPublished(TRUE);
+
+                $new_media->save();
+
+                $newWebStoryImageIds[]['target_id'] = $new_media->id();
+
+            }
+        }
+
         $trove_story_web_story = Node::create(array(
             'type' => 'trove_story_web_story',
             'title' => $webStoryNodeTitle,
@@ -55,7 +98,8 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
             'field_tsws_story_links' => $webStoryLinks, //might not work
             'field_tsws_story_author' => $webStoryAuthor,
             'field_tsws_story_email' => $webStoryEmail,
-            'field_tsws_story_images' => $webStoryImages,
+            //'field_tsws_story_images' => $webStoryImages,
+            'field_tsws_story_images' => $newWebStoryImageIds, //new target_ids to public cloned files.
             'field_tsws_story_inspiration' => $webStoryInspiration,
             'field_tsws_story_name' => $webStoryName,
             //'field_tsws_story_category' => //Category field defaults to 'none'
