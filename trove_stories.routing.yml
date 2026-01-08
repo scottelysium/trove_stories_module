@@ -15,20 +15,26 @@ trove_stories.trove_stories:
   requirements:
     _permission: 'access content'
 
-#custom rest API endpoint that fetches web story items
+#custom rest API endpoint that fetches web story items - takes an 'offset' for the 'load more' functionality.
 trove_stories.api.website_stories:
-  path: '/trove-stories/api/website_stories'
+  path: '/trove-stories/api/website_stories/{offset}/{amountPerLoad}'
   defaults:
     _controller: '\Drupal\trove_stories\Controller\TroveStoriesApiController::getWebsiteStories'
+    offset: 0
+    amountPerLoad: 1,
   requirements:
     _permission: 'access content'
     _format: 'json'
 
-#custom rest API endpoint that SEARCHes web story items
-# trove_stories.api.search_website_stories:
-#   path: '/trove-stories/api/search_website_stories'
-#   defaults:
-#     _controller: '\Drupal\trove_stories\Controller\TroveStoriesApiController::searchWebsiteStories'
+#custom rest API endpoint that searches web story items - NOTE it uses the same TroveStoriesApiController as the listing
+trove_stories.api.search_website_stories:
+  path: '/trove-stories/api/search_website_stories/{searchString}'
+  defaults:
+    _controller: '\Drupal\trove_stories\Controller\TroveStoriesApiController::searchWebsiteStories'
+    searchString: ''
+  requirements:
+    _permission: 'access content'
+    _format: 'json'
 
 trove_stories.webform_submission.create_trove_story_web_story:
   path: '/admin/trove_stories/create_trove_story_web_story'

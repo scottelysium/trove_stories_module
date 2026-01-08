@@ -8,14 +8,12 @@ use Drupal\image\Entity\ImageStyle;
  * Controller for returning json data for the trove stories page (listing items, searching etc.)
  */
 class TroveStoriesApiController extends ControllerBase {
-    public function getWebsiteStories() {
 
-        /*
-            You MAY want to cache this data:
-            To make a JSON response cacheable in Drupal 10, you need to switch from the standard JsonResponse to Drupal’s CacheableJsonResponse.
-        */
+
+    public function searchWebsiteStories($searchString) { //ensure searchString is Urlencoded 
+
         $data = [
-            'status' => 'success',
+            'searchString' => $searchString,
             'timestamp' => time(),
             'payload' => [
                 ['id' => 1, 'name' => 'Project Alpha'],
@@ -23,24 +21,68 @@ class TroveStoriesApiController extends ControllerBase {
             ],
         ];
 
-        $web_stories = \Drupal::entityTypeManager()
-            ->getStorage('node')
-            ->loadByProperties([
-                'type' => 'trove_story_web_story',
-                'status' => 1, // Only published nodes
-            ]);
+        $storage = \Drupal::entityTypeManager()->getStorage('node');
+        $query = $storage->getQuery();
+        $query->condition('type', 'trove_story_web_story')
+                ->condition('status', 1)
+                ->condition('field_tsws_story_title', rawurldecode($searchString), 'CONTAINS') //this is just LIKE '%$searchString%'
+                ->sort('created', 'DESC');
+        
+        $query->accessCheck(TRUE); //fails if user can't access throws error if not included
 
+        $story_ids = $query->execute();
+        
+        /** @var \Drupal\node\NodeInterface[] $web_stories */
+        $searched_web_stories = $storage->loadMultiple($story_ids);
+
+        $story_gallery_items = $this->processStoriesJson($searched_web_stories);
+        
+        return new JsonResponse($story_gallery_items);
+    }
+
+    public function getWebsiteStories($offset, $amountPerLoad) {
+        
+        $storage = \Drupal::entityTypeManager()->getStorage('node');
+        $query = $storage->getQuery();
+        $query->condition('type', 'trove_story_web_story')
+                ->condition('status', 1)
+                ->sort('created', 'DESC');
+
+        // offset and limit: range($start, $length)
+        // This skips the first '$offset' results and takes the next '$amountPerLoad'.
+        $query->range($offset, $amountPerLoad);
+
+        $query->accessCheck(TRUE); //fails if user can't access throws error if not included
+
+        $story_ids = $query->execute();
+
+        /** @var \Drupal\node\NodeInterface[] $web_stories */
+        $web_stories = $storage->loadMultiple($story_ids);
+
+        $story_gallery_items = $this->processStoriesJson($web_stories);
+        
+
+        return new JsonResponse($story_gallery_items);
+    }
+
+    private function processStoriesJson($web_stories) {
         $story_gallery_items = [];
 
         foreach ($web_stories as $web_story) {
             //$story_gallery_items[]['test']['story_title'] = $web_story->get('field_tsws_story_title')->value;
-            $story_title = $web_story->get('field_tsws_story_title')->value;
+            //$story_title = $web_story->get('field_tsws_story_title')->value;
 
             
 
             //$story_gallery_items[]['test']['story_vlaue2'] = "moo";
             $thumbnails = [];
-            $image_entities = $web_story->get('field_tsws_story_images')->referencedEntities();
+
+            /** @var \Drupal\Core\Field\EntityReferenceFieldItemListInterface $images */
+            $images = $web_story->get('field_tsws_story_images');
+
+            /** @var \Drupal\node\NodeInterface[] $image_entities */
+            $image_entities = $images->referencedEntities();
+
             foreach ($image_entities as $image_entity) {
                 $file_entity = $image_entity->get('field_media_image')->entity;
                 $uri = $file_entity->getFileUri();
@@ -54,16 +96,14 @@ class TroveStoriesApiController extends ControllerBase {
 
             $story_gallery_items[] = [
                 'story_title' => $web_story->get('field_tsws_story_title')->value,
-                'image_urls' => $thumbnails
+                'image_urls' => $thumbnails,
+                'thumbnail_url' => $thumbnails[0] //just get the top one for now.
             ];
-
             
         }
 
-        // 2. Return the JsonResponse object instead of a render array
-        return new JsonResponse($story_gallery_items);
+        return $story_gallery_items;
     }
-
     // public function searchWebsiteStories() {
         
     // }

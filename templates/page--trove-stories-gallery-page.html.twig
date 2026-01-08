@@ -1,9 +1,11 @@
-<div>
-    HELLO. this is the trove stories gallery page.
-    {# <h1>{{ title }}</h1>
-  <ul>
-    {% for key, value in data %}
-      <li><strong>{{ key }}:</strong> {{ value }}</li>
-    {% endfor %}
-  </ul> #}
+{{ attach_library('trove_stories/trove_stories_gallery_page') }}
+
+<div id="trove-stories-gallery">
+    <input placeholder="Search Trove Stories Gallery" id="trove-stories-searchbox" type="text">
+
+    <div id="trove-stories-gallery-list">
+        {# list here. #}
+    </div>
+
+    <button id="trove-stories-load-more">Load more</button>
 </div>
