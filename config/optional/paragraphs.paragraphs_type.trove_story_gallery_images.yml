@@ -1,0 +1,12 @@
+uuid: e8dd93be-7bbb-42dd-bf38-37a4315761ad
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: NfqTmii3LkP4DBnv1t6LoYxSxjR-YoWaDRLBdlEA7ZU
+id: trove_story_gallery_images
+label: 'Trove Story Gallery Images'
+icon_uuid: null
+icon_default: null
+description: 'A list of images used as a gallery for a trove story item'
+behavior_plugins: {  }

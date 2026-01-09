@@ -1,0 +1,31 @@
+uuid: 98d0673e-12aa-4b00-9969-a5ce75f5202d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_ptsws_gallery_images
+    - media.type.image
+    - paragraphs.paragraphs_type.trove_story_gallery_images
+_core:
+  default_config_hash: 4WKU3ZqNv3SBPI6IP3Bzky6K1tPT69V0Qm6dqtz_Dg0
+id: paragraph.trove_story_gallery_images.field_ptsws_gallery_images
+field_name: field_ptsws_gallery_images
+entity_type: paragraph
+bundle: trove_story_gallery_images
+label: 'Trove Story Gallery Images'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

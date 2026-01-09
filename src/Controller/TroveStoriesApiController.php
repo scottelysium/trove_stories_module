@@ -12,14 +12,14 @@ class TroveStoriesApiController extends ControllerBase {
 
     public function searchWebsiteStories($searchString) { //ensure searchString is Urlencoded 
 
-        $data = [
-            'searchString' => $searchString,
-            'timestamp' => time(),
-            'payload' => [
-                ['id' => 1, 'name' => 'Project Alpha'],
-                ['id' => 2, 'name' => 'Project Beta'],
-            ],
-        ];
+        // $data = [
+        //     'searchString' => $searchString,
+        //     'timestamp' => time(),
+        //     'payload' => [
+        //         ['id' => 1, 'name' => 'Project Alpha'],
+        //         ['id' => 2, 'name' => 'Project Beta'],
+        //     ],
+        // ];
 
         $storage = \Drupal::entityTypeManager()->getStorage('node');
         $query = $storage->getQuery();
@@ -69,35 +69,32 @@ class TroveStoriesApiController extends ControllerBase {
         $story_gallery_items = [];
 
         foreach ($web_stories as $web_story) {
-            //$story_gallery_items[]['test']['story_title'] = $web_story->get('field_tsws_story_title')->value;
-            //$story_title = $web_story->get('field_tsws_story_title')->value;
 
+
+            //todo: setup thumbnail as its own feild with template image and fetch it here
             
+            // $thumbnails = [];
 
-            //$story_gallery_items[]['test']['story_vlaue2'] = "moo";
-            $thumbnails = [];
+            // /** @var \Drupal\Core\Field\EntityReferenceFieldItemListInterface $images */
+            // $images = $web_story->get('field_tsws_story_images');
+            
+            // /** @var \Drupal\node\NodeInterface[] $image_entities */
+            // $image_entities = $images->referencedEntities();
 
-            /** @var \Drupal\Core\Field\EntityReferenceFieldItemListInterface $images */
-            $images = $web_story->get('field_tsws_story_images');
+            // foreach ($image_entities as $image_entity) {
+            //     $file_entity = $image_entity->get('field_media_image')->entity;
+            //     $uri = $file_entity->getFileUri();
 
-            /** @var \Drupal\node\NodeInterface[] $image_entities */
-            $image_entities = $images->referencedEntities();
-
-            foreach ($image_entities as $image_entity) {
-                $file_entity = $image_entity->get('field_media_image')->entity;
-                $uri = $file_entity->getFileUri();
-
-                // Load the style and build the URL
-                $style = ImageStyle::load('thumbnail');
-                $styled_url = $style->buildUrl($uri);
-                //$story_gallery_items[]['story_images'] = $styled_url;
-                $thumbnails[] = $styled_url; //these urls MUST be public
-            }
+            //     // Load the style and build the URL
+            //     $style = ImageStyle::load('thumbnail');
+            //     $styled_url = $style->buildUrl($uri);
+            //     $thumbnails[] = $styled_url; 
+            // }
 
             $story_gallery_items[] = [
                 'story_title' => $web_story->get('field_tsws_story_title')->value,
-                'image_urls' => $thumbnails,
-                'thumbnail_url' => $thumbnails[0] //just get the top one for now.
+                //'image_urls' => $thumbnails,
+                //'thumbnail_url' => $thumbnails[0] //just get the top one for now.
             ];
             
         }

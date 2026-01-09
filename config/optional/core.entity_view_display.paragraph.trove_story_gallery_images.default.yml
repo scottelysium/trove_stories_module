@@ -1,0 +1,25 @@
+uuid: cf23cbe9-7ff3-4e43-8971-4703a376979f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.trove_story_gallery_images.field_ptsws_gallery_images
+    - paragraphs.paragraphs_type.trove_story_gallery_images
+_core:
+  default_config_hash: poHfecfDCLnaTTD-7Mko02MINMxKlyCe_B_mq5XvXxQ
+id: paragraph.trove_story_gallery_images.default
+targetEntityType: paragraph
+bundle: trove_story_gallery_images
+mode: default
+content:
+  field_ptsws_gallery_images:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

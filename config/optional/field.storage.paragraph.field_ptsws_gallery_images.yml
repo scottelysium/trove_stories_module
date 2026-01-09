@@ -1,13 +1,15 @@
-uuid: 0648a2ec-1ef4-4934-bacf-04ba2b501553
+uuid: 54b1dcd2-7ed4-472a-8488-d8ad70590d50
 langcode: en
 status: true
 dependencies:
   module:
     - media
-    - node
-id: node.field_tsws_story_images
-field_name: field_tsws_story_images
-entity_type: node
+    - paragraphs
+_core:
+  default_config_hash: LOPdJvNBvJxKyYxoi3eyFJlacbRhSfcQBcb-YndgtJQ
+id: paragraph.field_ptsws_gallery_images
+field_name: field_ptsws_gallery_images
+entity_type: paragraph
 type: entity_reference
 settings:
   target_type: media

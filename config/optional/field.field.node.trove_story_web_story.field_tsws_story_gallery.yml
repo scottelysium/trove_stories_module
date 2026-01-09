@@ -1,0 +1,51 @@
+uuid: bf451693-1d91-4955-8ffe-e10ec09c25ac
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tsws_story_gallery
+    - node.type.trove_story_web_story
+    - paragraphs.paragraphs_type.trove_story_gallery_images
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: '-T5svUND2yxtoqoT8M-j6OWUHW-S7rVJMADNY2wATho'
+id: node.trove_story_web_story.field_tsws_story_gallery
+field_name: field_tsws_story_gallery
+entity_type: node
+bundle: trove_story_web_story
+label: 'Story Gallery'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      trove_story_gallery_images: trove_story_gallery_images
+    negate: 0
+    target_bundles_drag_drop:
+      additional_components:
+        weight: 8
+        enabled: false
+      additional_components_text:
+        weight: 9
+        enabled: false
+      additional_components_yt_video:
+        weight: 10
+        enabled: false
+      contributor:
+        weight: 11
+        enabled: false
+      information_tile:
+        weight: 12
+        enabled: false
+      project:
+        weight: 13
+        enabled: false
+      trove_story_gallery_images:
+        weight: 14
+        enabled: true
+field_type: entity_reference_revisions

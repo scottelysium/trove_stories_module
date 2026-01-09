@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.trove_story_web_story.field_tsws_story_author
     - field.field.node.trove_story_web_story.field_tsws_story_category
     - field.field.node.trove_story_web_story.field_tsws_story_email
-    - field.field.node.trove_story_web_story.field_tsws_story_images
+    - field.field.node.trove_story_web_story.field_tsws_story_gallery
     - field.field.node.trove_story_web_story.field_tsws_story_inspiration
     - field.field.node.trove_story_web_story.field_tsws_story_links
     - field.field.node.trove_story_web_story.field_tsws_story_name
@@ -17,10 +17,11 @@ dependencies:
     - field.field.node.trove_story_web_story.field_tsws_story_year_of_birth
     - node.type.trove_story_web_story
   module:
+    - entity_reference_revisions
     - link
     - user
 _core:
-  default_config_hash: pxL7UAihj0OY8sE4Vmb8PFDMRy3w8qMuibFY1zI3cek
+  default_config_hash: D_Gb65CUZ28a32csDZHLORYcHcJY8TWnCvP8ZTJmM4c
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
@@ -56,14 +57,14 @@ content:
     third_party_settings: {  }
     weight: 105
     region: content
-  field_tsws_story_images:
-    type: entity_reference_entity_view
+  field_tsws_story_gallery:
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
       view_mode: default
-      link: false
+      link: ''
     third_party_settings: {  }
-    weight: 106
+    weight: 113
     region: content
   field_tsws_story_inspiration:
     type: basic_string
