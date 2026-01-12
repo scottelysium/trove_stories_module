@@ -14,6 +14,19 @@
     
 }
 
+.troveStoriesFade { 
+    animation: troveStoriesFade .3s linear;
+}
+
+@keyframes troveStoriesFade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;	
+	}
+}
+
 /**** general admin area ****/
 
 

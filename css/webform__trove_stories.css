@@ -3,6 +3,61 @@
 
 }
 
+/**** header / banner *****************/
+
+.trove-stories-form .story-banner {
+    
+    display: grid;
+    grid-template-columns: 1fr 613px;
+    grid-template-rows: 596px;
+}
+
+.trove-stories-form .story-banner .banner-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffbd4c;
+}
+
+.trove-stories-form .story-banner .banner-left .banner-content {
+    padding-left: 10vw;
+}
+
+.trove-stories-form .story-banner .banner-left .banner-content h1 {
+    margin: 0;
+    padding: 0;
+    font-family: "Source Serif Variable", serif;
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.trove-stories-form .story-banner .banner-left .banner-content p {
+    margin: 25px 5vw 25px 0px;
+    font-size: 20px;
+    /* font-weight: 300; */
+}
+
+.trove-stories-form .story-banner .banner-left .banner-content p strong {
+    font-weight: 500;
+}
+
+.trove-stories-form .story-banner .banner-right {
+    background-image: url(../images/banner-book.jpg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: auto 100%;
+}
+
+.trove-stories-form .story-banner .banner-right .bannerGoblet svg {
+    display: block;
+    height: 596px;
+    width: auto;
+}
+
+
+
+
+/**** form *****************/
 .trove-stories-form .hidden-submit {
     display: none;
 }

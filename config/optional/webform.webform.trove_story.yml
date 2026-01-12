@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: vbn_3kIJuFBGSI6yYeeIBgt0FXPoWy7pOrbprEl_xog
+  default_config_hash: HJUuNC3gF9rBlD6pVop6uJgLMc4OAIuNPpfb4WtDv6w
 weight: 0
 open: null
 close: null
@@ -15,6 +15,9 @@ title: 'Trove Story'
 description: ''
 categories: {  }
 elements: |-
+  tswf_banner_message:
+    '#type': webform_markup
+    '#markup': '<h1>Submit your Trove Story!</h1><p><strong>Discover bold stories, share your own spark and explore a world of creativity shaped by people like you!</strong</p><p>Trove invites you to show how you use one of the country’s most-loved online resources. Share a photo, video, or a quick story and your submission may become part of a public gallery for everyone to explore and enjoy!</p>'
   tswf_how_you_use_trove:
     '#type': textarea
     '#title': 'Tell us how you use Trove'
@@ -28,12 +31,7 @@ elements: |-
   tswf_intro_message:
     '#type': webform_markup
     '#markup': |-
-      <p>&nbsp;</p>
-
       <h2>Want to share your Story?</h2>
-
-      <p>&nbsp;</p>
-
       <p>If you’ve made a project using Trove, please share it with us below. You can upload images and videos.</p>
   tswf_story_title:
     '#type': textfield

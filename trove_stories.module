@@ -18,6 +18,12 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
             'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
                 'base hook' => 'webform',
             ],
+            'form-element__webform__tswf_banner_message' => [ //overwrite the header/banner html markup field
+                'base hook' => 'form_element',
+            ],
+            // 'webform_html_editor_markup' => [ //overwrite the html editor markup content for the header/banner
+            //     'base hook' => 'webform_html_editor_markup',
+            // ],
             'field__node__title__trove_story_submission' => [
                 'template' => 'field--node--title--trove-story-submission',
                 'base hook' => 'field',
@@ -32,31 +38,39 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
         ];
 }
 
-/*
-    On the trove stories gallery listing page, remove the top region that contains the breadcrumbs
-    this is so there is space to put in the banner
-*/
-function trove_stories_preprocess_page(&$variables) {
-    $route_match = \Drupal::routeMatch();
-    $route_name = $route_match->getRouteName();
-    if ($route_name === "trove_stories.trove_stories") {
-        unset($variables['page']['content_top']);
-    }
+/* We add a custom template form the banner form element  */
+function trove_stories_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
+    
+    if (empty($variables['element']['#webform'])) return;
 
+    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+
+    if (   
+        $variables['element']['#webform'] === $selected_form_id &&
+        $variables['element']['#webform_id'] === 'trove_story--tswf_banner_message'
+        ) {
+            $suggestions[] = 'form-element__webform__tswf_banner_message';
+    }
 }
 
-/*
-    The default template breadcrumbs don't show the non-linked breadcrumbs, so we fix this bug just for trove stories.
-    (also most of the prod site overwrites/fixes this with the vue interface which I dont have access to)
-*/
-// function trove_stories_theme_suggestions_breadcrumb_alter(array &$suggestions, array $variables) {
-//     $route_match = \Drupal::routeMatch();
-//     $route_name = $route_match->getRouteName();
-//     if ($route_name === "trove_stories.trove_stories") {
-//         $suggestions[] = 'breadcrumb__trove_stories';
-//     }
+/* We add a custom template form the html content of the header/banner  */
+// function trove_stories_theme_suggestions_webform_html_editor_markup_alter(array &$suggestions, array $variables) {
+//     $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+
 // }
- 
+
+/* We add a custom template into the trove stories form  */
+function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {
+
+    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+
+    //if ($variables['element']['#webform_id'] == 'trove_story') {
+    if ($variables['element']['#webform_id'] == $selected_form_id) {
+        //look for this 'webform--trove-stories.html' template in modules/trove_stories/templates
+        $suggestions[] = 'webform__trove_stories';
+    }
+}
+
 /*
 We override the submit button template for the trove stories form, note there are multiple 
 submit buttons, so we directly check the id for 'edit-submit' which is the main form submission button.
@@ -77,18 +91,23 @@ function trove_stories_theme_suggestions_input_alter(array &$suggestions, array 
     
 }
 
-/* We add a custom template into the trove stories form  */
-function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {
-
-    $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
-
-    //if ($variables['element']['#webform_id'] == 'trove_story') {
-    if ($variables['element']['#webform_id'] == $selected_form_id) {
-        //look for this 'webform--trove-stories.html' template in modules/trove_stories/templates
-        $suggestions[] = 'webform__trove_stories';
+/*
+    On the trove stories gallery listing page and trove main form page
+     remove the top region that contains the breadcrumbs
+    this is so there is space to put in the banners
+*/
+function trove_stories_preprocess_page(&$variables) {
+    $route_match = \Drupal::routeMatch();
+    $route_name = $route_match->getRouteName();
+    if ($route_name === "trove_stories.trove_stories") {
+        unset($variables['page']['content_top']);
     }
-}
 
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) {
+        unset($variables['page']['content_top']);
+    }
+
+}
 
 
 /* We add a custom template into the page title area */
