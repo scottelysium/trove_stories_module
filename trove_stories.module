@@ -300,6 +300,7 @@ function trove_stories_page_attachments(array &$attachments) {
 
     // Also attach your JavaScript library.
     $attachments['#attached']['library'][] = 'trove_stories/trove_stories_recaptcha';
+    $attachments['#attached']['library'][] = 'trove_stories/trove_stories_js_webform';
 }
 
 /**

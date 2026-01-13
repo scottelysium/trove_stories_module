@@ -13,6 +13,14 @@ trove_stories_form_css_library:
     theme:
       css/webform__trove_stories.css: {}
 
+trove_stories_js_webform: 
+    js:
+      js/trove_stories_js_webform.js: {}
+    dependencies:
+      - core/drupal
+      - core/once
+      - core/drupalSettings
+
 #this is not the api, this is the implementation the relies on the api, the api is inserted in the trove_stories.module file via a hook.
 trove_stories_recaptcha: 
     js:

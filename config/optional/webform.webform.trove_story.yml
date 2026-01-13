@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: HJUuNC3gF9rBlD6pVop6uJgLMc4OAIuNPpfb4WtDv6w
+  default_config_hash: 8fGUGt7-5cC373-vET38hxwZZxa5ct_GFD0e0w1jmZs
 weight: 0
 open: null
 close: null
@@ -48,7 +48,6 @@ elements: |-
     '#counter_type': word
     '#counter_minimum': 1
     '#counter_maximum': 500
-    '#counter_maximum_message': 'You have exceeded the limit of words'
   tswf_upload_images:
     '#type': webform_image_file
     '#title': 'Upload images'
@@ -64,6 +63,7 @@ elements: |-
     '#type': url
     '#title': 'Link articles used from the Trove archive'
     '#multiple': true
+    '#description': '<p>Links must be sourced from <em>trove.nla.gov.au</em>, <em>nla.gov.au</em> or <em>webarchive.nla.gov.au</em></p>'
     '#help_title': 'Valid URLs'
     '#help': |-
       <p>Links must be sourced from the following websites:</p>
@@ -71,11 +71,19 @@ elements: |-
       <p>https://trove.nla.gov.au<br />
       https://nla.gov.au<br />
       https://webarchive.nla.gov.au</p>
+    '#description_display': before
+    '#placeholder': 'Paste Trove URL(s) here'
     '#pattern': '^(?i)(?=.*?\bnla.gov.au\b).*$'
     '#pattern_error': 'Link must be a valid trove URL'
+    '#multiple__empty_items': 2
+    '#multiple__sorting': false
+    '#multiple__add': false
+    '#multiple__remove': false
+    '#multiple__add_more_input': false
+    '#multiple__add_more_button_label': '+ Add'
   tswf_about_message:
-    '#type': label
-    '#title': 'A few things about you'
+    '#type': webform_markup
+    '#markup': '<p>A few things about you</p>'
   tswf_name:
     '#type': textfield
     '#title': Name

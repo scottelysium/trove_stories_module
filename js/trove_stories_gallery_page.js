@@ -4,8 +4,6 @@
 (function (Drupal) {
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        // Your code to run since DOM is loaded and ready
-        console.log("moo");
 
         let loadMoreOffset = 0;
         let amountPerLoad = 2; //the amount loaded in the next 'load more' call
