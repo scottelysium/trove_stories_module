@@ -18,13 +18,14 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
             'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
                 'base hook' => 'webform',
             ],
-            'form-element__webform__tswf_banner_message' => [ //overwrite the header/banner html markup field
+            'form_element__webform__tswf_banner_message' => [ //overwrite the header/banner html markup field
                 'base hook' => 'form_element',
             ],
-            // 'webform_html_editor_markup' => [ //overwrite the html editor markup content for the header/banner
-            //     'base hook' => 'webform_html_editor_markup',
+            // 'form_element__webform_webform_image_file' => [ //overwrite the idividual files(s) uploaded template
+            //     'base hook' => 'form_element',
             // ],
-            'field__node__title__trove_story_submission' => [
+ 
+            'field__node__title__trove_story_submission' => [ //template for content type 'trove story submission'
                 'template' => 'field--node--title--trove-story-submission',
                 'base hook' => 'field',
             ],
@@ -44,13 +45,20 @@ function trove_stories_theme_suggestions_form_element_alter(array &$suggestions,
     if (empty($variables['element']['#webform'])) return;
 
     $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
+    if ($variables['element']['#webform'] !== $selected_form_id ) return;
 
-    if (   
-        $variables['element']['#webform'] === $selected_form_id &&
-        $variables['element']['#webform_id'] === 'trove_story--tswf_banner_message'
-        ) {
-            $suggestions[] = 'form-element__webform__tswf_banner_message';
+    //$field_id = $variables['element']['#webform_id']; //"trove_story--tswf_upload_images"
+
+    if ($variables['element']['#webform_id'] === 'trove_story--tswf_banner_message') {
+        $suggestions[] = 'form_element__webform__tswf_banner_message';
     }
+
+    // if ($variables['element']['#type'] === 'webform_image_file') {
+    //     $suggestions[] = "form_element__webform_tswf_upload_images";
+    // }
+    // if ($variables['element']['#webform_id'] === 'trove_story--tswf_upload_images') {
+    //     $suggestions[] = "form_element__webform_tswf_upload_images";
+    // }
 }
 
 /* We add a custom template form the html content of the header/banner  */
@@ -109,19 +117,9 @@ function trove_stories_preprocess_page(&$variables) {
 
 }
 
-
-/* We add a custom template into the page title area */
-// function trove_stories_theme_suggestions_block_alter(array &$suggestions, array &$variables) {
-
-//     if ($variables['elements']['#base_plugin_id'] === 'page_title_block') {
-//         if (\Drupal::service('trove_stories.common_services')->isTroveStoryRoute()) { 
-//             //$suggestions[] = 'block__trove_stories_admin_page_title';
-//             $suggestions[] = 'trove_stories_input__submit.html';
-//         }
-//     }
+// function trove_stories_preprocess_file_link(&$variables) {
+//     echo "moo";
 // }
-
-
 
 //hook into the form submission and create a new trove webform submission entry.
 function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
@@ -286,7 +284,9 @@ function trove_stories_library_info_build() {
 
 /**
  * Implements hook_page_attachments().
- * we use this to insert the recaptcha key from the config into the javascript libray/file that executes the recaptcha api call.
+ * we use this to:
+ * 1) insert the recaptcha key from the config into the javascript libray/file that executes the recaptcha api call.
+ * 2) Insert the generic javascript file for the form
  */
 function trove_stories_page_attachments(array &$attachments) {
 
@@ -295,10 +295,10 @@ function trove_stories_page_attachments(array &$attachments) {
 
     $recaptcha_site_key = \Drupal::config('trove_stories.settings')->get('trove_stories_recaptcha_site_key');
 
-    // Attach the value to drupalSettings under your module's namespace.
+    // Attach the value to drupalSettings so its avaiable in the js file
     $attachments['#attached']['drupalSettings']['trove_stories']['trove_stories_recaptcha_site_key'] = $recaptcha_site_key;
 
-    // Also attach your JavaScript library.
+    // attach libraries
     $attachments['#attached']['library'][] = 'trove_stories/trove_stories_recaptcha';
     $attachments['#attached']['library'][] = 'trove_stories/trove_stories_js_webform';
 }

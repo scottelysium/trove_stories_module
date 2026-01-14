@@ -58,6 +58,7 @@
 
 
 /**** form *****************/
+
 .trove-stories-form .hidden-submit {
     display: none;
 }
@@ -120,20 +121,17 @@
 
 }
 
-
-
 .trove-stories-form .js-form-item-tswf-links .table-responsive {
     display: block;
     width: auto;
+    overflow-x: visible;
 }
 
 .trove-stories-form .js-form-item-tswf-links .table-responsive .tableresponsive-toggle-columns {
     display: none;
 }
 
-/* .trove-stories-form .js-form-item-tswf-links #edit-tswf-links-items { */
 .trove-stories-form .js-form-item-tswf-links [id^="edit-tswf-links-items"] {
-    
     display: block;
     margin: 0;
 }
@@ -165,6 +163,27 @@
     margin: 0;
     padding: 0;
     margin: 0.5rem 0 0.5rem 0;
+    position:relative;
+}
+
+.trove-stories-form .js-form-item-tswf-links [id^="edit-tswf-links-items"] tbody tr td .js-form-item.urlpass:after {
+    content: url(../images/check_circle_green.svg); 
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    right: 0.7rem;
+    top: 0.4rem;
+}
+
+.trove-stories-form .js-form-item-tswf-links [id^="edit-tswf-links-items"] tbody tr td .js-form-item.urlfail:after {
+    content: url(../images/check_circle_red.svg); 
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    right: 0.7rem;
+    top: 0.4rem;
 }
 
 .trove-stories-form .js-form-item-tswf-links [id^="edit-tswf-links-add-submit"] {
@@ -173,3 +192,61 @@
     font-size: 0.8rem;
     line-height: 0.6rem;
 }
+
+.trove-stories-form #edit-tswf-about-message * { /*HTML message, all children get stripped */
+    font-family: Source Sans Variable, system-ui, Segoe UI, sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #333333;
+    padding: 0;
+    margin: 0;
+}
+
+.trove-stories-form .js-webform-flexbox .js-form-item {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.trove-stories-form [class*="js-form-item-tswf-upload-images-file-"] {
+    max-width: none;
+    margin: 0 auto;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.trove-stories-form [class*="js-form-item-tswf-upload-images-file-"] .js-form-file {
+    margin-bottom: 1rem;
+}
+
+.trove-stories-form [class*="js-form-item-tswf-upload-images-file-"] .fa-stack {
+    display: none; /* gotta hide this messy stuff */
+}
+
+.trove-stories-form [class*="js-form-item-tswf-upload-images-file-"] .file--image {
+    font-weight: 400; 
+    font-size: 1rem;
+}
+
+.trove-stories-form [class*="js-form-item-tswf-upload-images-file-"] .form-check-label {
+    display: flex;
+    /* align-items: center; */
+    padding: 0.1rem 0rem 0.1rem 0rem;
+}
+
+.trove-stories-form [class*="js-form-item-tswf-upload-images-file-"] .form-check-label > label {
+    margin: 0;
+}
+
+.trove-stories-form [class*="js-form-item-tswf-upload-images-file-"] .form-check-label .form-check-input {
+    position: relative;
+    margin: 0rem 0.5rem 0rem 0rem;
+    display: block;
+}
+/* js-form-item 
+js-form-type-checkbox 
+checkbox 
+form-check 
+js-form-item-tswf-upload-images-file-4235-selected 
+form-item-tswf-upload-images-file-4235-selected form-group */

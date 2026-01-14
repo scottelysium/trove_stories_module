@@ -1,24 +1,42 @@
 (function (Drupal) {
 
-    // Drupal.behaviors.trove_stories_js_webform = {
-    //     attach: function(context, settings) {
-    //         once('trove_stories_form', '#webform-submission-trove-story-add-form').forEach(function (trove_form_element) {
-    //             console.log("trove_stories_js_webform");
-    //         });
-    //     }
-    // }
-    document.addEventListener("DOMContentLoaded", function(event) {
+    Drupal.behaviors.trove_stories_js_webform = {
+        attach: function(context, settings) {
 
-        const linkElements = document.querySelectorAll('[id^="edit-tswf-links-items-"]');
-        console.log(linkElements);
+            /* For link items, check if the url contains https/nla.gov.au and append helpful icons */
+            once('trove_stories_form', 'input[id^="edit-tswf-links-items-"]').forEach(function (linkElement) {
 
-        const linkAddButtonElement = document.querySelector('[id^="edit-tswf-links-add-submit"]');
-        console.log(linkAddButtonElement);
-        linkAddButtonElement.addEventListener("click", function() {
-            console.log("add links button clicked");
-        });
+                validateTroveUrl(linkElement); //run once on load/ajax to reset all validations
 
-    });
-    
+                linkElement.addEventListener("input", function(e) {
+                    validateTroveUrl(e.target);
+                });
+            });
 
+            function validateTroveUrl(linkElement) {
+                if (!linkElement.value) {
+                    linkElement.parentElement.classList.remove("urlpass");
+                    linkElement.parentElement.classList.remove("urlfail");
+                    return;
+                }
+
+                urlText = linkElement.value.trim();
+                
+                if (
+                        (['https://', 'http://'].some(protocol => urlText.toLowerCase().startsWith(protocol))) //starts with http(s)
+                        &&
+                        (urlText.includes("nla.gov.au")) //string contains nla.gov.au
+                        &&
+                        (!urlText.includes(" ")) //no empty spaces
+                )
+                    {
+                    linkElement.parentElement.classList.remove("urlfail");
+                    linkElement.parentElement.classList.add("urlpass");
+                } else {
+                    linkElement.parentElement.classList.remove("urlpass");
+                    linkElement.parentElement.classList.add("urlfail");
+                }
+            }
+        }
+    }
 })(Drupal);

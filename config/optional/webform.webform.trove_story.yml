@@ -73,7 +73,7 @@ elements: |-
       https://webarchive.nla.gov.au</p>
     '#description_display': before
     '#placeholder': 'Paste Trove URL(s) here'
-    '#pattern': '^(?i)(?=.*?\bnla.gov.au\b).*$'
+    '#pattern': '^(?=.*?\bnla.gov.au\b).*$'
     '#pattern_error': 'Link must be a valid trove URL'
     '#multiple__empty_items': 2
     '#multiple__sorting': false
@@ -109,7 +109,9 @@ elements: |-
     '#markup': |-
       <h2>Trove Privacy Collection Notice</h2>
 
-      <p><strong>By clicking submit, you consent to the work being collected, held, used and disclosed in accordance with the <a href="https://trove.nla.gov.au/about/policies/privacy">Trove privacy notice</a> and the <a href="https://www.library.gov.au/visit/about-us/corporate-information/library-services-policies-and-plans/privacy-policy">National Library’s Privacy Policy</a></strong>. We will only use and disclose your personal information as described in the Trove Privacy notice and the National Library’s Privacy Policy, and you provide consent. You may contact the Library at any time to withdraw consent.</p>
+      <p><strong>By clicking submit, you consent to the work being collected, held, used and disclosed in accordance with the <a href="https://trove.nla.gov.au/about/policies/privacy">Trove privacy notice</a> and the <a href="https://www.library.gov.au/visit/about-us/corporate-information/library-services-policies-and-plans/privacy-policy">National Library’s Privacy Policy</a></strong>.</p>
+
+      <p>We will only use and disclose your personal information as described in the Trove Privacy notice and the National Library’s Privacy Policy, and you provide consent. You may contact the Library at any time to withdraw consent.</p>
   tswf_recaptcha_token:
     '#type': hidden
     '#title': 'Hidden reCAPTCHA Token'
