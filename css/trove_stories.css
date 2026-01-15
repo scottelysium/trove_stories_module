@@ -1,8 +1,8 @@
-.troveStories { /* body class */
+.troveStoriesPage { /* body class */
 
 }
 
-.troveStories .wrapper {
+.troveStoriesPage .wrapper {
     max-width: 1440px;
     padding-right: 20px;
     padding-left: 20px;
@@ -10,11 +10,33 @@
     margin-left: auto;
 }
 
-.troveStoriesForm {
-    
+/** confirmation page styling **/
+
+.troveStoriesPage .webform-confirmation {
+    width: 45vw;
+    margin: 7rem auto 7rem auto;
+    background-color: #ffbd4c;
+    padding: 4rem 4rem 3rem 4rem;
 }
 
-.troveStoriesFade { 
+.troveStoriesPage .webform-confirmation .webform-confirmation__message {
+   font-size: 20px;
+   text-align: center;
+   font-weight: 600;
+}
+
+/***** RESPONSIVE ********************************************************/
+/*********************DESKTOP FIRST**************************************/
+
+@media only screen and (max-width : 1020px) {
+    .troveStoriesPage .footer .footer-middle .container .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+}
+
+
+/* .troveStoriesFade { 
     animation: troveStoriesFade .3s linear;
 }
 
@@ -25,42 +47,34 @@
 	to {
 		opacity: 1;	
 	}
-}
+} */
 
 /**** general admin area ****/
 
 
 /**** admin area fixing bootstrap/adminimal css bugs ****/
 
-/* .troveStories .content-outer-wrap {
-    max-width: 1440px;
-    padding-right: 20px;
-    padding-left: 20px;
-    margin-right: auto;
-    margin-left: auto;
-} */
 
-.troveStories .region-messages {
+
+/* .troveStoriesPage .region-messages {
     justify-content: center;
 }
 
-.troveStories .region-messages .messages__wrapper {
+.troveStoriesPage .region-messages .messages__wrapper {
     text-align: center;
     margin: 40px auto 40px auto;
 }
 
-.troveStories table.sticky-header thead {
+.troveStoriesPage table.sticky-header thead {
     top: auto;
 }
 
-/* status message is transparent and cant read it */
-.troveStories.adminimal .messages--status { 
+.troveStoriesPage.adminimal .messages--status { 
     background-color: #fff;
 }
 
-/* tab margins are set to negative causing bottom horizonatl scrollbar to appear */
-.troveStories.adminimal nav.is-horizontal.is-collapsible.position-container.is-horizontal-enabled ul.tabs.primary {
+.troveStoriesPage.adminimal nav.is-horizontal.is-collapsible.position-container.is-horizontal-enabled ul.tabs.primary {
     margin-left: 0;
     margin-right: 0;
-}
+} */
 

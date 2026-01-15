@@ -42,6 +42,23 @@ class TroveStoriesCommonServices {
         return false;
     }
 
+    public function isTroveStoryConfirmation() {
+        $route_match = \Drupal::routeMatch();
+        $route_name = $route_match->getRouteName(); 
+
+        if ($route_name === "entity.webform.confirmation") { //confirmation page route
+        
+            $webform = $route_match->getParameter('webform');
+
+            if (empty($webform)) return false;
+
+            if ($webform->id() === $this->getTroveStoriesFormId()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     public function isTroveStorySubmission() {
         

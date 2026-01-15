@@ -100,26 +100,39 @@ function trove_stories_theme_suggestions_input_alter(array &$suggestions, array 
 }
 
 /*
-    On the trove stories gallery listing page and trove main form page
+    On the trove stories gallery listing page, trove main form page and form confirmation page
      remove the top region that contains the breadcrumbs
     this is so there is space to put in the banners
 */
 function trove_stories_preprocess_page(&$variables) {
     $route_match = \Drupal::routeMatch();
-    $route_name = $route_match->getRouteName();
-    if ($route_name === "trove_stories.trove_stories") {
+    $route_name = $route_match->getRouteName(); 
+
+    if ($route_name === "trove_stories.trove_stories") { //gallery page
         unset($variables['page']['content_top']);
     }
 
-    if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) {
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) { //form page
         unset($variables['page']['content_top']);
     }
+
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryConfirmation()) { //confirmation page
+        unset($variables['page']['content_top']);
+    }
+
+    // if ($route_name === "entity.webform.confirmation") { //confirmation page
+        
+    //     $webform = $route_match->getParameter('webform');
+
+    //     if (empty($webform)) return;
+
+    //     if ($webform->id() === \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId()) {
+    //         unset($variables['page']['content_top']);
+    //     }
+
+    // }
 
 }
-
-// function trove_stories_preprocess_file_link(&$variables) {
-//     echo "moo";
-// }
 
 //hook into the form submission and create a new trove webform submission entry.
 function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
@@ -165,7 +178,6 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
                     ]);
 
                     $media->save();
-                    //$new_media_id = $media->id();
                     $uploaded_media_ids[] = ['target_id' => $media->id()];
                 }
             }
@@ -230,9 +242,11 @@ function trove_stories_entity_access(Drupal\Core\Entity\EntityInterface $entity,
 function trove_stories_preprocess_html(&$variables) {
 
     if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm() 
-        || \Drupal::service('trove_stories.common_services')->isTroveStorySubmission()) { 
+        || \Drupal::service('trove_stories.common_services')->isTroveStorySubmission()
+        || \Drupal::service('trove_stories.common_services')->isTroveStoryConfirmation()
+    ) { 
         $variables['#attached']['library'][] = 'trove_stories/trove_stories_css_library'; //add our main stylesheet
-        $variables['attributes']['class'][] = 'troveStories'; //add body class to all trove stories areas
+        $variables['attributes']['class'][] = 'troveStoriesPage'; //add body class to all trove stories areas
     }
 
     if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) { 
@@ -373,23 +387,27 @@ function _trove_stories_webform_validate(array &$form, FormStateInterface $form_
     $result = file_get_contents($url, false, $context);
 
     if ($result === false) {
-        // Log the error for debugging purposes (optional)
+        $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
+        return;
+    }
+    
+
+    $response_data = json_decode($result, true);
+
+    if (empty($response_data)) {
         $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
         return;
     }
 
-    $response_data = json_decode($result, true);
-    // $response_data['success'];
-    // $response_data['challenge_ts'];
-    // $response_data['hostname'];
-    // $response_data['score'];
-    // $response_data['action'];
-
-    if ($response_data && $response_data['success'] === true) {
+    if ($response_data['success'] === true) {
         if ($response_data['score'] < 0.5) {
+        // if ($response_data['score'] > 0.5) {
             $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
             return;
         }
+    } else { //$response_data['success'] === false
+        $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
+        return;
     }
 }
 
@@ -401,59 +419,53 @@ function _trove_stories_webform_validate(array &$form, FormStateInterface $form_
 */
 function trove_stories_node_view_alter(array &$build, \Drupal\Core\Entity\EntityInterface $entity) {
     
-        if ($entity->bundle() !== 'trove_story_submission') {
-            return;
-        }
+    if ($entity->bundle() !== 'trove_story_submission') {
+        return;
+    }
 
-        //create a fieldset for the buttons
-        $build['trove_story_submissions_buttons'] = [
-            '#type' => 'fieldset',
-            '#title' => '',
-            '#description' => '',
-            '#attributes' => [
-                'class' => ['trove_story_submission_buttons'],
-            ],
-            '#weight' => -10
-        ];
+    //create a fieldset for the buttons
+    $build['trove_story_submissions_buttons'] = [
+        '#type' => 'fieldset',
+        '#title' => '',
+        '#description' => '',
+        '#attributes' => [
+            'class' => ['trove_story_submission_buttons'],
+        ],
+        '#weight' => -10
+    ];
 
-        //create the 'back to submissions' button
-        $submissions_route_url = Url::fromRoute('view.trove_stories_views.page_1');
-        
-        $build['trove_story_submissions_buttons']['back_to_trove_story_submissions_button'] = [
-            '#type' => 'link',
-            '#title' => \Drupal::service('string_translation')->translate('< Back to trove story submissions'),
-            '#url' => $submissions_route_url,
-            '#prefix' => '<div class="trove-story-web-story-button-wrapper">',
-            '#suffix' => '</div>',
-            '#attributes' => [
-                'class' => ['button', 'button--primary'],
-            ],
-            '#weight' => -10
-        ];
-
-        //create the 'convert to trove story' button
-        $query_string_options['submission_id'] = $entity->id();
-        $convert_route_url = Url::fromRoute('trove_stories.webform_submission.create_trove_story_web_story');
-        $convert_route_url->setOption('query', $query_string_options);
-
-        $build['trove_story_submissions_buttons']['convert_to_trove_story_web_story_button'] = [
-            '#type' => 'link',
-            '#title' => \Drupal::service('string_translation')->translate('Convert to Trove Story Website Story'),
-            '#url' => $convert_route_url,
-            '#prefix' => '<div class="trove-story-web-story-button-wrapper btn2">',
-            '#suffix' => '</div>',
-            '#weight' => -10,
-            '#attributes' => [
-                'class' => ['button', 'button--primary'],
-            ],
-        ];
-
-        //$build['convert_to_trove_story_button']['#weight'] = -10;
-        //$build['convert_to_trove_story_web_story_button']['#weight'] = 150;
+    //create the 'back to submissions' button
+    $submissions_route_url = Url::fromRoute('view.trove_stories_views.page_1');
     
+    $build['trove_story_submissions_buttons']['back_to_trove_story_submissions_button'] = [
+        '#type' => 'link',
+        '#title' => \Drupal::service('string_translation')->translate('< Back to trove story submissions'),
+        '#url' => $submissions_route_url,
+        '#prefix' => '<div class="trove-story-web-story-button-wrapper">',
+        '#suffix' => '</div>',
+        '#attributes' => [
+            'class' => ['button', 'button--primary'],
+        ],
+        '#weight' => -10
+    ];
 
+    //create the 'convert to trove story' button
+    $query_string_options['submission_id'] = $entity->id();
+    $convert_route_url = Url::fromRoute('trove_stories.webform_submission.create_trove_story_web_story');
+    $convert_route_url->setOption('query', $query_string_options);
+
+    $build['trove_story_submissions_buttons']['convert_to_trove_story_web_story_button'] = [
+        '#type' => 'link',
+        '#title' => \Drupal::service('string_translation')->translate('Convert to Trove Story Website Story'),
+        '#url' => $convert_route_url,
+        '#prefix' => '<div class="trove-story-web-story-button-wrapper btn2">',
+        '#suffix' => '</div>',
+        '#weight' => -10,
+        '#attributes' => [
+            'class' => ['button', 'button--primary'],
+        ],
+    ];
 }
-
 
 /**
  * Implements hook_install().

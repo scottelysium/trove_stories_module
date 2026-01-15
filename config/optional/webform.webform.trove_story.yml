@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: 8fGUGt7-5cC373-vET38hxwZZxa5ct_GFD0e0w1jmZs
+  default_config_hash: fmyzbDXjHTRlJUxw9QZ_JbypMxZrEj6YY8kRUVCy118
 weight: 0
 open: null
 close: null
@@ -222,9 +222,9 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: ''
+  confirmation_message: "<p>Thank you for your story submission.</p>\r\n\r\n<p>Our staff will review your story and if it meets the correct criteria your story may be featured on the trove stories gallery page.</p>\r\n\r\n<p>For any technical assistance please feel free to <a href=\"https://trove.nla.gov.au/about/contact-us\">contact us</a></p>"
   confirmation_attributes: {  }
-  confirmation_back: true
+  confirmation_back: false
   confirmation_back_label: ''
   confirmation_back_attributes: {  }
   confirmation_exclude_query: false
