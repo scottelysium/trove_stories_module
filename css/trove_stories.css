@@ -33,7 +33,19 @@
         margin-right: 0px;
         margin-left: 0px;
     }
+
+    .troveStoriesPage .webform-confirmation { 
+        width: 90vw;
+    }
 }
+
+@media only screen and (max-width : 785px) {
+    .troveStoriesPage .header .header-bottom .container .row {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+}
+
 
 
 /* .troveStoriesFade { 
