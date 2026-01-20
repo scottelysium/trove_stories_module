@@ -3,6 +3,7 @@ namespace Drupal\trove_stories\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\media\Entity\Media;
 
 /**
  * Controller for returning json data for the trove stories page (listing items, searching etc.)
@@ -67,16 +68,34 @@ class TroveStoriesApiController extends ControllerBase {
 
     private function processStoriesJson($web_stories) {
         $story_gallery_items = [];
+        $styled_url = "";
 
         foreach ($web_stories as $web_story) {
-
-
-            //todo: setup thumbnail as its own feild with template image and fetch it here
             
             // $thumbnails = [];
 
             // /** @var \Drupal\Core\Field\EntityReferenceFieldItemListInterface $images */
-            // $images = $web_story->get('field_tsws_story_images');
+            $paragraph_thumbnails = $web_story->get('field_tsws_story_thumbnail')->referencedEntities();
+
+            foreach ($paragraph_thumbnails as $paragraph_thumbnail) {
+
+                if (!$paragraph_thumbnail->get('field_ptsws_browse_thumbnail')->isEmpty()) {
+                    //first get the media reference field
+                    $browse_media = $paragraph_thumbnail->get('field_ptsws_browse_thumbnail')->entity;
+                    if ($browse_media instanceof Media) {
+                        
+                        $thumb_file = $browse_media->get('field_media_image')->entity;
+
+                        $uri = $thumb_file->getFileUri();
+                        $style = ImageStyle::load('thumbnail');
+                        $styled_url = $style->buildUrl($uri);;
+                    }
+                     
+                }
+                
+            }
+
+            
             
             // /** @var \Drupal\node\NodeInterface[] $image_entities */
             // $image_entities = $images->referencedEntities();
@@ -94,7 +113,7 @@ class TroveStoriesApiController extends ControllerBase {
             $story_gallery_items[] = [
                 'story_title' => $web_story->get('field_tsws_story_title')->value,
                 //'image_urls' => $thumbnails,
-                //'thumbnail_url' => $thumbnails[0] //just get the top one for now.
+                'thumbnail_url' => $styled_url
             ];
             
         }

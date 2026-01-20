@@ -1,0 +1,23 @@
+uuid: 7560c8f6-6c38-489b-b4fd-8cd166740ab2
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+_core:
+  default_config_hash: YVNgQjLLN4c8GgJ8QAOlE4EoAQxBp7MYYPpr6r20bIU
+id: node.field_tsws_story_thumbnail
+field_name: field_tsws_story_thumbnail
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

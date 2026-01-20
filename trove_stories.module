@@ -168,7 +168,17 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
                     $media = Media::create([ //we create a new 'image' media type that references this privately stored file.
                         'bundle' => 'image',
                         'uid' => \Drupal::currentUser()->id(),
-                        'status' => 1,
+                        /**
+                        NOTE: status 0 means NOT published, this is IMPORTANT 
+                        because otherwise these 'private' files will show up 
+                        in the entity browser across the entire site - this
+                        would be bad because drupal admins could accidently choose these
+                        files for public pages or blocks and then they won't
+                        display on the front end. Non-published ensures the media
+                        browser ignores them but we can still use them for our 
+                        submissions content type for viewing on backend only.
+                         */
+                        'status' => 0,
                         'name' => $file->getFilename(),
                         'field_media_image' => [
                             'target_id' => $file->id(),
@@ -517,58 +527,18 @@ function trove_stories_install() {
         $loadedRole->grantPermission('revert trove_story_web_story revisions');
         $loadedRole->grantPermission('view trove_story_web_story revisions');
 
+        /*
+        review from sync:
+        user.role.trove_editor                                                   | Update    |
+|       | user.role.trove_author                                                   | Update    |
+|       | user.role.trove_administrator
+        */
+
         $loadedRole->save();
     }
 
-
-    /***
-        For the Trove Stories form, set default columns to display
-        to set custom columns, get the full form from state API, then
-        update the array 'results.custom.columns' with the preferred column keys to display.
-    ****/
-    // $state = \Drupal::state();
-    // $form_data = $state->get('webform.webform.trove_story', []); 
-    // $diplayed_cols = [ // these keys can be found by debugging /WebformResultsCustomForm.php
-    //     'serial',
-    //     'element__email',
-    //     'element__story_title',
-    //     'element__name',
-    //     'element__year_of_birth',
-    //     'element__display_name_story_author',
-    //     //'sid',
-    //     'created',
-    //     'operations'
-    // ];
-    
-    // $form_data['results.custom.columns'] = $diplayed_cols;
-    // $state->set('webform.webform.trove_story', $form_data);
-
-    /***
-        set new action 'create_trove_story_action' to 'on' in the 'admin/structure/webform/config/submissions' area.
-        this enables the bulk action on form submissions that converts a submission to a trove story.
-        REMOVED: actions not really needed and too much extra work when we can use a button per individual 
-        submission to create trove story.
-    ****/
-    // $actions = \Drupal::entityTypeManager()->getStorage('action')->loadMultiple();
-
-    // if (!is_null($actions['create_trove_story_action'])) {
-        
-    //     $config_factory = \Drupal::service('config.factory');
-    //     $webFormconfig = $config_factory->getEditable('webform.settings');
-
-    //     $submission_bulk_actions = $webFormconfig->get("settings.webform_submission_bulk_form_actions");
-
-    //     // 'webform_submission_bulk_form_actions' array lists the ENABLED items - disabled items don't exist in the array
-    //     // so we add the action to the array.
-    //     // the admin page that renders these config items is the buildBulkOperations() function in WebformAdminConfigBaseForm.php
-    //     if (!in_array('create_trove_story_action', $submission_bulk_actions)) {
-    //         $submission_bulk_actions[] = 'create_trove_story_action';
-    //         $webFormconfig->set('settings.webform_submission_bulk_form_actions', $submission_bulk_actions);
-    //         $webFormconfig->save();
-    //     }
-    // }
-
 }
+
 
 
 

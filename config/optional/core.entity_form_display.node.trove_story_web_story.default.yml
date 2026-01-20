@@ -12,6 +12,7 @@ dependencies:
     - field.field.node.trove_story_web_story.field_tsws_story_links
     - field.field.node.trove_story_web_story.field_tsws_story_name
     - field.field.node.trove_story_web_story.field_tsws_story_postcode
+    - field.field.node.trove_story_web_story.field_tsws_story_thumbnail
     - field.field.node.trove_story_web_story.field_tsws_story_title
     - field.field.node.trove_story_web_story.field_tsws_story_use
     - field.field.node.trove_story_web_story.field_tsws_story_year_of_birth
@@ -22,7 +23,7 @@ dependencies:
     - paragraphs
     - path
 _core:
-  default_config_hash: OYSfGNDE_ExWFGIUCJIpR6slBjWpgrZofpE3VDJOQSU
+  default_config_hash: '-RHO7QKLlqhlXmiUAlJYS3ujdpqUOmLV9hfa-Y1UTTQ'
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
@@ -36,7 +37,7 @@ content:
     third_party_settings: {  }
   field_tsws_story_about:
     type: string_textarea
-    weight: 12
+    weight: 13
     region: content
     settings:
       rows: 5
@@ -44,7 +45,7 @@ content:
     third_party_settings: {  }
   field_tsws_story_author:
     type: string_textfield
-    weight: 14
+    weight: 15
     region: content
     settings:
       size: 60
@@ -58,7 +59,7 @@ content:
     third_party_settings: {  }
   field_tsws_story_email:
     type: email_default
-    weight: 15
+    weight: 16
     region: content
     settings:
       placeholder: ''
@@ -66,7 +67,7 @@ content:
     third_party_settings: {  }
   field_tsws_story_gallery:
     type: paragraphs
-    weight: 26
+    weight: 23
     region: content
     settings:
       title: Paragraph
@@ -92,7 +93,7 @@ content:
     third_party_settings: {  }
   field_tsws_story_links:
     type: link_default
-    weight: 13
+    weight: 14
     region: content
     settings:
       placeholder_url: ''
@@ -114,6 +115,26 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+  field_tsws_story_thumbnail:
+    type: paragraphs
+    weight: 11
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: trove_story_thumbnail
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
+    third_party_settings: {  }
   field_tsws_story_title:
     type: string_textfield
     weight: 20
@@ -124,7 +145,7 @@ content:
     third_party_settings: {  }
   field_tsws_story_use:
     type: string_textarea
-    weight: 11
+    weight: 12
     region: content
     settings:
       rows: 5

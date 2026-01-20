@@ -1,0 +1,35 @@
+uuid: 2f693326-ec6b-499e-a91f-87e0b7e7fa04
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.trove_story_thumbnail.field_ptsws_browse_thumbnail
+    - field.field.paragraph.trove_story_thumbnail.field_ptsws_category_thumb
+    - paragraphs.paragraphs_type.trove_story_thumbnail
+  module:
+    - options
+_core:
+  default_config_hash: Hx6p_1CavSZfJI67Ap7xyJohzMLbvW2GDfAGgc1IPRM
+id: paragraph.trove_story_thumbnail.default
+targetEntityType: paragraph
+bundle: trove_story_thumbnail
+mode: default
+content:
+  field_ptsws_browse_thumbnail:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: media_library
+      link: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_ptsws_category_thumb:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  search_api_excerpt: true

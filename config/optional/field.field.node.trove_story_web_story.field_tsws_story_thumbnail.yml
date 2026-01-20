@@ -1,0 +1,54 @@
+uuid: da4af01c-b857-4184-b8c3-affd6b39e880
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tsws_story_thumbnail
+    - node.type.trove_story_web_story
+    - paragraphs.paragraphs_type.trove_story_thumbnail
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: k46A3DcEVW_VYZv-VJ7SiBDXVcUndw7JPO48dldpWK8
+id: node.trove_story_web_story.field_tsws_story_thumbnail
+field_name: field_tsws_story_thumbnail
+entity_type: node
+bundle: trove_story_web_story
+label: 'Story Thumbnail'
+description: 'Choose a thumbnail that will be used on the story gallery page.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      trove_story_thumbnail: trove_story_thumbnail
+    negate: 0
+    target_bundles_drag_drop:
+      additional_components:
+        weight: 10
+        enabled: false
+      additional_components_text:
+        weight: 11
+        enabled: false
+      additional_components_yt_video:
+        weight: 12
+        enabled: false
+      contributor:
+        weight: 13
+        enabled: false
+      information_tile:
+        weight: 14
+        enabled: false
+      project:
+        weight: 15
+        enabled: false
+      trove_story_gallery_images:
+        weight: 16
+        enabled: false
+      trove_story_thumbnail:
+        weight: 9
+        enabled: true
+field_type: entity_reference_revisions

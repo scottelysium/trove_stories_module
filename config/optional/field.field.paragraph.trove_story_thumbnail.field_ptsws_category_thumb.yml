@@ -1,0 +1,23 @@
+uuid: a9ce0930-2a49-45d5-822d-4aaa5a7ce581
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_ptsws_category_thumb
+    - paragraphs.paragraphs_type.trove_story_thumbnail
+  module:
+    - options
+_core:
+  default_config_hash: h6yp-xXcV5qPUNC3gdsPdUotXm3hu8b1YBBnjQID0yg
+id: paragraph.trove_story_thumbnail.field_ptsws_category_thumb
+field_name: field_ptsws_category_thumb
+entity_type: paragraph
+bundle: trove_story_thumbnail
+label: 'Trove Story Category Thumbnail'
+description: 'Choose a template thumbnail associated with a category or overwrite this by browsing for a thumbnail.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

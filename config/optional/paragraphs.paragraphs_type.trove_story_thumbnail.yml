@@ -1,0 +1,12 @@
+uuid: 6336091b-0bbe-43ab-90cd-3ea01c9626f6
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 0sI6u5oD4bggFaqXPlNzHRv3hArr88o9IKjhKHe-Zmw
+id: trove_story_thumbnail
+label: 'Trove Story Thumbnail'
+icon_uuid: null
+icon_default: null
+description: 'A default thumbnail picker for a trove story that allows you to select from a predefined list of thumbnail template images or add your own from the media library'
+behavior_plugins: {  }

@@ -1,0 +1,22 @@
+uuid: 93f07c84-3f70-44fc-a056-677c59f37781
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+_core:
+  default_config_hash: Ji0o6rYXZ0S9hCr2RQyYiHkdX_CziEawrVlH0nT-L_U
+id: paragraph.field_ptsws_browse_thumbnail
+field_name: field_ptsws_browse_thumbnail
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

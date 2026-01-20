@@ -1,0 +1,53 @@
+uuid: 4befeb34-bb26-4323-956a-718a6f693691
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+_core:
+  default_config_hash: xh-74DLQABVhV7HXNEam4QodKAgoPZsnN-cDY3UGKXc
+id: paragraph.field_ptsws_category_thumb
+field_name: field_ptsws_category_thumb
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: thumb_newspapers_and_gazettes
+      label: 'Newspapers and Gazettes'
+    -
+      value: thumb_magazines_and_newsletters
+      label: 'Magazines and Newsletters'
+    -
+      value: thumb_images_maps_and_artefacts
+      label: 'Images, Maps and Artefacts'
+    -
+      value: thumb_research_and_reports
+      label: 'Research and Reports'
+    -
+      value: thumb_books_libraries
+      label: 'Books & Libraries'
+    -
+      value: thumb_diaries_letters_archives
+      label: 'Diaries, Letters & Archives'
+    -
+      value: thumb_music_audio_and_video
+      label: 'Music, Audio and Video'
+    -
+      value: thumb_people_and_organisations
+      label: 'People and Organisations'
+    -
+      value: thumb_websites
+      label: Websites
+    -
+      value: thumb_lists
+      label: Lists
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
