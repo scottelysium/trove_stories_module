@@ -2,13 +2,10 @@
 namespace Drupal\trove_stories\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-//use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
-//use Drupal\webform\Entity\WebformSubmission;
-//use Drupal\Core\File\FileSystemInterface;
 use Drupal\Core\File\FileExists;
 use Drupal\paragraphs\Entity\Paragraph;
 
@@ -45,16 +42,18 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
         $webStoryLinks = $storySubmissionNode->get('field_tss_story_links')->getValue();
 
         //get images
-        $webStoryImages = $storySubmissionNode->get('field_tss_story_images')->getValue(); //this has the media ids already set no extra porcessing needed.
+        //$webStoryImages = $storySubmissionNode->get('field_tss_story_images')->getValue(); //this has the media ids already set no extra porcessing needed.
+
+        $privateImageIds = $storySubmissionNode->get('field_tss_private_image_ids')->getValue();
 
         $newWebStoryImageIds = [];
 
-        //clone the images from private directory to the public
-        foreach($webStoryImages as $webStoryImage) {
-            $target_id = $webStoryImage['target_id'];
-            $source_media = Media::load($target_id);
+        foreach($privateImageIds as $privateImageId) {
+            $target_id = $privateImageId['value'];
+            //$source_media = Media::load($target_id);
+            $source_file = File::load($target_id);
 
-            $source_file = $source_media->get('field_media_image')->entity;
+            //$source_file = $source_media->get('field_media_image')->entity;
 
             if ($source_file instanceof File) { //we want the original File the media points to.
 
@@ -68,25 +67,64 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
                 $file_repository = \Drupal::service('file.repository');
                 $new_file = $file_repository->copy($source_file, $destination, FileExists::Rename);
 
-                // Create the new Media entity
-                $new_media = $source_media->createDuplicate();
-
-                // Set the new file entity and any other specific metadata
-                $new_media->set('field_media_image', [
-                    'target_id' => $new_file->id(),
-                    'alt' => $source_media->get('field_media_image')->alt, // Carry over alt text if it's an image
-                    'title' => $source_media->get('field_media_image')->title,
+                $new_file_media = Media::create([ //we create a new 'image' media type that references this newly cloned file.
+                    'bundle' => 'image',
+                    'uid' => \Drupal::currentUser()->id(),
+                    
+                    'status' => 1, //published
+                    'name' => $new_file->getFilename(),
+                    'field_media_image' => [
+                        'target_id' => $new_file->id(),
+                        'alt' => $new_file->getFilename(),
+                        'title' => $new_file->getFilename(),
+                        ],
                 ]);
 
-                $new_media->setName('trove_story_' . $source_media->getName()); //this is the media name - not the actual file name
-                $new_media->setPublished(TRUE);
+                $new_file_media->save();
 
-                $new_media->save();
-
-                $newWebStoryImageIds[]['target_id'] = $new_media->id();
+                $newWebStoryImageIds[]['target_id'] = $new_file_media->id();
 
             }
         }
+
+        //clone the images from private directory to the public
+        // foreach($webStoryImages as $webStoryImage) {
+        //     $target_id = $webStoryImage['target_id'];
+        //     $source_media = Media::load($target_id);
+
+        //     $source_file = $source_media->get('field_media_image')->entity;
+
+        //     if ($source_file instanceof File) { //we want the original File the media points to.
+
+        //         //Prepare the public destination URI
+        //         $filename = $source_file->getFilename();
+        //         $destination = 'public://' . $filename;
+
+        //         // Use FileRepository to copy the file and create a new File entity
+        //         // This creates a physical copy and a new entry in the 'file_managed' table
+        //         /** @var \Drupal\file\FileRepositoryInterface $file_repository */
+        //         $file_repository = \Drupal::service('file.repository');
+        //         $new_file = $file_repository->copy($source_file, $destination, FileExists::Rename);
+
+        //         // Create the new Media entity
+        //         $new_media = $source_media->createDuplicate();
+
+        //         // Set the new file entity and any other specific metadata
+        //         $new_media->set('field_media_image', [
+        //             'target_id' => $new_file->id(),
+        //             'alt' => $source_media->get('field_media_image')->alt, // Carry over alt text if it's an image
+        //             'title' => $source_media->get('field_media_image')->title,
+        //         ]);
+
+        //         $new_media->setName('trove_story_' . $source_media->getName()); //this is the media name - not the actual file name
+        //         $new_media->setPublished(TRUE);
+
+        //         $new_media->save();
+
+        //         $newWebStoryImageIds[]['target_id'] = $new_media->id();
+
+        //     }
+        // }
 
         //now the images are moved to the public folder, create the paragraph field for the story gallery
         $paragraphGallery = Paragraph::create([

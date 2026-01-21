@@ -4,20 +4,24 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.trove_story_submission.field_tss_private_image_ids
+    - field.field.node.trove_story_submission.field_tss_private_image_urls
+    - field.field.node.trove_story_submission.field_tss_status
     - field.field.node.trove_story_submission.field_tss_story_about
-    - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_author
     - field.field.node.trove_story_submission.field_tss_story_email
-    - field.field.node.trove_story_submission.field_tss_story_images
     - field.field.node.trove_story_submission.field_tss_story_inspiration
+    - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_name
     - field.field.node.trove_story_submission.field_tss_story_postcode
     - field.field.node.trove_story_submission.field_tss_story_title
-    - field.field.node.trove_story_submission.field_tss_story_year_of_birth
     - field.field.node.trove_story_submission.field_tss_story_use
+    - field.field.node.trove_story_submission.field_tss_story_year_of_birth
     - node.type.trove_story_submission
   module:
     - user
+_core:
+  default_config_hash: KOCTPINRQfso93U5BlL9VqbJUVikdSJM4J9fQuRDYRc
 id: node.trove_story_submission.teaser
 targetEntityType: node
 bundle: trove_story_submission
@@ -29,16 +33,18 @@ content:
     weight: 100
     region: content
 hidden:
+  field_tss_private_image_ids: true
+  field_tss_private_image_urls: true
+  field_tss_status: true
   field_tss_story_about: true
-  field_tss_story_links: true
   field_tss_story_author: true
   field_tss_story_email: true
-  field_tss_story_images: true
   field_tss_story_inspiration: true
+  field_tss_story_links: true
   field_tss_story_name: true
   field_tss_story_postcode: true
   field_tss_story_title: true
-  field_tss_story_year_of_birth: true
   field_tss_story_use: true
+  field_tss_story_year_of_birth: true
   langcode: true
   search_api_excerpt: true

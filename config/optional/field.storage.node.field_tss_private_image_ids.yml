@@ -1,0 +1,21 @@
+uuid: 35941c83-b9dc-43e3-bdd0-a31fed18d874
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_tss_private_image_ids
+field_name: field_tss_private_image_ids
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 4
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

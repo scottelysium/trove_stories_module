@@ -6,7 +6,7 @@
     document.addEventListener("DOMContentLoaded", function(event) {
 
         let loadMoreOffset = 0;
-        let amountPerLoad = 2; //the amount loaded in the next 'load more' call
+        let amountPerLoad = 6; //the amount loaded in the next 'load more' call
 
         fetchStoryItems(0); //initial fetch, hardcode zero as offset variable updates
 
@@ -69,7 +69,27 @@
             const listContainer = document.getElementById("trove-stories-gallery-list");
             if (!listContainer) return;
 
+            const masonyCol1 = document.querySelector(".masonry-col1");
+            const masonyCol2 = document.querySelector(".masonry-col2");
+            const masonyCol3 = document.querySelector(".masonry-col3");
+
             storyItems.forEach((item, i) => {
+
+                // if (i % 2 === 0) { // Check for even index
+                //     console.log(`Processing first/third/etc. item (index ${i})`);
+                //     const storyItemElement = document.createElement("div");
+                //     storyItemElement.innerHTML = generateHtmlStoryItem(item);
+                //     masonyCol2.appendChild(storyItemElement);
+                // }
+
+                if (i % 3 === 2) { //every third
+                    console.log(`Processing first/third/etc. item (index ${i})`);
+                    // const storyItemElement = document.createElement("div");
+                    // storyItemElement.innerHTML = generateHtmlStoryItem(item);
+                    // masonyCol3.appendChild(storyItemElement);
+                }
+
+               
                 const storyItemElement = document.createElement("div");
                 storyItemElement.innerHTML = generateHtmlStoryItem(item);
                 listContainer.appendChild(storyItemElement);

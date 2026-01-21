@@ -68,7 +68,7 @@ class TroveStoriesApiController extends ControllerBase {
 
     private function processStoriesJson($web_stories) {
         $story_gallery_items = [];
-        $styled_url = "";
+        $thumbnail_url = "";
 
         foreach ($web_stories as $web_story) {
             
@@ -78,7 +78,8 @@ class TroveStoriesApiController extends ControllerBase {
             $paragraph_thumbnails = $web_story->get('field_tsws_story_thumbnail')->referencedEntities();
 
             foreach ($paragraph_thumbnails as $paragraph_thumbnail) {
-
+                
+                //first check if there is a 'browse' thumbnail, if so we always use this.
                 if (!$paragraph_thumbnail->get('field_ptsws_browse_thumbnail')->isEmpty()) {
                     //first get the media reference field
                     $browse_media = $paragraph_thumbnail->get('field_ptsws_browse_thumbnail')->entity;
@@ -87,10 +88,59 @@ class TroveStoriesApiController extends ControllerBase {
                         $thumb_file = $browse_media->get('field_media_image')->entity;
 
                         $uri = $thumb_file->getFileUri();
-                        $style = ImageStyle::load('thumbnail');
-                        $styled_url = $style->buildUrl($uri);;
+                        $style = ImageStyle::load('thumbnail'); //Thumbnail (220×200)
+                        $thumbnail_url = $style->buildUrl($uri);;
                     }
-                     
+                } else {
+                    //check for category thumbnail value
+                    if (!$paragraph_thumbnail->get('field_ptsws_category_thumb')->isEmpty()) {
+                        $category_thumb_value = $paragraph_thumbnail->get('field_ptsws_category_thumb')->value;
+                        $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'trove_stories'); // eg "modules/custom/trove_stories"
+                        
+                        $thumb_path = $module_path . "/images/thumbnail_category_images/";
+
+                        $thumb_filename = "";
+
+                        switch ($category_thumb_value) {
+                            case "thumb_newspapers_and_gazettes":
+                                $thumb_filename = "newspapers_and_gazettes.jpg";
+                                break;
+                            case "thumb_magazines_and_newsletters":
+                                $thumb_filename = "magazines_and_newsletters.jpg";
+                                break;
+                            case "thumb_images_maps_and_artefacts":
+                                $thumb_filename = "images_maps_and_artefacts.jpg";
+                                break;
+                            case "thumb_research_and_reports":
+                                $thumb_filename = "research_and_reports.jpg";
+                                break;
+                            case "thumb_books_libraries":
+                                $thumb_filename = "books_and_libraries.jpg";
+                                break;
+                            case "thumb_diaries_letters_archives":
+                                $thumb_filename = "diaries_letters_and_archives.jpg";
+                                break;
+                            case "thumb_music_audio_and_video":
+                                $thumb_filename = "music_audio_and_video.jpg";
+                                break;
+                            case "thumb_people_and_organisations":
+                                $thumb_filename = "people_and_organisations.jpg";
+                                break;
+                            case "thumb_websites":
+                                $thumb_filename = "websites.jpg";
+                                break;
+                            case "thumb_lists":
+                                $thumb_filename = "lists.jpg";
+                                break;
+                        }
+                        
+                        $thumbnail_url = $thumb_path . $thumb_filename;
+                        
+                        
+                    } else {
+                        //if the category thumbnail is also empty then we need a default
+                    }
+
                 }
                 
             }
@@ -113,14 +163,12 @@ class TroveStoriesApiController extends ControllerBase {
             $story_gallery_items[] = [
                 'story_title' => $web_story->get('field_tsws_story_title')->value,
                 //'image_urls' => $thumbnails,
-                'thumbnail_url' => $styled_url
+                'thumbnail_url' => $thumbnail_url
             ];
             
         }
 
         return $story_gallery_items;
     }
-    // public function searchWebsiteStories() {
-        
-    // }
+
 }

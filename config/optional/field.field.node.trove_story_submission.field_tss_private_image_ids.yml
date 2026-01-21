@@ -1,0 +1,26 @@
+uuid: ad806251-a27a-4cc4-9665-b7625d398302
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tss_private_image_ids
+    - node.type.trove_story_submission
+  module:
+    - regex_field_validation
+third_party_settings:
+  regex_field_validation:
+    enable: 0
+    regex: ''
+    error_message: ''
+id: node.trove_story_submission.field_tss_private_image_ids
+field_name: field_tss_private_image_ids
+entity_type: node
+bundle: trove_story_submission
+label: 'Private image ids'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

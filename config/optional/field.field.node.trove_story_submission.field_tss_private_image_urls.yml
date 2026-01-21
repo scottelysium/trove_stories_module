@@ -1,0 +1,26 @@
+uuid: 556de1e0-3426-4d9e-81b4-5d2577bd47e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tss_private_image_urls
+    - node.type.trove_story_submission
+  module:
+    - regex_field_validation
+third_party_settings:
+  regex_field_validation:
+    enable: 0
+    regex: ''
+    error_message: ''
+id: node.trove_story_submission.field_tss_private_image_urls
+field_name: field_tss_private_image_urls
+entity_type: node
+bundle: trove_story_submission
+label: 'Private image urls'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

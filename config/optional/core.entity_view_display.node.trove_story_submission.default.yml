@@ -3,11 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.trove_story_submission.field_tss_private_image_ids
+    - field.field.node.trove_story_submission.field_tss_private_image_urls
     - field.field.node.trove_story_submission.field_tss_status
     - field.field.node.trove_story_submission.field_tss_story_about
     - field.field.node.trove_story_submission.field_tss_story_author
     - field.field.node.trove_story_submission.field_tss_story_email
-    - field.field.node.trove_story_submission.field_tss_story_images
     - field.field.node.trove_story_submission.field_tss_story_inspiration
     - field.field.node.trove_story_submission.field_tss_story_links
     - field.field.node.trove_story_submission.field_tss_story_name
@@ -21,12 +22,28 @@ dependencies:
     - options
     - user
 _core:
-  default_config_hash: y-X1zVXCriMjtHH5UZCjKNkNX4rzwrj-poN_Rdr8IfM
+  default_config_hash: wdcTIVKhGw_jZm6aJUPvQ9lvacqY12RfFpcZrmWhzB8
 id: node.trove_story_submission.default
 targetEntityType: node
 bundle: trove_story_submission
 mode: default
 content:
+  field_tss_private_image_ids:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 14
+    region: content
+  field_tss_private_image_urls:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 13
+    region: content
   field_tss_status:
     type: list_default
     label: above
@@ -55,15 +72,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 7
-    region: content
-  field_tss_story_images:
-    type: entity_reference_entity_view
-    label: above
-    settings:
-      view_mode: full
-      link: false
-    third_party_settings: {  }
-    weight: 12
     region: content
   field_tss_story_inspiration:
     type: basic_string

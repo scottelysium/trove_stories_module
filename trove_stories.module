@@ -21,11 +21,11 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
             'form_element__webform__tswf_banner_message' => [ //overwrite the header/banner html markup field
                 'base hook' => 'form_element',
             ],
-            // 'form_element__webform_webform_image_file' => [ //overwrite the idividual files(s) uploaded template
-            //     'base hook' => 'form_element',
-            // ],
+            'field__node__full__field_tss_private_image_urls__trove_story_submission' => [ 
+                'base hook' => 'field',
+            ],
  
-            'field__node__title__trove_story_submission' => [ //template for content type 'trove story submission'
+            'field__node__title__trove_story_submission' => [ //overwrite the 'title' area of a 'trove story submission'
                 'template' => 'field--node--title--trove-story-submission',
                 'base hook' => 'field',
             ],
@@ -134,8 +134,11 @@ function trove_stories_preprocess_page(&$variables) {
 
 }
 
+
+
 //hook into the form submission and create a new trove webform submission entry.
-function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
+//function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
+function trove_stories_webform_submission_insert(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
 
     if ($webform_submission->getEntityTypeId() === 'webform_submission') { //note this is the webform submission content type, not the trove stories submission content type
         if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm()) {
@@ -143,7 +146,9 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
             //create trove story submission content
             $submissionData = $webform_submission->getData();
 
-            $uploaded_media_ids = [];
+            $sid = $webform_submission->id();
+
+            //$uploaded_media_ids = [];
 
             /*
             Note: we are creating a new image that is of the 'Media type' > 'image'
@@ -161,36 +166,61 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
             the target_id of it to the original webform image target_id - it ends up referencing 
             a private file path.
             */
+            // if (!empty($submissionData["tswf_upload_images"])) {
+            //     foreach($submissionData["tswf_upload_images"] as $file_id) {
+            //         $file = File::load($file_id); //we load the webform file upload that is stored in the private directory
+
+            //         $url = $file->getFileUri();
+            //         //$new_file_id = $file->id();
+            //         $media = Media::create([ //we create a new 'image' media type that references this privately stored file.
+            //             'bundle' => 'image',
+            //             'uid' => \Drupal::currentUser()->id(),
+            //             /**
+            //             NOTE: status 0 means NOT published, this is IMPORTANT 
+            //             because otherwise these 'private' files will show up 
+            //             in the entity browser across the entire site - this
+            //             would be bad because drupal admins could accidently choose these
+            //             files for public pages or blocks and then they won't
+            //             display on the front end. Non-published ensures the media
+            //             browser ignores them but we can still use them for our 
+            //             submissions content type for viewing on backend only.
+            //              */
+            //             'status' => 0,
+            //             'name' => $file->getFilename(),
+            //             'field_media_image' => [
+            //                 'target_id' => $file->id(),
+            //                 'alt' => $file->getFilename(),
+            //                 'title' => $file->getFilename(),
+            //                 ],
+            //         ]);
+
+            //         $media->save();
+            //         $uploaded_media_ids[] = ['target_id' => $media->id()];
+            //     }
+            // }
+
+            $private_image_ids = [];
+            $private_image_urls = [];
+
             if (!empty($submissionData["tswf_upload_images"])) {
                 foreach($submissionData["tswf_upload_images"] as $file_id) {
-                    $file = File::load($file_id); //we load the webform file upload that is stored in the private directory
-                    //$new_file_id = $file->id();
-                    $media = Media::create([ //we create a new 'image' media type that references this privately stored file.
-                        'bundle' => 'image',
-                        'uid' => \Drupal::currentUser()->id(),
-                        /**
-                        NOTE: status 0 means NOT published, this is IMPORTANT 
-                        because otherwise these 'private' files will show up 
-                        in the entity browser across the entire site - this
-                        would be bad because drupal admins could accidently choose these
-                        files for public pages or blocks and then they won't
-                        display on the front end. Non-published ensures the media
-                        browser ignores them but we can still use them for our 
-                        submissions content type for viewing on backend only.
-                         */
-                        'status' => 0,
-                        'name' => $file->getFilename(),
-                        'field_media_image' => [
-                            'target_id' => $file->id(),
-                            'alt' => $file->getFilename(),
-                            'title' => $file->getFilename(),
-                            ],
-                    ]);
+                    $file = File::load($file_id);
+                    $file_uri = $file->getFileUri();
 
-                    $media->save();
-                    $uploaded_media_ids[] = ['target_id' => $media->id()];
+                    
+                    $file_url_generator = \Drupal::service('file_url_generator');
+                    $relative_url = $file_url_generator->generateString($file_uri);
+                    
+                    //the file url path will contain a '_sid_' value that needs to be replaced with the submission id
+                    $just_path = dirname($relative_url);// just in case some person uploads file with "_sid_" in the name
+                    $just_name = basename($relative_url);
+                    $new_dir = str_replace("_sid_", $sid, $just_path);
+                    $actual_url = $new_dir . "/" . $just_name;
+
+                    $private_image_ids[] = $file_id;
+                    $private_image_urls[] = $actual_url;
                 }
-            }
+            }//"/system/files/webform/trove_story/_sid_/cat2_19.jpg"
             
 
             //create new trove story display from the data
@@ -205,12 +235,15 @@ function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmiss
                 'field_tss_story_links' => $submissionData["tswf_links"],
                 'field_tss_story_author' => $submissionData["tswf_display_name_story_author"],
                 'field_tss_story_email' => $submissionData["tswf_email"],
-                'field_tss_story_images' => $uploaded_media_ids,
+                //'field_tss_story_images' => $uploaded_media_ids,
                 'field_tss_story_inspiration' => $submissionData["tswf_inspired"],
                 'field_tss_story_name' => $submissionData["tswf_name"],
                 'field_tss_story_postcode' => $submissionData["tswf_postcode"],
                 'field_tss_story_title' => $submissionData["tswf_story_title"],
-                'field_tss_story_year_of_birth' => $submissionData["tswf_year_of_birth"]
+                'field_tss_story_year_of_birth' => $submissionData["tswf_year_of_birth"],
+
+                'field_tss_private_image_ids' => $private_image_ids,
+                'field_tss_private_image_urls' => $private_image_urls
             ));
 
             $trove_story_submission->save();

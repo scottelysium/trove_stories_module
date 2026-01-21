@@ -53,18 +53,19 @@
     display: none;
 }
 
-/** images are rendered as full content, ensure they only stretch to the size of the page **/
-.node--type-trove-story-submission .node__content .field .field__item .field--name-field-media-image img { 
-    max-width: 100%;
-    height: auto;
+.node--type-trove-story-submission .node__content .field--name-field-tss-private-image-ids { /** hide image ids, they are only used by the code **/
+    display: none;
 }
 
+/** images are rendered as full content, ensure they only stretch to the size of the page **/
+.node--type-trove-story-submission .node__content .field .field__item img { 
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+}
 
 .node--type-trove-story-submission .trove_story_submission_buttons .fieldset-wrapper {
-    /* margin: 20px 0px 60px 0px; */
     padding: 20px 0px 20px 0px;
-    /* border-top: 1px solid #d9d9d9;
-    border-bottom: 1px solid #d9d9d9; */
     display: flex;
 }
 
