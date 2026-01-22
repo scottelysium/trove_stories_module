@@ -23,6 +23,12 @@ trove_stories.content.story_form:
   url: 'internal:/form/trove-story'
   parent: trove_stories.content
 
+#Content > Trove Stories > View Gallery
+trove_stories.content.story_gallery:
+  title: 'View Gallery'
+  url: 'internal:/trove-stories'
+  parent: trove_stories.content
+
 #Content > Trove Stories > Edit Form
 trove_stories.content.story_edit_form:
   title: 'Edit Form'

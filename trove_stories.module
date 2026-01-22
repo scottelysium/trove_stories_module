@@ -287,6 +287,7 @@ function trove_stories_preprocess_html(&$variables) {
     if (\Drupal::service('trove_stories.common_services')->isTroveStoryForm() 
         || \Drupal::service('trove_stories.common_services')->isTroveStorySubmission()
         || \Drupal::service('trove_stories.common_services')->isTroveStoryConfirmation()
+        || \Drupal::service('trove_stories.common_services')->isTroveStoryGalleryPage()
     ) { 
         $variables['#attached']['library'][] = 'trove_stories/trove_stories_css_library'; //add our main stylesheet
         $variables['attributes']['class'][] = 'troveStoriesPage'; //add body class to all trove stories areas
@@ -298,6 +299,10 @@ function trove_stories_preprocess_html(&$variables) {
 
     if (\Drupal::service('trove_stories.common_services')->isTroveStorySubmission()) { 
         $variables['#attached']['library'][] = 'trove_stories/trove_stories_submission_css_library'; //add our submission page style sheet.
+    }
+
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryGalleryPage()) { 
+        $variables['#attached']['library'][] = 'trove_stories/trove_stories_gallery_page_css_library'; //add our gallery page style sheet.
     }
 }
 

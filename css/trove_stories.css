@@ -25,8 +25,74 @@
    font-weight: 600;
 }
 
+/** banner styling - used on gallery AND form page. **/
+.troveStoriesPage .story-banner {
+    display: grid;
+    grid-template-columns: 1fr 613px;
+    grid-template-rows: 540px;
+    margin-bottom: 3rem;
+}
+
+
+
+.troveStoriesPage .story-banner .banner-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffbd4c;
+}
+
+.troveStoriesPage .story-banner .banner-left .banner-content {
+    padding-left: 10vw;
+}
+
+.troveStoriesPage .story-banner .banner-left .banner-content h1 {
+    margin: 0;
+    padding: 0;
+    font-family: "Source Serif Variable", serif;
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.troveStoriesPage .story-banner .banner-left .banner-content p {
+    margin: 25px 5vw 25px 0px;
+    font-size: 1.3rem;
+}
+
+.troveStoriesPage .story-banner .banner-left .banner-content p strong {
+    font-weight: 500;
+}
+
+.troveStoriesPage .story-banner .banner-right {
+    background-image: url(../images/banner-book.jpg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: auto 100%;
+}
+
+.troveStoriesPage .story-banner .banner-right .bannerGoblet svg {
+    display: block;
+    height: 540px;
+    width: auto;
+}
+
+
+
 /***** RESPONSIVE ********************************************************/
 /*********************DESKTOP FIRST**************************************/
+
+
+@media only screen and (max-width : 1300px) {
+
+    .troveStoriesPage .story-banner {
+        grid-template-columns: 1fr 413px;
+    }
+
+    .troveStoriesPage .story-banner .banner-right {
+        background-position: top left;
+    }
+}
+
 
 @media only screen and (max-width : 1020px) {
     .troveStoriesPage .footer .footer-middle .container .row {
@@ -39,6 +105,32 @@
     }
 }
 
+@media only screen and (max-width : 990px) {
+
+    .troveStoriesPage .story-banner .banner-left .banner-content h1 {
+        font-size: 2.75rem;
+        padding-top: 1rem;
+    }
+
+    .troveStoriesPage .story-banner .banner-left .banner-content p {
+        font-size: 1rem;
+    }
+
+    .troveStoriesPage .story-banner {
+        grid-template-rows: 410px;
+    }
+
+    .troveStoriesPage .story-banner .banner-right .bannerGoblet svg {
+        height: 410px;
+    }
+}
+
+@media only screen and (max-width : 860px) {
+    .troveStoriesPage .story-banner {
+        grid-template-columns: 1fr 250px;
+    }
+}
+
 @media only screen and (max-width : 785px) {
     .troveStoriesPage .header .header-bottom .container .row {
         margin-right: 0px;
@@ -46,20 +138,25 @@
     }
 }
 
+@media only screen and (max-width : 680px) {
+    .troveStoriesPage .story-banner {
+        display: block;
+    }
 
+    .troveStoriesPage .story-banner .banner-right {
+        height: 55vw;
+        background-position: center center;
+        background-size: cover;
+    }
 
-/* .troveStoriesFade { 
-    animation: troveStoriesFade .3s linear;
+    .troveStoriesPage .story-banner .banner-right .bannerGoblet {
+        display: none;
+    }
 }
 
-@keyframes troveStoriesFade {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;	
-	}
-} */
+
+
+
 
 /**** general admin area ****/
 

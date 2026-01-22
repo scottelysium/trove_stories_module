@@ -1,14 +1,51 @@
 {{ attach_library('trove_stories/trove_stories_gallery_page') }}
 
+<div class="story-banner">
+
+    <div class='banner-left'>
+        <div class='banner-content'>
+            <h1>Explore Trove Stories</h1>
+            <p><strong>Discover bold stories, share your own spark and explore a world of creativity 
+            shaped by people like you! We're inviting you to explore how the community 
+            uses one of our favourite online resources.</strong></p>
+
+            <p><strong>Browse our gallery, or feel free to submit your own!</strong></p>
+        </div>
+    </div>
+
+    <div class='banner-right'>
+        <div class='bannerGoblet'>
+            
+            <svg viewBox="0 0 150 596" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clipPath="url(#clip0_1_7)">
+                    <path d="M149.355 46.2501C149.355 -127.77 43.57 -268.86 -86.921 -268.86C-217.413 -268.86 -323.197 -127.77 -323.197 46.2501C-323.197 175.42 -264.854 286.3 -181.444 334.96L-323.197 1074.44H149.347L7.59399 334.96C91.004 286.3 149.347 175.42 149.347 46.2501" fill="#FFBD4C"/>
+                </g>
+                <defs>
+                    <clipPath id="clip0_1_7">
+                        <rect width="150" height="596" fill="white"/>
+                    </clipPath>
+                </defs>
+            </svg>
+        </div>
+    
+    </div>
+</div>
+
 <div id="trove-stories-gallery">
-    <input placeholder="Search Trove Stories Gallery" id="trove-stories-searchbox" type="text">
+
+    <div class="searchBox">
+        <input placeholder="Search Trove Stories Gallery..." id="trove-stories-searchbox" type="text">
+        <button class="clearSearch" id="clearSearchButton">
+            <span>clear</span>
+        </button>
+    </div>
 
     <div id="trove-stories-gallery-list">
         {# list here. #}
 
-        <div class"masonry-col1"></div>
-        <div class"masonry-col2"></div>
-        <div class"masonry-col3"></div>
+        <div class="masonry-col1"></div>
+        <div class="masonry-col2"></div>
+        <div class="masonry-col3"></div>
     </div>
 
     <button id="trove-stories-load-more">Load more</button>

@@ -1,0 +1,131 @@
+
+#trove-stories-gallery {
+    width: 1160px;
+    margin: 0 auto;
+}
+
+#trove-stories-gallery #trove-stories-gallery-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 6rem;
+    min-height: 40rem;
+}
+
+#trove-stories-gallery .searchBox {
+    margin-bottom: 4rem;
+    border-bottom: 4px solid black;
+    /* height: 4rem;
+    line-height: 4rem; */
+    box-sizing:content-box;
+    position: relative;
+}
+
+#trove-stories-gallery .searchBox input#trove-stories-searchbox {
+    border: 0;
+    padding: 0 0 0 1rem;
+    margin: 0 0 0 0;
+    width: 100%;
+    font-family: "Source Sans Pro";
+    font-size: 1.5rem;
+    font-weight: 300;
+    height: 4rem;
+    line-height: 3rem;
+}
+
+#trove-stories-gallery .searchBox button.clearSearch {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.09rem;
+    border: 0;
+    background-image: url(../images/cross.svg);
+    background-color: #eee;
+    background-color: transparent;
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 50%;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: none;
+}
+
+#trove-stories-gallery .searchBox button.clearSearch:hover {
+    border: 1px solid #444;
+}
+
+#trove-stories-gallery .searchBox button.clearSearch span {
+    display: none;
+}
+
+#trove-stories-gallery .searchBox button.clearSearch.show {
+    display: block;
+}
+
+#trove-stories-gallery .searchBox input#trove-stories-searchbox::placeholder {
+    font-style: italic;
+    color: #535353;
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .masonry-col1 {
+    
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .masonry-col2 {
+    
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .masonry-col3 {
+    
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .storyItem {
+    margin-bottom: 3rem;
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .storyItem a {
+    display: block;
+    text-decoration: none;
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .storyItem a img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.9rem;
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .storyItem a h2.storyItemTitle {
+    margin: 0;
+    padding: 0;
+    font-family: "Source Sans Pro";
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #000;
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .storyItem .colorBar {
+    height: 4px;
+    background-color: blue;
+    width: 70%;
+}
+
+#trove-stories-gallery button#trove-stories-load-more {
+
+}
+
+#trove-stories-gallery button#trove-stories-load-more.hide {
+    display: none;
+}
+
+.troveStoriesFade { 
+    animation: troveStoriesFade .3s linear;
+}
+
+@keyframes troveStoriesFade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;	
+	}
+}

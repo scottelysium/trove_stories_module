@@ -13,7 +13,6 @@ dependencies:
     - field.field.node.trove_story_web_story.field_tsws_story_name
     - field.field.node.trove_story_web_story.field_tsws_story_postcode
     - field.field.node.trove_story_web_story.field_tsws_story_thumbnail
-    - field.field.node.trove_story_web_story.field_tsws_story_title
     - field.field.node.trove_story_web_story.field_tsws_story_use
     - field.field.node.trove_story_web_story.field_tsws_story_year_of_birth
     - node.type.trove_story_web_story
@@ -23,7 +22,7 @@ dependencies:
     - paragraphs
     - path
 _core:
-  default_config_hash: '-RHO7QKLlqhlXmiUAlJYS3ujdpqUOmLV9hfa-Y1UTTQ'
+  default_config_hash: rcjKBNcJkS9hGfG0tvi325taz_z93xzHKuMuz3tIRrU
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
@@ -134,14 +133,6 @@ content:
         collapse_edit_all: collapse_edit_all
         convert: '0'
         duplicate: duplicate
-    third_party_settings: {  }
-  field_tsws_story_title:
-    type: string_textfield
-    weight: 20
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
     third_party_settings: {  }
   field_tsws_story_use:
     type: string_textarea

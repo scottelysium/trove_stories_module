@@ -26,7 +26,8 @@ class TroveStoriesApiController extends ControllerBase {
         $query = $storage->getQuery();
         $query->condition('type', 'trove_story_web_story')
                 ->condition('status', 1)
-                ->condition('field_tsws_story_title', rawurldecode($searchString), 'CONTAINS') //this is just LIKE '%$searchString%'
+               // ->condition('field_tsws_story_title', rawurldecode($searchString), 'CONTAINS') //this is just LIKE '%$searchString%'
+                ->condition('title', rawurldecode($searchString), 'CONTAINS')
                 ->sort('created', 'DESC');
         
         $query->accessCheck(TRUE); //fails if user can't access throws error if not included
@@ -72,9 +73,7 @@ class TroveStoriesApiController extends ControllerBase {
 
         foreach ($web_stories as $web_story) {
             
-            // $thumbnails = [];
-
-            // /** @var \Drupal\Core\Field\EntityReferenceFieldItemListInterface $images */
+            /** @var \Drupal\Core\Field\EntityReferenceFieldItemListInterface $images */
             $paragraph_thumbnails = $web_story->get('field_tsws_story_thumbnail')->referencedEntities();
 
             foreach ($paragraph_thumbnails as $paragraph_thumbnail) {
@@ -88,7 +87,7 @@ class TroveStoriesApiController extends ControllerBase {
                         $thumb_file = $browse_media->get('field_media_image')->entity;
 
                         $uri = $thumb_file->getFileUri();
-                        $style = ImageStyle::load('thumbnail'); //Thumbnail (220×200)
+                        $style = ImageStyle::load('trove_story_thumbnail_style'); //Thumbnail size (320 width × auto height)
                         $thumbnail_url = $style->buildUrl($uri);;
                     }
                 } else {
@@ -97,7 +96,7 @@ class TroveStoriesApiController extends ControllerBase {
                         $category_thumb_value = $paragraph_thumbnail->get('field_ptsws_category_thumb')->value;
                         $module_path = \Drupal::service('extension.path.resolver')->getPath('module', 'trove_stories'); // eg "modules/custom/trove_stories"
                         
-                        $thumb_path = $module_path . "/images/thumbnail_category_images/";
+                        $thumb_path = "/" . $module_path . "/images/thumbnail_category_images/";
 
                         $thumb_filename = "";
 
@@ -161,7 +160,9 @@ class TroveStoriesApiController extends ControllerBase {
             // }
 
             $story_gallery_items[] = [
-                'story_title' => $web_story->get('field_tsws_story_title')->value,
+                //'story_title' => $web_story->get('field_tsws_story_title')->value,
+                'story_title' => $web_story->get('title')->value,
+                'story_link' => $web_story->toUrl()->toString(),
                 //'image_urls' => $thumbnails,
                 'thumbnail_url' => $thumbnail_url
             ];

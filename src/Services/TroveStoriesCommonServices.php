@@ -74,4 +74,27 @@ class TroveStoriesCommonServices {
         return false;
     }
 
+    public function isTroveStoryGalleryPage() {
+        
+        $route_match = \Drupal::routeMatch();
+
+        $route_name = $route_match->getRouteName();
+
+        // route: trove_stories.trove_stories
+        if ($route_name === "trove_stories.trove_stories") {
+            return true;
+        }
+
+        
+        //$route_node = $route_match->getParameter('node');
+        
+        // if ($route_node instanceof NodeInterface) {
+        //     if ($route_node->bundle() === 'trove_story_submission') {
+        //         return true;
+        //     }
+        // }
+
+        return false;
+    }
+
 }

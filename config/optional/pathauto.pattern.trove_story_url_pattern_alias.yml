@@ -1,0 +1,22 @@
+uuid: 0743e465-57a0-4f4d-8a5f-5e2b647c44ab
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: trove_story_url_pattern_alias
+label: 'Trove Story'
+type: 'canonical_entities:node'
+pattern: '/trove-story/[node:title]'
+selection_criteria:
+  51847c0f-6233-46c0-bb2d-03f21e364bfe:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 51847c0f-6233-46c0-bb2d-03f21e364bfe
+    context_mapping:
+      node: node
+    bundles:
+      trove_story_web_story: trove_story_web_story
+selection_logic: and
+weight: -5
+relationships: {  }

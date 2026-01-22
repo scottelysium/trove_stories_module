@@ -13,6 +13,11 @@ trove_stories_form_css_library:
     theme:
       css/webform__trove_stories.css: {}
 
+trove_stories_gallery_page_css_library:
+  css:
+    theme:
+      css/trove_stories_gallery_page.css: {}
+
 trove_stories_js_webform: 
     js:
       js/trove_stories_js_webform.js: {}

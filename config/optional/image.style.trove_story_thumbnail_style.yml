@@ -1,0 +1,15 @@
+uuid: 71632454-cd3a-43ae-b4bd-4b68ac27b455
+langcode: en
+status: true
+dependencies: {  }
+name: trove_story_thumbnail_style
+label: 'Trove Story Thumbnail Style (320px width)'
+effects:
+  e13a07bc-186e-4a59-8e97-c3839c313c27:
+    uuid: e13a07bc-186e-4a59-8e97-c3839c313c27
+    id: image_scale
+    weight: 1
+    data:
+      width: 320
+      height: null
+      upscale: true

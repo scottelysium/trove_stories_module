@@ -135,13 +135,14 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
 
         $trove_story_web_story = Node::create(array(
             'type' => 'trove_story_web_story',
-            'title' => $webStoryNodeTitle,
+            //'title' => $webStoryNodeTitle,
+            'title' => $webStoryTitle, // 'story title' field becomes node title.
             'langcode' => 'en',
             'uid' => \Drupal::currentUser()->id(), 
-            'status' => 0, //not published
+            'status' => 0, //not published by default
             'field_tsws_story_use' => $webStoryUse,
             'field_tsws_story_about' => $webStoryAbout,
-            'field_tsws_story_links' => $webStoryLinks, //might not work
+            'field_tsws_story_links' => $webStoryLinks,
             'field_tsws_story_author' => $webStoryAuthor,
             'field_tsws_story_email' => $webStoryEmail,
             //'field_tsws_story_images' => $webStoryImages,
@@ -156,7 +157,7 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
             'field_tsws_story_name' => $webStoryName,
             //'field_tsws_story_category' => //Category field defaults to 'none'
             'field_tsws_story_postcode' => $webStoryPostcode,
-            'field_tsws_story_title' => $webStoryTitle,
+            //'field_tsws_story_title' => $webStoryTitle,
             'field_tsws_story_year_of_birth' => $webStoryBirth
         ));
 
