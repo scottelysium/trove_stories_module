@@ -5,6 +5,10 @@
 
     document.addEventListener("DOMContentLoaded", function(event) {
 
+        const mediaQuery = window.matchMedia("(max-width: 650px)"); //falls into single col
+        const mobile = mediaQuery.matches;
+        //console.log ("mobile: " + mobile);
+
         let loadMoreOffset = 0;
         let amountPerLoad = 6; //the amount loaded in the next 'load more' call
 
@@ -25,9 +29,6 @@
         const masonyCol3 = document.querySelector(".masonry-col3");
 
         inputSearchBox.addEventListener("input", function(e) {
-            // console.log("Search box onchange");
-            
-            // console.log(e.target.value);
 
             //show the clear search button now that we are searching
             buttonClearSearch.classList.add('show');
@@ -40,12 +41,12 @@
                 loadMoreButton.classList.remove("hide");
                 buttonClearSearch.classList.remove('show');
                 clearList();
+                loadMoreOffset = 0;
                 fetchStoryItems(0); //default back to first load
                 return;
             }
 
             const searchString = encodeURIComponent(e.target.value);
-           // console.log(searchString);
             searchStoryItems(searchString);
         });
 
@@ -54,6 +55,7 @@
             buttonClearSearch.classList.remove('show');
             inputSearchBox.value = ''; //clear text written in.
             clearList();
+            loadMoreOffset = 0;
             fetchStoryItems(0); //default back to first load
         });
         
@@ -68,7 +70,14 @@
                 const data = await storiesResponse.json();
                 //console.log(data);
                 if (data) {
-                    createList(data);
+                    createList(data.story_gallery_items);
+                    
+                    //if we go past the total available, hide the load more button.
+                    if ((loadMoreOffset + amountPerLoad) >= data.total) {
+                        loadMoreButton.classList.add("hide");
+                    } else {
+                        loadMoreButton.classList.remove("hide");
+                    }
                 }
 
             } catch (e) {
@@ -81,10 +90,10 @@
             try {
                 const storiesResponse = await fetch(`trove-stories/api/search_website_stories/${searchString}`);
                 const data = await storiesResponse.json();
-                console.log(data);
+                //console.log(data);
                 if (data) {
                     clearList();
-                    createList(data);
+                    createList(data.story_gallery_items);
                 }
 
             } catch (e) {
@@ -104,12 +113,19 @@
             const listContainer = document.getElementById("trove-stories-gallery-list");
             if (!listContainer) return;
 
-            const number_of_cols = 3;
+            if (mobile) {
+                createMobileList(storyItems);
+                return;
+            }
 
-            console.log(storyItems.length);
+            const number_of_cols = 3;
+            //const number_of_cols = mobile ? 1 : 3;
+
+
+            //console.log(storyItems.length);
             for (let i = 0; i < storyItems.length; i = i + number_of_cols) {
 
-                /* when loop by 3, and access the index 1 before and 1 after per loop. */
+                /* when loop by 3, and access the index 1 ahead and 2 ahead */
 
                 let colIndexOne = i;
                 let colIndexTwo = i + 1;
@@ -120,8 +136,7 @@
                 if (typeof colStoryObjectOne !== 'undefined') {
                     const storyElementColOne = document.createElement("div");
                     storyElementColOne.classList.add("storyItem", "troveStoriesFade");
-                    storyElementColOne.innerHTML = generateHtmlStoryItem(colStoryObjectOne);
-                    //console.log("creating element");
+                    storyElementColOne.innerHTML = generateHtmlStoryItem(colStoryObjectOne, colIndexOne);
                     masonyCol1.appendChild(storyElementColOne);
                 }
                 
@@ -130,8 +145,7 @@
                 if (typeof colStoryObjectTwo !== 'undefined') {
                     const storyElementColTwo = document.createElement("div");
                     storyElementColTwo.classList.add("storyItem", "troveStoriesFade");
-                    storyElementColTwo.innerHTML = generateHtmlStoryItem(colStoryObjectTwo);
-                    //console.log("creating element");
+                    storyElementColTwo.innerHTML = generateHtmlStoryItem(colStoryObjectTwo, colIndexTwo);
                     masonyCol2.appendChild(storyElementColTwo);
                 }
 
@@ -140,21 +154,64 @@
                 if (typeof colStoryObjectThree !== 'undefined') {
                     const storyElementColThree = document.createElement("div");
                     storyElementColThree.classList.add("storyItem", "troveStoriesFade");
-                    storyElementColThree.innerHTML = generateHtmlStoryItem(colStoryObjectThree);
-                    //console.log("creating element");
+                    storyElementColThree.innerHTML = generateHtmlStoryItem(colStoryObjectThree, colIndexThree);
                     masonyCol3.appendChild(storyElementColThree);
                 }
                 
             }
         }
 
-        function generateHtmlStoryItem(item) {
+        function createMobileList(storyItems) {
+
+            //for mobile we stik them all in the first col and hide the others.
+            storyItems.forEach((storyItem, i) => {
+                if (typeof storyItem !== 'undefined') {
+                    const storyElementColMobile = document.createElement("div");
+                    storyElementColMobile.classList.add("storyItem", "troveStoriesFade");
+                    storyElementColMobile.innerHTML = generateHtmlStoryItem(storyItem, i);
+                    masonyCol1.appendChild(storyElementColMobile);
+                }
+            });
+        }
+
+        function generateHtmlStoryItem(item, currentIndex) {
+            //console.log("currentIndex" + (loadMoreOffset + currentIndex));
+
+            const totalIndex = (loadMoreOffset + currentIndex);
+
+           // console.log(totalIndex % amountPerLoad);
+
+            let indexByAmount = totalIndex % amountPerLoad; //totalindex keeps going up, but we % back down to 0-5 for the six colours.
+
+            let colorClass = '';
+
+            switch (indexByAmount) {
+                case 0:
+                colorClass = 'green';
+                break;
+                case 1:
+                colorClass = 'blue';
+                break;
+                case 2:
+                colorClass = 'yellow';
+                break;
+                case 3:
+                colorClass = 'red';
+                break;
+                case 4:
+                colorClass = 'orange';
+                break;
+                case 5:
+                colorClass = 'purple';
+                break;
+            }
+
             let htmlContent = "";
 
             htmlContent += "<a href='" + item.story_link + "'>";
             htmlContent += "<img class='troveStoriesFade' src='" + item.thumbnail_url + "' alt='trove stories gallery item' />";
             htmlContent += "<h2 class='storyItemTitle'>" + item.story_title + "</h2>";
-            htmlContent += "<div class='colorBar'></div>";
+            htmlContent += "<div class='colorBar " + colorClass + "'></div>";
             htmlContent += "</a>";
 
             return htmlContent;

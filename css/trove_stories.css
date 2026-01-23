@@ -28,7 +28,7 @@
 /** banner styling - used on gallery AND form page. **/
 .troveStoriesPage .story-banner {
     display: grid;
-    grid-template-columns: 1fr 613px;
+    grid-template-columns: 1fr 605px;
     grid-template-rows: 540px;
     margin-bottom: 3rem;
 }

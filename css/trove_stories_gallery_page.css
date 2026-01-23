@@ -14,8 +14,6 @@
 #trove-stories-gallery .searchBox {
     margin-bottom: 4rem;
     border-bottom: 4px solid black;
-    /* height: 4rem;
-    line-height: 4rem; */
     box-sizing:content-box;
     position: relative;
 }
@@ -66,7 +64,7 @@
     color: #535353;
 }
 
-#trove-stories-gallery #trove-stories-gallery-list .masonry-col1 {
+/* #trove-stories-gallery #trove-stories-gallery-list .masonry-col1 {
     
 }
 
@@ -76,7 +74,7 @@
 
 #trove-stories-gallery #trove-stories-gallery-list .masonry-col3 {
     
-}
+} */
 
 #trove-stories-gallery #trove-stories-gallery-list .storyItem {
     margin-bottom: 3rem;
@@ -101,19 +99,50 @@
     font-size: 1.3rem;
     font-weight: 700;
     color: #000;
+    margin-bottom: 0.6rem;
 }
 
 #trove-stories-gallery #trove-stories-gallery-list .storyItem .colorBar {
     height: 4px;
-    background-color: blue;
     width: 70%;
+    transition: width 0.2s;
 }
 
-#trove-stories-gallery button#trove-stories-load-more {
-
+#trove-stories-gallery #trove-stories-gallery-list .storyItem:hover .colorBar {
+    width: 100%;
 }
 
-#trove-stories-gallery button#trove-stories-load-more.hide {
+#trove-stories-gallery #trove-stories-gallery-list .storyItem .colorBar.green {
+    background-color: #008944;
+}
+#trove-stories-gallery #trove-stories-gallery-list .storyItem .colorBar.blue {
+    background-color: #61B7F9;
+}
+#trove-stories-gallery #trove-stories-gallery-list .storyItem .colorBar.yellow {
+    background-color: #FFBD4C;
+}
+#trove-stories-gallery #trove-stories-gallery-list .storyItem .colorBar.red {
+    background-color: #C0286F;
+}
+#trove-stories-gallery #trove-stories-gallery-list .storyItem .colorBar.orange {
+    background-color: #FF733E;
+}
+#trove-stories-gallery #trove-stories-gallery-list .storyItem .colorBar.purple {
+    background-color: #6338C2;
+}
+
+#trove-stories-gallery .stories-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#trove-stories-gallery .stories-footer button#trove-stories-load-more {
+    line-height: 0.5rem;
+    margin-top: 1rem;
+}
+
+#trove-stories-gallery .stories-footer button#trove-stories-load-more.hide {
     display: none;
 }
 
@@ -128,4 +157,36 @@
 	to {
 		opacity: 1;	
 	}
+}
+
+/************* RESPONSIVE *********************************/
+
+
+@media only screen and (max-width : 1200px) {
+    #trove-stories-gallery {
+        width: auto;
+        margin: 0 2rem;
+    }
+
+    #trove-stories-gallery #trove-stories-gallery-list {
+        column-gap: 3vw;
+    }
+}
+
+@media only screen and (max-width : 650px) {
+    #trove-stories-gallery #trove-stories-gallery-list {
+        display: block;
+    }
+
+    /* #trove-stories-gallery #trove-stories-gallery-list .masonry-col1 {
+        
+    } */
+
+    #trove-stories-gallery #trove-stories-gallery-list .masonry-col2 {
+        display: none;
+    }
+
+    #trove-stories-gallery #trove-stories-gallery-list .masonry-col3 {
+        display: none;
+    }
 }

@@ -4,12 +4,14 @@
 
     <div class='banner-left'>
         <div class='banner-content'>
-            <h1>Explore Trove Stories</h1>
-            <p><strong>Discover bold stories, share your own spark and explore a world of creativity 
+            {# <h1>Explore Trove Stories</h1> #}
+            <h1>{{ banner_text_heading }}</h1>
+            {# <p><strong>Discover bold stories, share your own spark and explore a world of creativity 
             shaped by people like you! We're inviting you to explore how the community 
             uses one of our favourite online resources.</strong></p>
 
-            <p><strong>Browse our gallery, or feel free to submit your own!</strong></p>
+            <p><strong>Browse our gallery, or feel free to submit your own!</strong></p> #}
+            <p>{{ banner_text_message|raw }}</p>
         </div>
     </div>
 
@@ -48,5 +50,7 @@
         <div class="masonry-col3"></div>
     </div>
 
-    <button id="trove-stories-load-more">Load more</button>
+    <div class="stories-footer">
+        <button id="trove-stories-load-more" class="btn btn-primary">Load more stories</button>
+    </div>
 </div>

@@ -2,7 +2,7 @@
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
-use Drupal\media\Entity\Media;
+//use Drupal\media\Entity\Media;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
 /**
@@ -12,8 +12,10 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
 
         return [
             'page__trove_stories_gallery_page' => [ //this is the main content area for /trove-stories - eg, the gallery/listing page.
-                //'variables' => ['title' => NULL, 'data' => []],
-                'variables' => [],
+                'variables' => [
+                    'banner_text_heading' => '', //these get set in the controller
+                    'banner_text_message' => '',
+                ],
             ],
             'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
                 'base hook' => 'webform',
@@ -530,6 +532,17 @@ function trove_stories_install() {
         $config->save();
     }
 
+    /*** Default values for banner text on gallery page */
+    
+   // $config = $this->config('trove_stories.settings');
+    //$config = \Drupal::config('trove_stories.settings');
+    //\Drupal\Core\Config\ConfigFactoryInterface::getEditable()
+    $config = \Drupal::configFactory()->getEditable('trove_stories.settings');
+
+
+    $config->set('trove_stories_gallery_banner_text_heading', 'Explore Trove Stories');
+    $config->set('trove_stories_gallery_banner_text_message', "Discover bold stories, share your own spark and explore a world of creativity shaped by people like you! We're inviting you to explore how the community uses one of our favourite online resources.<br><br>Browse our gallery, or feel free to submit your own!");
+    $config->save();
     /***** 
         set access permissions for new content types, these are set at:
         admin/structure/types/manage/trove_story_submission/permissions

@@ -38,8 +38,13 @@ class TroveStoriesApiController extends ControllerBase {
         $searched_web_stories = $storage->loadMultiple($story_ids);
 
         $story_gallery_items = $this->processStoriesJson($searched_web_stories);
+
+        $jsonData = [
+            'total' => 0, //total not currently needed on search
+            'story_gallery_items' => $story_gallery_items
+        ];
         
-        return new JsonResponse($story_gallery_items);
+        return new JsonResponse($jsonData);
     }
 
     public function getWebsiteStories($offset, $amountPerLoad) {
@@ -62,9 +67,21 @@ class TroveStoriesApiController extends ControllerBase {
         $web_stories = $storage->loadMultiple($story_ids);
 
         $story_gallery_items = $this->processStoriesJson($web_stories);
-        
 
-        return new JsonResponse($story_gallery_items);
+        //we do another query to get the total
+        $queryTotal = $storage->getQuery();
+        $queryTotal->condition('type', 'trove_story_web_story')
+                ->condition('status', 1);
+        $queryTotal->accessCheck(TRUE);
+        $totalStoryItems = $queryTotal->count()->execute();
+        
+        $jsonData = [
+            'total' => $totalStoryItems,
+            'story_gallery_items' => $story_gallery_items
+        ];
+
+        return new JsonResponse($jsonData);
+        //return new JsonResponse($story_gallery_items);
     }
 
     private function processStoriesJson($web_stories) {

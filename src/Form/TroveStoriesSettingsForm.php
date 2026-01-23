@@ -25,16 +25,16 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
 
         $config = $this->config('trove_stories.settings');
 
-        $entityTypeManager = \Drupal::service('entity_type.manager');
-        $formsList = $entityTypeManager->getStorage('webform')->loadMultiple();
+        // $entityTypeManager = \Drupal::service('entity_type.manager');
+        // $formsList = $entityTypeManager->getStorage('webform')->loadMultiple();
 
-        $select_form_ids = [];
+        // $select_form_ids = [];
 
-        foreach ($formsList as $currentform) {
-            if (!str_contains($currentform->id(), "template_")) { //filter out the 'template' forms
-                $select_form_ids[$currentform->id()] = $currentform->label();
-            }
-        }
+        // foreach ($formsList as $currentform) {
+        //     if (!str_contains($currentform->id(), "template_")) { //filter out the 'template' forms
+        //         $select_form_ids[$currentform->id()] = $currentform->label();
+        //     }
+        // }
 
         
         // $form['trove_stories_selected_form'] = [
@@ -48,33 +48,48 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
         //     '#default_value' => $config->get('trove_stories_selected_form'),
         // ];
 
+        /** GALLERY HEADER TEXT FORM  */
+        $form['trove_stories_gallery_banner_text_fieldset'] = [
+            '#type' => 'fieldset',
+            '#title' => $this->t('Gallery Banner Text'),
+            '#description' => $this->t('The heading and message displayed in the banner for the gallery page.'),
+        ];
+
+            $form['trove_stories_gallery_banner_text_fieldset']['trove_stories_gallery_banner_text_heading'] = [
+                '#type' => 'textfield',
+                '#title' => $this->t('Banner Heading'),
+                '#default_value' => $config->get('trove_stories_gallery_banner_text_heading'),
+            ];
+
+            $form['trove_stories_gallery_banner_text_fieldset']['trove_stories_gallery_banner_text_message'] = [
+                '#type' => 'textarea',
+                '#title' => $this->t('Banner Message'),
+                '#default_value' => $config->get('trove_stories_gallery_banner_text_message'),
+            ];
+
+        /** RECAPTCHA SETTINGS FORM */
         $form['trove_stories_recaptcha_fieldset'] = [
             '#type' => 'fieldset',
             '#title' => $this->t('Recaptcha site keys'),
             '#description' => $this->t('Provide your recaptcha site key to protect the form from spam and bots'),
         ];
 
-        $form['trove_stories_recaptcha_fieldset']['trove_stories_recaptcha_site_key'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Recaptcha site key'),
-            //'#description' => $this->t('Provide your recaptcha site key to protect the form from spam and bots'),
-            '#default_value' => $config->get('trove_stories_recaptcha_site_key'),
-        ];
+            $form['trove_stories_recaptcha_fieldset']['trove_stories_recaptcha_site_key'] = [
+                '#type' => 'textfield',
+                '#title' => $this->t('Recaptcha site key'),
+                '#default_value' => $config->get('trove_stories_recaptcha_site_key'),
+            ];
 
-        $form['trove_stories_recaptcha_fieldset']['trove_stories_recaptcha_secret_key'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Recaptcha SECRET key'),
-            //'#description' => $this->t('Provide your recaptcha site key to protect the form from spam and bots'),
-            '#default_value' => $config->get('trove_stories_recaptcha_secret_key'),
-        ];
+            $form['trove_stories_recaptcha_fieldset']['trove_stories_recaptcha_secret_key'] = [
+                '#type' => 'textfield',
+                '#title' => $this->t('Recaptcha SECRET key'),
+                '#default_value' => $config->get('trove_stories_recaptcha_secret_key'),
+            ];
 
         return $form;
 
     }
 
-    /**
- * Custom submit handler for the action button.
- */
     public function submitUpdateConfig(array &$form, FormStateInterface $form_state) {
         $route_url = Url::fromRoute('trove_stories.update_trove_stories_config');
         $form_state->setRedirectUrl($route_url);
@@ -89,6 +104,10 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
         $config = $this->config('trove_stories.settings');
 
         //$config->set('trove_stories_selected_form', $form_state->getValue('trove_stories_selected_form'));
+
+        $config->set('trove_stories_gallery_banner_text_heading', $form_state->getValue('trove_stories_gallery_banner_text_heading'));
+        $config->set('trove_stories_gallery_banner_text_message', $form_state->getValue('trove_stories_gallery_banner_text_message'));
+
         $config->set('trove_stories_recaptcha_site_key', $form_state->getValue('trove_stories_recaptcha_site_key'));
         $config->set('trove_stories_recaptcha_secret_key', $form_state->getValue('trove_stories_recaptcha_secret_key'));
 
