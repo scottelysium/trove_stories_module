@@ -1,0 +1,25 @@
+uuid: 0bc47e93-4fd6-4655-b76d-b041ebca34a6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.trove_story_hero_image.field_ptsws_hero_image
+    - paragraphs.paragraphs_type.trove_story_hero_image
+_core:
+  default_config_hash: SvM9uWhsud9TaBU9iQ6c3QzXPiFaNwU_8il2Wqm9NMo
+id: paragraph.trove_story_hero_image.default
+targetEntityType: paragraph
+bundle: trove_story_hero_image
+mode: default
+content:
+  field_ptsws_hero_image:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  search_api_excerpt: true

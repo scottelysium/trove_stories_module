@@ -23,24 +23,20 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
             'form_element__webform__tswf_banner_message' => [ //overwrite the header/banner html markup field
                 'base hook' => 'form_element',
             ],
-            // 'field__node__full__field_tss_private_image_urls__trove_story_submission' => [ 
-            //     'base hook' => 'field',
-            // ],
             'field__node__full__field_tss_private_image_ids__trove_story_submission' => [ //private image ids template, so we can fetch and show the images
                 'base hook' => 'field',
             ],
- 
             'field__node__title__trove_story_submission' => [ //overwrite the 'title' area of a 'trove story submission'
                 'template' => 'field--node--title--trove-story-submission',
                 'base hook' => 'field',
             ],
-
+            'node__trove_story_web_story' => [ //overwrite the 'title' area of a 'trove story submission'
+                //'template' => 'field--node--title--trove-story-submission',
+                'base hook' => 'node',
+            ],
             'input__submit_trove_stories' => [ //register new hook suggestion implemented in trove_stories_theme_suggestions_input_alter()
                 'base hook' => 'input__submit',
             ],
-            // 'breadcrumb__trove_stories' => [ //register new hook suggestion used in trove_stories_theme_suggestions_breadcrumb_alter() below
-            //     'base hook' => 'breadcrumb',
-            // ]
         ];
 }
 
@@ -254,6 +250,7 @@ function trove_stories_preprocess_html(&$variables) {
         || \Drupal::service('trove_stories.common_services')->isTroveStorySubmission()
         || \Drupal::service('trove_stories.common_services')->isTroveStoryConfirmation()
         || \Drupal::service('trove_stories.common_services')->isTroveStoryGalleryPage()
+        || \Drupal::service('trove_stories.common_services')->isTroveStoryWebStory()
     ) { 
         $variables['#attached']['library'][] = 'trove_stories/trove_stories_css_library'; //add our main stylesheet
         $variables['attributes']['class'][] = 'troveStoriesPage'; //add body class to all trove stories areas
@@ -508,6 +505,7 @@ function trove_stories_install() {
     $config->set('trove_stories_gallery_banner_text_heading', 'Explore Trove Stories');
     $config->set('trove_stories_gallery_banner_text_message', "Discover bold stories, share your own spark and explore a world of creativity shaped by people like you! We're inviting you to explore how the community uses one of our favourite online resources.<br><br>Browse our gallery, or feel free to submit your own!");
     $config->save();
+
     /***** 
         set access permissions for new content types, these are set at:
         admin/structure/types/manage/trove_story_submission/permissions
@@ -555,19 +553,31 @@ function trove_stories_install() {
         $loadedRole->grantPermission('delete paragraph content trove_story_gallery_images');
         $loadedRole->grantPermission('update paragraph content trove_story_gallery_images');
         $loadedRole->grantPermission('view paragraph content trove_story_gallery_images');
-        
 
-
-
-        /*
-        review from sync folder:
-        user.role.trove_editor                                                   
-|       user.role.trove_author                                                  
-|       user.role.trove_administrator
-        */
-
+        /** paragraph type trove_story_hero_image  **/
+        $loadedRole->grantPermission('create paragraph content trove_story_hero_image');
+        $loadedRole->grantPermission('delete paragraph content trove_story_hero_image');
+        $loadedRole->grantPermission('update paragraph content trove_story_hero_image');
+        $loadedRole->grantPermission('view paragraph content trove_story_hero_image');
+    
         $loadedRole->save();
     }
+
+    //we add some extra specific permissions so ALL ROLES (eg public) can view some paragraph types related to trove stories
+
+    /** @var \Drupal\user\RoleInterface $authRole */
+    $authRole = \Drupal::entityTypeManager()->getStorage('user_role')->load('anonymous');
+    $authRole->grantPermission('view paragraph content trove_story_gallery_images');
+    $authRole->grantPermission('view paragraph content trove_story_thumbnail');
+    $authRole->grantPermission('view paragraph content trove_story_hero_image'); 
+    $authRole->save();
+
+    /** @var \Drupal\user\RoleInterface $authRole */
+    $authRole = \Drupal::entityTypeManager()->getStorage('user_role')->load('authenticated');
+    $authRole->grantPermission('view paragraph content trove_story_gallery_images');
+    $authRole->grantPermission('view paragraph content trove_story_thumbnail');
+    $authRole->grantPermission('view paragraph content trove_story_hero_image');
+    $authRole->save();
 
 }
 

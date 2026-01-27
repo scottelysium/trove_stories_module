@@ -17,9 +17,10 @@
     display: none;
 }
 
-.node--type-trove-story-submission .messages.messages--error {
-    display: none; /* TEMP FOR DEBUGGING */
-}
+
+/* .node--type-trove-story-submission .messages.messages--error {
+    display: none; 
+} */
 
 .node--type-trove-story-submission .layout-main-wrapper .main-content > .container .block-page-title-block {
     padding: 0;
@@ -29,11 +30,11 @@
     padding: 0;
 }
 
-.node--type-trove-story-submission .content-outer-wrap > .container .nav.mb-5 {
+/* .node--type-trove-story-submission .content-outer-wrap > .container .nav.mb-5 {
     margin-top: 2rem;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .node--type-trove-story-submission .block-page-title-block h1 { /** title of the page **/
     font-family: "Source Sans Pro", sans-serif;

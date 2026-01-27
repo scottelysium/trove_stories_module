@@ -1,0 +1,31 @@
+uuid: 78c9efa7-eaa6-43a2-9305-068aa82a457c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_ptsws_hero_image
+    - media.type.image
+    - paragraphs.paragraphs_type.trove_story_hero_image
+_core:
+  default_config_hash: Sg1NSvZMWEQxCowEZde5XwZuap0k4xj-J1ZIC5GttMo
+id: paragraph.trove_story_hero_image.field_ptsws_hero_image
+field_name: field_ptsws_hero_image
+entity_type: paragraph
+bundle: trove_story_hero_image
+label: 'Trove Story Hero Image'
+description: 'Hero banner image above main content. Ideal size is landscape orientation, around 2000px with and 655px height - <strong><em>smaller images will be stretched and may look blurry</em></strong>.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

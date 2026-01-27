@@ -1,0 +1,23 @@
+uuid: 7339037c-2683-426b-bda3-e3da5a1a15fc
+langcode: en
+status: true
+dependencies:
+  module:
+    - entity_reference_revisions
+    - node
+    - paragraphs
+_core:
+  default_config_hash: 4u4E9ZWqkDUw6Q2v1srfzlTXwH10MJ4JX4IA0eimBM4
+id: node.field_tsws_story_hero
+field_name: field_tsws_story_hero
+entity_type: node
+type: entity_reference_revisions
+settings:
+  target_type: paragraph
+module: entity_reference_revisions
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

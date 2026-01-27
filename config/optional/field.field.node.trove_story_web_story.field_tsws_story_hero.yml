@@ -1,22 +1,22 @@
-uuid: da4af01c-b857-4184-b8c3-affd6b39e880
+uuid: 2a6b766c-ca4c-40ae-ae38-b3bb6ecb964d
 langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.field_tsws_story_thumbnail
+    - field.storage.node.field_tsws_story_hero
     - node.type.trove_story_web_story
-    - paragraphs.paragraphs_type.trove_story_thumbnail
+    - paragraphs.paragraphs_type.trove_story_hero_image
   module:
     - entity_reference_revisions
 _core:
-  default_config_hash: YQAoK_BDk9cw-nAMwyCXrGCO6BTzSJY39QRFklPRg5o
-id: node.trove_story_web_story.field_tsws_story_thumbnail
-field_name: field_tsws_story_thumbnail
+  default_config_hash: JpXYU57D1WWCHjIcpsp5LkydIu6DyC76h-8p2L1bv9Q
+id: node.trove_story_web_story.field_tsws_story_hero
+field_name: field_tsws_story_hero
 entity_type: node
 bundle: trove_story_web_story
-label: 'Story Thumbnail'
+label: 'Story Hero Image'
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''
@@ -24,34 +24,34 @@ settings:
   handler: 'default:paragraph'
   handler_settings:
     target_bundles:
-      trove_story_thumbnail: trove_story_thumbnail
+      trove_story_hero_image: trove_story_hero_image
     negate: 0
     target_bundles_drag_drop:
       additional_components:
-        weight: 10
-        enabled: false
-      additional_components_text:
         weight: 11
         enabled: false
-      additional_components_yt_video:
+      additional_components_text:
         weight: 12
         enabled: false
-      contributor:
+      additional_components_yt_video:
         weight: 13
         enabled: false
-      information_tile:
+      contributor:
         weight: 14
         enabled: false
-      project:
+      information_tile:
         weight: 15
         enabled: false
-      trove_story_gallery_images:
+      project:
         weight: 16
+        enabled: false
+      trove_story_gallery_images:
+        weight: 17
         enabled: false
       trove_story_hero_image:
         weight: 10
-        enabled: false
-      trove_story_thumbnail:
-        weight: 9
         enabled: true
+      trove_story_thumbnail:
+        weight: 18
+        enabled: false
 field_type: entity_reference_revisions

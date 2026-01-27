@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.trove_story_web_story.field_tsws_story_category
     - field.field.node.trove_story_web_story.field_tsws_story_email
     - field.field.node.trove_story_web_story.field_tsws_story_gallery
+    - field.field.node.trove_story_web_story.field_tsws_story_hero
     - field.field.node.trove_story_web_story.field_tsws_story_inspiration
     - field.field.node.trove_story_web_story.field_tsws_story_links
     - field.field.node.trove_story_web_story.field_tsws_story_name
@@ -20,7 +21,7 @@ dependencies:
   module:
     - user
 _core:
-  default_config_hash: ZYDLlKmMlZLJib6EELNiVbPsR-2EnLgfuY6np2JuSaU
+  default_config_hash: tLI0QJh5cmRAkb2HCNxLkNRFWEumPes7vY-QE-E7rv0
 id: node.trove_story_web_story.teaser
 targetEntityType: node
 bundle: trove_story_web_story
@@ -37,6 +38,7 @@ hidden:
   field_tsws_story_category: true
   field_tsws_story_email: true
   field_tsws_story_gallery: true
+  field_tsws_story_hero: true
   field_tsws_story_inspiration: true
   field_tsws_story_links: true
   field_tsws_story_name: true

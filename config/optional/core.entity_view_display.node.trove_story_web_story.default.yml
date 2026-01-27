@@ -8,6 +8,7 @@ dependencies:
     - field.field.node.trove_story_web_story.field_tsws_story_category
     - field.field.node.trove_story_web_story.field_tsws_story_email
     - field.field.node.trove_story_web_story.field_tsws_story_gallery
+    - field.field.node.trove_story_web_story.field_tsws_story_hero
     - field.field.node.trove_story_web_story.field_tsws_story_inspiration
     - field.field.node.trove_story_web_story.field_tsws_story_links
     - field.field.node.trove_story_web_story.field_tsws_story_name
@@ -21,7 +22,7 @@ dependencies:
     - link
     - user
 _core:
-  default_config_hash: evlJTvjGjD652Xy2Steq0BJ3uvXJqyqtJO3zfcWNhP0
+  default_config_hash: jULak1PfIXViSTuLzIb2n6JKylWPIgnEwMghxKL4gjE
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
@@ -48,7 +49,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 12
+    weight: 11
     region: content
   field_tsws_story_email:
     type: basic_string
@@ -64,7 +65,16 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 13
+    weight: 12
+    region: content
+  field_tsws_story_hero:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
     region: content
   field_tsws_story_inspiration:
     type: basic_string
@@ -101,15 +111,6 @@ content:
     third_party_settings: {  }
     weight: 9
     region: content
-  field_tsws_story_thumbnail:
-    type: entity_reference_revisions_entity_view
-    label: above
-    settings:
-      view_mode: default
-      link: ''
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_tsws_story_use:
     type: basic_string
     label: above
@@ -123,13 +124,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 11
+    weight: 10
     region: content
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
+  field_tsws_story_thumbnail: true
   langcode: true
   search_api_excerpt: true

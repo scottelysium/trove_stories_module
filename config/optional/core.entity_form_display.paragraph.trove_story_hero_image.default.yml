@@ -1,0 +1,26 @@
+uuid: fbf340a0-5dbb-4e49-83f0-7c379ac81581
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.trove_story_hero_image.field_ptsws_hero_image
+    - paragraphs.paragraphs_type.trove_story_hero_image
+  module:
+    - media_library
+_core:
+  default_config_hash: BGQ3QVBWntw-J5fhDE3S_BKADhjS0s1MqFw7jBphfsc
+id: paragraph.trove_story_hero_image.default
+targetEntityType: paragraph
+bundle: trove_story_hero_image
+mode: default
+content:
+  field_ptsws_hero_image:
+    type: media_library_widget
+    weight: 0
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,12 @@
+uuid: 5b71bf35-a27d-43f0-a18f-20ba6dbe89bc
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: foKAhliUwijokwLD5A4kuM5jGZ2aoPg0GNnj7QW1bog
+id: trove_story_hero_image
+label: 'Trove Story Hero Image'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

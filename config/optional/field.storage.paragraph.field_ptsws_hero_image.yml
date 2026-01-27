@@ -1,0 +1,22 @@
+uuid: d4dc359c-1aa4-4a08-b647-3c310eb82dfb
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - paragraphs
+_core:
+  default_config_hash: M9kmIrBTCsxg7ZmpX4fMQyAEBhzkB96tBVygxEC6XB0
+id: paragraph.field_ptsws_hero_image
+field_name: field_ptsws_hero_image
+entity_type: paragraph
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
