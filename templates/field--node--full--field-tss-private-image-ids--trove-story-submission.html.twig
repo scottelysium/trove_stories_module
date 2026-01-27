@@ -56,12 +56,18 @@
   {% if multiple %}
     <div{{ attributes.addClass(classes, 'field__items') }}>
       {% for item in items %}
-        <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+        <div{{ item.attributes.addClass('field__item') }}>
+            {# {{ item.content }} #}
+             <img src={{ item.content }} />
+        </div>
       {% endfor %}
     </div>
   {% else %}
     {% for item in items %}
-      <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
+      <div{{ attributes.addClass(classes, 'field__item') }}>
+      {# {{ item.content }} #}
+       <img src={{ item.content }} />
+      </div>
     {% endfor %}
   {% endif %}
 {% else %}

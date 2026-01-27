@@ -5,7 +5,6 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.trove_story_submission.field_tss_private_image_ids
-    - field.field.node.trove_story_submission.field_tss_private_image_urls
     - field.field.node.trove_story_submission.field_tss_status
     - field.field.node.trove_story_submission.field_tss_story_about
     - field.field.node.trove_story_submission.field_tss_story_author
@@ -21,7 +20,7 @@ dependencies:
   module:
     - user
 _core:
-  default_config_hash: KOCTPINRQfso93U5BlL9VqbJUVikdSJM4J9fQuRDYRc
+  default_config_hash: npFTQEYNN-zNsPpolKkBj-0YWkL4M1vlY2geny5HfNU
 id: node.trove_story_submission.teaser
 targetEntityType: node
 bundle: trove_story_submission
@@ -34,7 +33,6 @@ content:
     region: content
 hidden:
   field_tss_private_image_ids: true
-  field_tss_private_image_urls: true
   field_tss_status: true
   field_tss_story_about: true
   field_tss_story_author: true

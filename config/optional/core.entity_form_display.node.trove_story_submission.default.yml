@@ -4,7 +4,6 @@ status: true
 dependencies:
   config:
     - field.field.node.trove_story_submission.field_tss_private_image_ids
-    - field.field.node.trove_story_submission.field_tss_private_image_urls
     - field.field.node.trove_story_submission.field_tss_status
     - field.field.node.trove_story_submission.field_tss_story_about
     - field.field.node.trove_story_submission.field_tss_story_author
@@ -22,7 +21,7 @@ dependencies:
     - link
     - path
 _core:
-  default_config_hash: 3Cow9riBg4wDLAn-hHHS_kFNqxf69S29-l9lhUNMBoU
+  default_config_hash: qZaCrAPI4UvbHf3hHO7uJIyZLbuj81xm5Zj5tjwzAEc
 id: node.trove_story_submission.default
 targetEntityType: node
 bundle: trove_story_submission
@@ -37,14 +36,6 @@ content:
   field_tss_private_image_ids:
     type: string_textfield
     weight: 24
-    region: content
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
-  field_tss_private_image_urls:
-    type: string_textfield
-    weight: 23
     region: content
     settings:
       size: 60

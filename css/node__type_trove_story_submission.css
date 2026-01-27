@@ -53,9 +53,6 @@
     display: none;
 }
 
-.node--type-trove-story-submission .node__content .field--name-field-tss-private-image-ids { /** hide image ids, they are only used by the code **/
-    display: none;
-}
 
 /** images are rendered as full content, ensure they only stretch to the size of the page **/
 .node--type-trove-story-submission .node__content .field .field__item img { 
