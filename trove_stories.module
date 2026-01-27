@@ -108,7 +108,11 @@ function trove_stories_preprocess_page(&$variables) {
     $route_match = \Drupal::routeMatch();
     $route_name = $route_match->getRouteName(); 
 
-    if ($route_name === "trove_stories.trove_stories") { //gallery page
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryWebStory()) { //individual web story node
+        unset($variables['page']['content_top']);
+    }
+
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryGalleryPage()) { //gallery page
         unset($variables['page']['content_top']);
     }
 
@@ -153,7 +157,6 @@ function trove_stories_preprocess_field(&$variables) {
 
 
 //hook into the form submission and create a new trove webform submission entry.
-//function trove_stories_webform_submission_presave(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
 function trove_stories_webform_submission_insert(\Drupal\webform\WebformSubmissionInterface $webform_submission) {
 
     if ($webform_submission->getEntityTypeId() === 'webform_submission') { //note this is the webform submission content type, not the trove stories submission content type
@@ -267,6 +270,11 @@ function trove_stories_preprocess_html(&$variables) {
     if (\Drupal::service('trove_stories.common_services')->isTroveStoryGalleryPage()) { 
         $variables['#attached']['library'][] = 'trove_stories/trove_stories_gallery_page_css_library'; //add our gallery page style sheet.
     }
+
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryWebStory()) { 
+        $variables['#attached']['library'][] = 'trove_stories/trove_stories_web_story_css_library'; //add our web story page style sheet.
+    }
+    
 }
 
 /**

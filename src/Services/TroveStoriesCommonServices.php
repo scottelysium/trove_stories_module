@@ -74,6 +74,20 @@ class TroveStoriesCommonServices {
         return false;
     }
 
+    public function isTroveStoryWebStory() {
+    
+        $route_match = \Drupal::routeMatch();
+        $route_node = $route_match->getParameter('node');
+        
+        if ($route_node instanceof NodeInterface) {
+            if ($route_node->bundle() === 'trove_story_web_story') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function isTroveStoryGalleryPage() {
         
         $route_match = \Drupal::routeMatch();
@@ -84,15 +98,6 @@ class TroveStoriesCommonServices {
         if ($route_name === "trove_stories.trove_stories") {
             return true;
         }
-
-        
-        //$route_node = $route_match->getParameter('node');
-        
-        // if ($route_node instanceof NodeInterface) {
-        //     if ($route_node->bundle() === 'trove_story_submission') {
-        //         return true;
-        //     }
-        // }
 
         return false;
     }

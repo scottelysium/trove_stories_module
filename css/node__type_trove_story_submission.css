@@ -1,10 +1,15 @@
 /****  admin area TROVE STORY SUBMISSION node ****/
 
 
-.node--type-trove-story-submission {
-    border: 1px solid #d9d9d9;
+/* .node--type-trove-story-submission {
+    
+} */
+
+.node--type-trove-story-submission article {
+    /* border: 1px solid #d9d9d9; */
     padding: 20px;
     border-radius: 10px;
+    background-color: #eee;
 }
 
 .node--type-trove-story-submission .block-system-breadcrumb-block,
@@ -24,14 +29,23 @@
     padding: 0;
 }
 
-.node--type-trove-story-submission .content-outer-wrap > .container .nav.mb-5 { /* remove margin from bottom of tabs */
-    margin-bottom: 20px !important;
+.node--type-trove-story-submission .content-outer-wrap > .container .nav.mb-5 {
+    margin-top: 2rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .node--type-trove-story-submission .block-page-title-block h1 { /** title of the page **/
     font-family: "Source Sans Pro", sans-serif;
-    font-size: 1.75rem;
+    font-size: 1.55rem;
+    margin-top: 2rem;
+    /* text-align: center; */
+    font-weight: 400;
 }
+
+/* .node--type-trove-story-submission .block-page-title-block h1 span {
+    font-weight: 600;
+} */
 
 .node--type-trove-story-submission .node__content .field { /** each individual field output **/
     margin: 1rem 0rem 1rem 0rem;
@@ -53,12 +67,15 @@
     display: none;
 }
 
-
+.node--type-trove-story-submission .node__content .field.field--name-field-tss-private-image-ids .field__label {
+    margin-bottom: 2rem;
+}
 /** images are rendered as full content, ensure they only stretch to the size of the page **/
 .node--type-trove-story-submission .node__content .field .field__item img { 
     max-width: 100%;
     height: auto;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
+    padding: 0rem 3rem 3rem 3rem;
 }
 
 .node--type-trove-story-submission .trove_story_submission_buttons .fieldset-wrapper {
