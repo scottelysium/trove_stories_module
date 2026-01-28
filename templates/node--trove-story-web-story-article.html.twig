@@ -1,0 +1,121 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ */
+#}
+{{ attach_library('bootstrap_barrio/node') }}
+
+{%
+  set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+
+    {# {{ dump(content) }} #}
+    {{ content.field_tsws_story_hero }}
+
+    <div class="story-grid">
+        <div class="story-content">
+            {{ content.field_tsws_story_about }}
+        </div>
+        <div class="story-side">
+            <h1 class="story-title">{{ node.label }}</h1>
+            <div class="story-author">{{ content.field_tsws_story_author }}</div>
+            <div class="story-date">
+                {{ node.getCreatedTime()|date("d/m/Y") }}
+            </div>
+            <div class="story-category">
+                <span>{{ content.field_tsws_story_category }}</span>
+            </div>
+            
+            <div class="story-share-links">
+                <div class="share-links-title">Share this story</div>
+
+                <div class="share-links-row">
+                    <div class="shre-cogs">
+                        <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M27 5.78571C27 8.97991 24.4085 11.5714 21.2143 11.5714C19.4725 11.5714 17.9116 10.8 16.8509 9.58259L11.4449 12.2886C11.5292 12.6804 11.5172 13.0842 11.5172 13.4458C11.5172 13.9158 11.5292 14.3196 11.4449 14.7114L16.8509 17.3632C17.9116 16.2 19.4725 15.3743 21.2143 15.3743C24.4085 15.3743 27 17.9658 27 21.2143C27 24.4085 24.4085 27 21.2143 27C17.9658 27 15.4286 24.4085 15.4286 21.2143C15.4286 20.7984 15.4708 20.3946 15.5551 20.0029L10.1491 17.2969C9.08839 18.5143 7.52746 19.2857 5.78571 19.2857C2.59031 19.2857 0 16.6942 0 13.4458C0 10.2516 2.59031 7.66005 5.78571 7.66005C7.52746 7.66005 9.08839 8.48571 10.1491 9.64888L15.5551 6.9971C15.4708 6.60536 15.4286 6.20156 15.4286 5.78571C15.4286 2.59031 17.9658 0 21.2143 0C24.4085 0 27 2.59031 27 5.78571ZM5.73147 16.3929C7.38281 16.3929 8.62433 15.0971 8.62433 13.5C8.62433 11.9029 7.38281 10.6071 5.73147 10.6071C4.18801 10.6071 2.83862 11.9029 2.83862 13.5C2.83862 15.0971 4.18801 16.3929 5.73147 16.3929ZM21.2143 2.89286C19.6172 2.89286 18.3214 4.18862 18.3214 5.78571C18.3214 7.38281 19.6172 8.67857 21.2143 8.67857C22.8114 8.67857 24.1071 7.38281 24.1071 5.78571C24.1071 4.18862 22.8114 2.89286 21.2143 2.89286ZM21.2143 24.1071C22.8114 24.1071 24.1071 22.8114 24.1071 21.2143C24.1071 19.6172 22.8114 18.3214 21.2143 18.3214C19.6172 18.3214 18.3214 19.6172 18.3214 21.2143C18.3214 22.8114 19.6172 24.1071 21.2143 24.1071Z" fill="#2D004B"/>
+                        </svg>
+                    </div>
+
+                    <a class="share-fb" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url('<current>') }}">
+                        <svg width="13" height="24" viewBox="0 0 13 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.0117 13.5L12.6783 9.15656H8.51062V6.33797C8.51062 5.14969 9.09281 3.99141 10.9594 3.99141H12.8541V0.293438C12.8541 0.293438 11.1347 0 9.49078 0C6.05859 0 3.81516 2.08031 3.81516 5.84625V9.15656H0V13.5H3.81516V24H8.51062V13.5H12.0117Z" fill="#2D004B"/>
+                        </svg>
+                    </a>
+                    <a class="share-email" target="_blank" href="mailto:?subject={{ node.label }}&body={{ url('<current>') }}">
+                        <svg width="27" height="21" viewBox="0 0 27 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 3.375C0 1.51084 1.51084 0 3.375 0H23.625C25.4865 0 27 1.51084 27 3.375V16.875C27 18.7365 25.4865 20.25 23.625 20.25H3.375C1.51084 20.25 0 18.7365 0 16.875V3.375ZM2.53125 3.375V4.54043L11.6279 12.0076C12.7143 12.9041 14.2857 12.9041 15.3721 12.0076L24.4688 4.54043V3.32754C24.4688 2.91094 24.0891 2.48379 23.625 2.48379H3.375C2.90883 2.48379 2.53125 2.91094 2.53125 3.32754V3.375ZM2.53125 7.81523V16.875C2.53125 17.3391 2.90883 17.7188 3.375 17.7188H23.625C24.0891 17.7188 24.4688 17.3391 24.4688 16.875V7.81523L16.9805 13.9641C14.9555 15.6252 12.0445 15.6252 9.97207 13.9641L2.53125 7.81523Z" fill="#2D004B"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+
+</article>

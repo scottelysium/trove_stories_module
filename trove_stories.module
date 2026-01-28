@@ -30,8 +30,9 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
                 'template' => 'field--node--title--trove-story-submission',
                 'base hook' => 'field',
             ],
-            'node__trove_story_web_story' => [ //overwrite the 'title' area of a 'trove story submission'
-                //'template' => 'field--node--title--trove-story-submission',
+            'node__trove_story_web_story_article' => [ //overwrite the 'title' area of a 'trove story submission'
+            //'page__trove_story_web_story' => [ 
+                //'template' => 'page--trove-story-web-story',
                 'base hook' => 'node',
             ],
             'input__submit_trove_stories' => [ //register new hook suggestion implemented in trove_stories_theme_suggestions_input_alter()
@@ -40,7 +41,11 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
         ];
 }
 
-
+function trove_stories_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+    if (\Drupal::service('trove_stories.common_services')->isTroveStoryWebStory()) {
+        $suggestions[] = 'node__trove_story_web_story_article';
+    }
+}
 
 
 /* We add a custom template form the banner form element  */
@@ -56,12 +61,6 @@ function trove_stories_theme_suggestions_form_element_alter(array &$suggestions,
     }
 
 }
-
-/* We add a custom template form the html content of the header/banner  */
-// function trove_stories_theme_suggestions_webform_html_editor_markup_alter(array &$suggestions, array $variables) {
-//     $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
-
-// }
 
 /* We add a custom template into the trove stories form  */
 function trove_stories_theme_suggestions_webform_alter(array &$suggestions, array $variables) {

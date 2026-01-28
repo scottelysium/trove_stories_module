@@ -23,7 +23,7 @@ dependencies:
     - paragraphs
     - path
 _core:
-  default_config_hash: N0Ar8EPq1FeJSZWeOssb9a2ukPJLhXz_bLQQ5eTdJnA
+  default_config_hash: hY_iVTjVDR7XaFaK-MkLQV4KUL-H_KiIR3xx-dxsdZY
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
@@ -53,7 +53,7 @@ content:
     third_party_settings: {  }
   field_tsws_story_category:
     type: options_select
-    weight: 22
+    weight: 26
     region: content
     settings: {  }
     third_party_settings: {  }

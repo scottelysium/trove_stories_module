@@ -20,9 +20,10 @@ dependencies:
   module:
     - entity_reference_revisions
     - link
+    - options
     - user
 _core:
-  default_config_hash: jULak1PfIXViSTuLzIb2n6JKylWPIgnEwMghxKL4gjE
+  default_config_hash: VSVtoVDhi5VjhDe8Pku59RLi0Zrlm-VmPl_aDTT45lI
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
@@ -37,39 +38,31 @@ content:
     region: content
   field_tsws_story_author:
     type: string
-    label: above
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
     weight: 5
     region: content
   field_tsws_story_category:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 11
-    region: content
-  field_tsws_story_email:
-    type: basic_string
-    label: above
+    type: list_default
+    label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 6
+    weight: 12
     region: content
   field_tsws_story_gallery:
     type: entity_reference_revisions_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 12
+    weight: 11
     region: content
   field_tsws_story_hero:
     type: entity_reference_revisions_entity_view
-    label: above
+    label: hidden
     settings:
       view_mode: default
       link: ''
@@ -81,7 +74,7 @@ content:
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 6
     region: content
   field_tsws_story_links:
     type: link
@@ -101,7 +94,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 7
     region: content
   field_tsws_story_postcode:
     type: string
@@ -109,7 +102,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 9
+    weight: 8
     region: content
   field_tsws_story_use:
     type: basic_string
@@ -124,7 +117,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 10
+    weight: 9
     region: content
   links:
     settings: {  }
@@ -132,6 +125,7 @@ content:
     weight: 1
     region: content
 hidden:
+  field_tsws_story_email: true
   field_tsws_story_thumbnail: true
   langcode: true
   search_api_excerpt: true

@@ -6,7 +6,7 @@ dependencies:
     - media
     - paragraphs
 _core:
-  default_config_hash: M9kmIrBTCsxg7ZmpX4fMQyAEBhzkB96tBVygxEC6XB0
+  default_config_hash: FKF4mVgJKz0XfBU48PCI1OfWX5kBZTqDV7Ih1LSRE7Q
 id: paragraph.field_ptsws_hero_image
 field_name: field_ptsws_hero_image
 entity_type: paragraph

@@ -1,0 +1,94 @@
+
+/* .node--type-trove-story-web-story {
+
+} */
+
+.node--type-trove-story-web-story .field--name-field-tsws-story-hero {
+    max-height: 600px;
+    overflow: hidden;
+    
+}
+
+.node--type-trove-story-web-story .field--name-field-tsws-story-hero .field--type-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node--type-trove-story-web-story .field--name-field-tsws-story-hero .field--type-image img {
+    width: 100%;
+    height: auto;
+}
+
+.node--type-trove-story-web-story article .story-grid {
+    width: 1160px;
+    margin: 4rem auto 0rem auto;
+    display: grid;
+    grid-template-columns: 1fr 15rem;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-content {
+
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side {
+    padding: 4rem 0rem 0rem 0rem;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-title {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0.5rem;
+    color: #008944;
+    text-transform: uppercase;
+    font-size: 2.1rem;
+    font-weight: 700;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-author {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: #4A4A4A;
+    padding-left: 0.5rem;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-date {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    padding-left: 0.5rem;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-category {
+    margin: 1.2rem 0rem 1rem 0rem;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-category span {
+    display: inline-block;
+    font-family: "Source Serif Variable", serif;
+    color: #2D004B;
+    border: 2px solid #2D004B;
+    border-radius: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 0.9rem;
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-share-links {
+    padding-top: 0.8rem;
+    padding-left: 0.5rem;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-share-links .share-links-title {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-share-links .share-links-row {
+    display: flex;
+}
+
+.node--type-trove-story-web-story article .story-grid .story-side .story-share-links .share-links-row a {
+    margin-left: 1.5rem;
+}

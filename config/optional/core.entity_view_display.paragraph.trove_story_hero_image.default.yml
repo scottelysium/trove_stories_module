@@ -6,7 +6,7 @@ dependencies:
     - field.field.paragraph.trove_story_hero_image.field_ptsws_hero_image
     - paragraphs.paragraphs_type.trove_story_hero_image
 _core:
-  default_config_hash: SvM9uWhsud9TaBU9iQ6c3QzXPiFaNwU_8il2Wqm9NMo
+  default_config_hash: 1DR7bru3l310nGt7o4ewIGxQM3JbICNv8gXBdhmEJJ4
 id: paragraph.trove_story_hero_image.default
 targetEntityType: paragraph
 bundle: trove_story_hero_image
@@ -14,9 +14,9 @@ mode: default
 content:
   field_ptsws_hero_image:
     type: entity_reference_entity_view
-    label: above
+    label: hidden
     settings:
-      view_mode: default
+      view_mode: full
       link: false
     third_party_settings: {  }
     weight: 0
