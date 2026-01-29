@@ -2,9 +2,11 @@
 use Drupal\Core\Url;
 use Drupal\node\Entity\Node;
 use Drupal\file\Entity\File;
-//use Drupal\media\Entity\Media;
+use Drupal\media\Entity\Media;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\image\Entity\ImageStyle;
+//use Drupal\paragraphs\Entity\Paragraph;
 /**
 * Implements hook_theme().
 */
@@ -213,6 +215,43 @@ function trove_stories_entity_access(Drupal\Core\Entity\EntityInterface $entity,
     return AccessResult::neutral();
 }
 
+/**
+ * Pass through all the needed gallery image urls to the web story template so javascript can turn them into a gallery.
+ */
+function trove_stories_preprocess_node(&$variables) {
+    $node = $variables['node'];
+    if ($node->bundle() == 'trove_story_web_story') {
+
+        $paragraph_items = $node->get('field_tsws_story_gallery')->referencedEntities();
+
+        $image_urls = [];
+
+        foreach ($paragraph_items as $paragraph) {
+            if ($paragraph->bundle() == 'trove_story_gallery_images') {
+                $media_entities = $paragraph->get('field_ptsws_gallery_images')->referencedEntities();
+                foreach ($media_entities as $media) {
+                    if ($media instanceof Media && $media->hasField('field_media_image')) {
+                        $file_entity = $media->get('field_media_image')->entity;
+                        if ($file_entity instanceof File) {
+                            $uri = $file_entity->getFileUri();
+                            $style = ImageStyle::load('collection_feature_banner'); //597×400
+                            $gallery_uri = $style->buildUrl($uri);;
+
+                            $full_image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($uri);
+                            $gallery_url = \Drupal::service('file_url_generator')->generateAbsoluteString($gallery_uri);
+                            $image_urls[] = [
+                                'full_image_url' => $full_image_url,
+                                'gallery_url' => $gallery_url
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
+        $variables['story_gallery_images'] = $image_urls;
+    }
+}
 
 /*
     Add custom css style sheets and body class for Trove Stories pages.

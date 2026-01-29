@@ -59,8 +59,8 @@
  * @see template_preprocess_node()
  */
 #}
-{{ attach_library('bootstrap_barrio/node') }}
-
+{# {{ attach_library('bootstrap_barrio/node') }} #}
+{{ attach_library('trove_stories/trove_stories_web_story') }}
 {%
   set classes = [
     'node',
@@ -75,6 +75,7 @@
 <article{{ attributes.addClass(classes) }}>
 
     {# {{ dump(content) }} #}
+    
     {{ content.field_tsws_story_hero }}
 
     <div class="story-grid">
@@ -117,5 +118,16 @@
 
         </div>
     </div>
-
+    {# {% if content.field_tsws_story_gallery %} #}
+        <div class="story-images">
+            {# {{ content.field_tsws_story_gallery }} #}
+            {# {{ dump(story_gallery_images) }} #}
+            <div class="story-gallery-slider">
+                {% for gallery_image in story_gallery_images %}
+                    {# {{ gallery_image.full_image_url }}<br> #}
+                    <img src="{{ gallery_image.gallery_url }}" alt="Image of {{ node.label }}" />
+                {% endfor %}
+            </div>
+        </div>
+    {# {% endif %} #}
 </article>

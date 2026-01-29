@@ -45,4 +45,9 @@ trove_stories_gallery_page:
       js/trove_stories_gallery_page.js: {}
     dependencies:
       - core/drupal
-      - core/once
+
+trove_stories_web_story: 
+    js:
+      js/trove_stories_web_story.js: {}
+    dependencies:
+      - core/drupal

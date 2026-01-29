@@ -29,7 +29,7 @@
 }
 
 .node--type-trove-story-web-story article .story-grid .story-content {
-
+    padding: 0;
 }
 
 .node--type-trove-story-web-story article .story-grid .story-side {
@@ -96,4 +96,16 @@
 
 .node--type-trove-story-web-story article .story-grid .story-side .story-share-links .share-links-row a {
     margin-left: 1.5rem;
+}
+
+.node--type-trove-story-web-story article .story-images {
+    overflow: hidden;
+    height: 500px;
+    position: relative;
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-slider {
+    display: flex;
+    /* position: absolute; */
+    
 }

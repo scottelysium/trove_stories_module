@@ -223,16 +223,3 @@
 
 
 })(Drupal);
-
-
-
-// (function (Drupal) {
-//     Drupal.behaviors.trove_stories_gallery_page = {
-//         attach: function(context, settings) {
-
-//             once('trove_stories_gallery_page', '#trove-stories-gallery').forEach(function (trove_form_element) {
-//                 console.log("hello this should only show on the trove stories gallery page.")
-//             })
-//         }
-//     };
-// })(Drupal);

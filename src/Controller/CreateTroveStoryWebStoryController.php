@@ -92,8 +92,6 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
             $formated_content .= "<h2>What Inspired this project</h2>";
             $formated_content .= "<p>" . $webStoryInspiration . "</p>";
         }
-        
-
 
         //reate the paragraph field for the story gallery
         $paragraphGallery = Paragraph::create([
