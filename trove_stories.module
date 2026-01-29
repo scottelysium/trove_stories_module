@@ -160,32 +160,7 @@ function trove_stories_webform_submission_insert(\Drupal\webform\WebformSubmissi
             //create trove story submission content
             $submissionData = $webform_submission->getData();
 
-            //$sid = $webform_submission->id();
-
-           // $private_image_ids = $submissionData["tswf_upload_images"];//[];
-            //$private_image_urls = [];
-
-            // if (!empty($submissionData["tswf_upload_images"])) {
-            //     foreach($submissionData["tswf_upload_images"] as $file_id) {
-            //         $file = File::load($file_id);
-            //         $file_uri = $file->getFileUri();
-
-                    
-            //         $file_url_generator = \Drupal::service('file_url_generator');
-            //         $relative_url = $file_url_generator->generateString($file_uri);
-                    
-            //         //the file url path will contain a '_sid_' value that needs to be replaced with the submission id
-            //         $just_path = dirname($relative_url);// just in case some person uploads file with "_sid_" in the name
-            //         $just_name = basename($relative_url);
-            //         $new_dir = str_replace("_sid_", $sid, $just_path);
-            //         $actual_url = $new_dir . "/" . $just_name;
-
-            //         $private_image_ids[] = $file_id;
-            //         $private_image_urls[] = $actual_url;
-            //     }
-            // }
             
-
             //create new trove story display from the data
             $trove_story_submission = Node::create(array(
                 'type' => 'trove_story_submission',
@@ -206,7 +181,6 @@ function trove_stories_webform_submission_insert(\Drupal\webform\WebformSubmissi
                 'field_tss_story_year_of_birth' => $submissionData["tswf_year_of_birth"],
 
                 'field_tss_private_image_ids' => $submissionData["tswf_upload_images"],
-                //'field_tss_private_image_urls' => $private_image_urls
             ));
 
             $trove_story_submission->save();

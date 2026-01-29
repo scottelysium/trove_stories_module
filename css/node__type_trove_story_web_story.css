@@ -25,6 +25,7 @@
     margin: 4rem auto 0rem auto;
     display: grid;
     grid-template-columns: 1fr 15rem;
+    column-gap: 7rem;
 }
 
 .node--type-trove-story-web-story article .story-grid .story-content {
@@ -40,7 +41,8 @@
     padding: 0 0 0 0.5rem;
     color: #008944;
     text-transform: uppercase;
-    font-size: 2.1rem;
+    font-size: 2.2rem;
+    line-height: 2.2rem;
     font-weight: 700;
 }
 
@@ -49,6 +51,8 @@
     font-size: 1.5rem;
     color: #4A4A4A;
     padding-left: 0.5rem;
+    line-height: 1.8rem;
+    margin-top: 0.5rem;
 }
 
 .node--type-trove-story-web-story article .story-grid .story-side .story-date {
@@ -56,6 +60,7 @@
     font-size: 1.2rem;
     line-height: 1.2rem;
     padding-left: 0.5rem;
+    margin-top: 0.4rem;
 }
 
 .node--type-trove-story-web-story article .story-grid .story-side .story-category {

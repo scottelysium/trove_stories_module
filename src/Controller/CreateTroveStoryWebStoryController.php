@@ -27,22 +27,19 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
             return new RedirectResponse($destination);
         }
 
-        $webStoryNodeTitle = $storySubmissionNode->get('title')->value;
+        //$webStoryNodeTitle = $storySubmissionNode->get('title')->value;
         $webStoryTitle = $storySubmissionNode->get('field_tss_story_title')->value; //note different from default title
-        $webStoryUse = $storySubmissionNode->get('field_tss_story_use')->value;
+        //$webStoryUse = $storySubmissionNode->get('field_tss_story_use')->value;
         $webStoryAbout = $storySubmissionNode->get('field_tss_story_about')->value;
         $webStoryAuthor = $storySubmissionNode->get('field_tss_story_author')->value;
         $webStoryEmail = $storySubmissionNode->get('field_tss_story_email')->value;
         $webStoryInspiration = $storySubmissionNode->get('field_tss_story_inspiration')->value;
-        $webStoryName = $storySubmissionNode->get('field_tss_story_name')->value;
-        $webStoryPostcode = $storySubmissionNode->get('field_tss_story_postcode')->value;
-        $webStoryBirth = $storySubmissionNode->get('field_tss_story_year_of_birth')->value;
+        //$webStoryName = $storySubmissionNode->get('field_tss_story_name')->value;
+        //$webStoryPostcode = $storySubmissionNode->get('field_tss_story_postcode')->value;
+        //$webStoryBirth = $storySubmissionNode->get('field_tss_story_year_of_birth')->value;
 
         //get links
         $webStoryLinks = $storySubmissionNode->get('field_tss_story_links')->getValue();
-
-        //get images
-        //$webStoryImages = $storySubmissionNode->get('field_tss_story_images')->getValue(); //this has the media ids already set no extra porcessing needed.
 
         $privateImageIds = $storySubmissionNode->get('field_tss_private_image_ids')->getValue();
 
@@ -50,10 +47,8 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
 
         foreach($privateImageIds as $privateImageId) {
             $target_id = $privateImageId['value'];
-            //$source_media = Media::load($target_id);
-            $source_file = File::load($target_id);
 
-            //$source_file = $source_media->get('field_media_image')->entity;
+            $source_file = File::load($target_id);
 
             if ($source_file instanceof File) { //we want the original File the media points to.
 
@@ -87,46 +82,20 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
             }
         }
 
-        //clone the images from private directory to the public
-        // foreach($webStoryImages as $webStoryImage) {
-        //     $target_id = $webStoryImage['target_id'];
-        //     $source_media = Media::load($target_id);
+        //setup the formatting of the various fields that go into the main content field
+        $formated_content = "";
+        if (!empty($webStoryAbout)) {
+            $formated_content .= "<p>" . $webStoryAbout . "</p>";
+        }
+        
+        if (!empty($webStoryInspiration)) {
+            $formated_content .= "<h2>What Inspired this project</h2>";
+            $formated_content .= "<p>" . $webStoryInspiration . "</p>";
+        }
+        
 
-        //     $source_file = $source_media->get('field_media_image')->entity;
 
-        //     if ($source_file instanceof File) { //we want the original File the media points to.
-
-        //         //Prepare the public destination URI
-        //         $filename = $source_file->getFilename();
-        //         $destination = 'public://' . $filename;
-
-        //         // Use FileRepository to copy the file and create a new File entity
-        //         // This creates a physical copy and a new entry in the 'file_managed' table
-        //         /** @var \Drupal\file\FileRepositoryInterface $file_repository */
-        //         $file_repository = \Drupal::service('file.repository');
-        //         $new_file = $file_repository->copy($source_file, $destination, FileExists::Rename);
-
-        //         // Create the new Media entity
-        //         $new_media = $source_media->createDuplicate();
-
-        //         // Set the new file entity and any other specific metadata
-        //         $new_media->set('field_media_image', [
-        //             'target_id' => $new_file->id(),
-        //             'alt' => $source_media->get('field_media_image')->alt, // Carry over alt text if it's an image
-        //             'title' => $source_media->get('field_media_image')->title,
-        //         ]);
-
-        //         $new_media->setName('trove_story_' . $source_media->getName()); //this is the media name - not the actual file name
-        //         $new_media->setPublished(TRUE);
-
-        //         $new_media->save();
-
-        //         $newWebStoryImageIds[]['target_id'] = $new_media->id();
-
-        //     }
-        // }
-
-        //now the images are moved to the public folder, create the paragraph field for the story gallery
+        //reate the paragraph field for the story gallery
         $paragraphGallery = Paragraph::create([
             'type' => 'trove_story_gallery_images',
             'field_ptsws_gallery_images' => $newWebStoryImageIds,
@@ -135,18 +104,19 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
 
         $trove_story_web_story = Node::create(array(
             'type' => 'trove_story_web_story',
-            //'title' => $webStoryNodeTitle,
             'title' => $webStoryTitle, // 'story title' field becomes node title.
             'langcode' => 'en',
             'uid' => \Drupal::currentUser()->id(), 
             'status' => 0, //not published by default
-            'field_tsws_story_use' => $webStoryUse,
+            //'field_tsws_story_use' => $webStoryUse,
+            'field_tsws_content' => [
+                'value' => $formated_content,
+                'format' => 'basic_html'
+            ],
             'field_tsws_story_about' => $webStoryAbout,
             'field_tsws_story_links' => $webStoryLinks,
             'field_tsws_story_author' => $webStoryAuthor,
             'field_tsws_story_email' => $webStoryEmail,
-            //'field_tsws_story_images' => $webStoryImages,
-            //'field_tsws_story_images' => $newWebStoryImageIds, //new target_ids to public cloned files.
             'field_tsws_story_gallery' => [
                 [
                     'target_id' => $paragraphGallery->id(),
@@ -154,11 +124,11 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
                 ],
             ],
             'field_tsws_story_inspiration' => $webStoryInspiration,
-            'field_tsws_story_name' => $webStoryName,
+            //'field_tsws_story_name' => $webStoryName,
             //'field_tsws_story_category' => //Category field defaults to 'none'
-            'field_tsws_story_postcode' => $webStoryPostcode,
+            //'field_tsws_story_postcode' => $webStoryPostcode,
             //'field_tsws_story_title' => $webStoryTitle,
-            'field_tsws_story_year_of_birth' => $webStoryBirth
+            //'field_tsws_story_year_of_birth' => $webStoryBirth
         ));
 
         $trove_story_web_story->save();

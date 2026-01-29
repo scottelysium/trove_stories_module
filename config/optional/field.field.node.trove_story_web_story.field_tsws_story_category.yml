@@ -7,6 +7,8 @@ dependencies:
     - node.type.trove_story_web_story
   module:
     - options
+_core:
+  default_config_hash: cNEfq234G99qI-L0Y9U2AZDCii2cgc6Wd7Zg5zwSyqU
 id: node.trove_story_web_story.field_tsws_story_category
 field_name: field_tsws_story_category
 entity_type: node

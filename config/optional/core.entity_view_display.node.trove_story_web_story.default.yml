@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.trove_story_web_story.field_tsws_content
     - field.field.node.trove_story_web_story.field_tsws_story_about
     - field.field.node.trove_story_web_story.field_tsws_story_author
     - field.field.node.trove_story_web_story.field_tsws_story_category
@@ -21,14 +22,22 @@ dependencies:
     - entity_reference_revisions
     - link
     - options
+    - text
     - user
 _core:
-  default_config_hash: VSVtoVDhi5VjhDe8Pku59RLi0Zrlm-VmPl_aDTT45lI
+  default_config_hash: Sf61yHWvcM2WvTtByhWINJO___2tS0Ykt1DuzdEGR4c
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
 mode: default
 content:
+  field_tsws_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 13
+    region: content
   field_tsws_story_about:
     type: basic_string
     label: above

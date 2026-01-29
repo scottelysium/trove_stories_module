@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.trove_story_web_story.field_tsws_content
     - field.field.node.trove_story_web_story.field_tsws_story_about
     - field.field.node.trove_story_web_story.field_tsws_story_author
     - field.field.node.trove_story_web_story.field_tsws_story_category
@@ -21,7 +22,7 @@ dependencies:
   module:
     - user
 _core:
-  default_config_hash: tLI0QJh5cmRAkb2HCNxLkNRFWEumPes7vY-QE-E7rv0
+  default_config_hash: qObALdLPRBP2JGDM8Wd2mrPXWnZC0byGRMJiborNzHg
 id: node.trove_story_web_story.teaser
 targetEntityType: node
 bundle: trove_story_web_story
@@ -33,6 +34,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_tsws_content: true
   field_tsws_story_about: true
   field_tsws_story_author: true
   field_tsws_story_category: true

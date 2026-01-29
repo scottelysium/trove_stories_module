@@ -5,6 +5,8 @@ dependencies:
   module:
     - node
     - options
+_core:
+  default_config_hash: 465Z1-32shh7BpgQE7sMHEH9HNIbXdo5fV2jiJbtufE
 id: node.field_tsws_story_category
 field_name: field_tsws_story_category
 entity_type: node
