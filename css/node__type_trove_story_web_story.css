@@ -20,6 +20,10 @@
     height: auto;
 }
 
+/* .node--type-trove-story-web-story article {
+    
+} */
+
 .node--type-trove-story-web-story article .story-grid {
     width: 1160px;
     margin: 4rem auto 0rem auto;
@@ -99,13 +103,62 @@
 }
 
 .node--type-trove-story-web-story article .story-images {
-    overflow: hidden;
-    height: 500px;
+    /* margin: 4rem auto 0rem auto; */
+    /* height: 500px; */
+    /* padding: 5rem 0rem 0rem 15rem; */
+    /* margin: 0 auto;
+    width: 1160px; */
     position: relative;
+    overflow-x: hidden;
 }
 
-.node--type-trove-story-web-story article .story-images .story-gallery-slider {
-    display: flex;
-    /* position: absolute; */
-    
+.node--type-trove-story-web-story article .story-images .story-slider-wrapper {
+    overflow-x: hidden;
+    height: 400px;
+    position: relative;
+    background-color: #eee;
+    opacity: 0;
+    transition: opacity 0.7s;
 }
+
+.node--type-trove-story-web-story article .story-images .story-slider-wrapper.show {
+    opacity: 1;
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-button {
+    position: absolute;
+    z-index: 1;
+    top: 180px;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 2px 11px 1px rgba(0,0,0,0.39); 
+    box-shadow: 1px 2px 11px 1px rgba(0,0,0,0.39);
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-button.left { /* note this is INSIDE wrapper and the right button is outside it so they align */
+    left: 5%;
+    background-image: url(../images/left-arrow-blue.svg);
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-button.right {
+    right: 5%;
+    background-image: url(../images/right-arrow-blue.svg);
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-button.right.hide,
+.node--type-trove-story-web-story article .story-images .story-gallery-button.left.hide {
+    display: none;
+}
+
+.node--type-trove-story-web-story article .story-images .story-slider-wrapper .story-gallery-slider { /* this one moves */
+    display: flex;
+    position: absolute;
+    left: 0;
+    background-color: #eee;
+    transition: left 0.5s;
+}
+

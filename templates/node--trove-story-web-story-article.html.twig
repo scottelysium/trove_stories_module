@@ -118,16 +118,29 @@
 
         </div>
     </div>
-    {# {% if content.field_tsws_story_gallery %} #}
+    {% if story_gallery_images %}
+
+        {# <div class="story-gallery-modal">
+            <div class=
+        </div> #}
+
         <div class="story-images">
-            {# {{ content.field_tsws_story_gallery }} #}
-            {# {{ dump(story_gallery_images) }} #}
-            <div class="story-gallery-slider">
-                {% for gallery_image in story_gallery_images %}
-                    {# {{ gallery_image.full_image_url }}<br> #}
-                    <img src="{{ gallery_image.gallery_url }}" alt="Image of {{ node.label }}" />
-                {% endfor %}
+
+            <div class="story-slider-wrapper">
+                <div class="story-gallery-slider" id="story-gallery-slider"> {# this one moves #}
+                    {% for gallery_image in story_gallery_images %}
+                        {# {{ gallery_image.full_image_url }}<br> #}
+                        <div class="story-gallery-slide">
+                            <img src="{{ gallery_image.gallery_url }}" alt="Image of {{ node.label }}" />
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="story-gallery-button left hide" id="story-button-left"/>
+                   
             </div>
+            
+            <button class="story-gallery-button right" id="story-button-right" />
+            
         </div>
-    {# {% endif %} #}
+    {% endif %}
 </article>
