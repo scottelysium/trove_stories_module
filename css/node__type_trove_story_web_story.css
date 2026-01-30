@@ -102,6 +102,49 @@
     margin-left: 1.5rem;
 }
 
+.node--type-trove-story-web-story article .story-gallery-modal {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255,255,255, 0.8);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.node--type-trove-story-web-story article .story-gallery-modal.show {
+    display: flex;
+}
+
+.node--type-trove-story-web-story article .story-gallery-modal .story-gallery-modal-inner {
+    width: 80%;
+    /* height: 50%; */
+    background-color: black;
+}
+
+.node--type-trove-story-web-story article .story-gallery-modal .story-gallery-modal-inner img {
+    width: 100%;
+}
+
+.modalFade { 
+    animation: modalFade .3s linear;
+}
+
+@keyframes modalFade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;	
+	}
+}
+
 .node--type-trove-story-web-story article .story-images {
     /* margin: 4rem auto 0rem auto; */
     /* height: 500px; */
@@ -160,5 +203,9 @@
     left: 0;
     background-color: #eee;
     transition: left 0.5s;
+}
+
+.node--type-trove-story-web-story article .story-images .story-slider-wrapper .story-gallery-slider .story-gallery-slide {
+    cursor: pointer;
 }
 

@@ -120,9 +120,13 @@
     </div>
     {% if story_gallery_images %}
 
-        {# <div class="story-gallery-modal">
-            <div class=
-        </div> #}
+        <div class="story-gallery-modal modalFade" id="story-gallery-modal">
+            
+            <div class="story-gallery-modal-inner" id="story-gallery-modal-inner">
+                {# img inserted with js here #}
+            </div>
+            <button id="story-gallery-modal-close">close</button>
+        </div>
 
         <div class="story-images">
 
@@ -130,7 +134,7 @@
                 <div class="story-gallery-slider" id="story-gallery-slider"> {# this one moves #}
                     {% for gallery_image in story_gallery_images %}
                         {# {{ gallery_image.full_image_url }}<br> #}
-                        <div class="story-gallery-slide">
+                        <div class="story-gallery-slide" data="{{ gallery_image.full_image_url }}">
                             <img src="{{ gallery_image.gallery_url }}" alt="Image of {{ node.label }}" />
                         </div>
                     {% endfor %}
