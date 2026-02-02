@@ -34,6 +34,7 @@
 
 .node--type-trove-story-web-story article .story-grid .story-content {
     padding: 0;
+    margin: 0rem 0 4rem 0;
 }
 
 .node--type-trove-story-web-story article .story-grid .story-side {
@@ -68,7 +69,7 @@
 }
 
 .node--type-trove-story-web-story article .story-grid .story-side .story-category {
-    margin: 1.2rem 0rem 1rem 0rem;
+    margin: 1.2rem 0rem 0rem 0rem;
 }
 
 .node--type-trove-story-web-story article .story-grid .story-side .story-category span {
@@ -85,6 +86,7 @@
 .node--type-trove-story-web-story article .story-grid .story-side .story-share-links {
     padding-top: 0.8rem;
     padding-left: 0.5rem;
+    margin-top: 1rem;
 }
 
 .node--type-trove-story-web-story article .story-grid .story-side .story-share-links .share-links-title {
@@ -100,6 +102,15 @@
 
 .node--type-trove-story-web-story article .story-grid .story-side .story-share-links .share-links-row a {
     margin-left: 1.5rem;
+}
+
+.node--type-trove-story-web-story article .story-article-links {
+    width: 1160px;
+    margin: 0rem auto 4rem auto;
+}
+
+.node--type-trove-story-web-story article .story-article-links-title {
+    
 }
 
 .node--type-trove-story-web-story article .story-gallery-modal {
@@ -118,13 +129,38 @@
     display: none;
 }
 
+.node--type-trove-story-web-story article .story-gallery-modal button.gallery-close {
+    display: block;
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    width: 4rem;
+    height: 4rem;
+    border: 0;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+    /* background-image: url(../images/cross-circle-black.svg); */
+    background-image: url(../images/cross.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 4rem auto;
+}
+
+.node--type-trove-story-web-story article .story-gallery-modal button.gallery-close span {
+    display: none;
+}
+
 .node--type-trove-story-web-story article .story-gallery-modal.show {
     display: flex;
 }
 
-.node--type-trove-story-web-story article .story-gallery-modal .story-gallery-modal-inner {
+.node--type-trove-story-web-story article .story-gallery-modal .story-gallery-modal-wrapper {
+    padding: 5rem;
     width: 80%;
-    /* height: 50%; */
+} 
+
+.node--type-trove-story-web-story article .story-gallery-modal .story-gallery-modal-wrapper .story-gallery-modal-inner {
     background-color: black;
 }
 
@@ -146,11 +182,7 @@
 }
 
 .node--type-trove-story-web-story article .story-images {
-    /* margin: 4rem auto 0rem auto; */
-    /* height: 500px; */
-    /* padding: 5rem 0rem 0rem 15rem; */
-    /* margin: 0 auto;
-    width: 1160px; */
+    margin: 0rem 0 10rem 0;
     position: relative;
     overflow-x: hidden;
 }
@@ -207,5 +239,16 @@
 
 .node--type-trove-story-web-story article .story-images .story-slider-wrapper .story-gallery-slider .story-gallery-slide {
     cursor: pointer;
+    overflow: hidden;
+}
+
+.node--type-trove-story-web-story article .story-images .story-slider-wrapper .story-gallery-slider .story-gallery-slide img {
+    transition: transform 0.5s, opacity 0.5s;
+}
+
+
+.node--type-trove-story-web-story article .story-images .story-slider-wrapper .story-gallery-slider .story-gallery-slide:hover img {
+    transform: scale(1.06);
+    opacity: 0.9;
 }
 

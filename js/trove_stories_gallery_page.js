@@ -10,7 +10,7 @@
         //console.log ("mobile: " + mobile);
 
         let loadMoreOffset = 0;
-        let amountPerLoad = 6; //the amount loaded in the next 'load more' call
+        let amountPerLoad = 9; //the amount loaded in the next 'load more' call
 
         fetchStoryItems(0); //initial fetch, hardcode zero as offset variable updates
 

@@ -19,7 +19,7 @@ dependencies:
     - text
     - user
 _core:
-  default_config_hash: V0JDBvs_nobgvKeGbmeaWLFKvxXzzslXH1PnWpaRXM4
+  default_config_hash: n-KS2ty7orTR9fqTtUMD6N7ukWy_-PRwkAFueoPkH74
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
@@ -67,7 +67,7 @@ content:
     region: content
   field_tsws_story_links:
     type: link
-    label: above
+    label: hidden
     settings:
       trim_length: 80
       url_only: false

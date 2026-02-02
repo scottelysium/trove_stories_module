@@ -12,11 +12,16 @@
         const storyGalleryModalInner = document.getElementById("story-gallery-modal-inner");
         const modalCloseButton = document.getElementById("story-gallery-modal-close");
         modalCloseButton.addEventListener("click", function() {
-            
             storyGalleryModal.classList.remove("show");
         });
 
-        
+        //if the outer white area is clicked, close the modal
+        storyGalleryModal.addEventListener("click", function(e) {
+            console.log(e.target.id);
+            if (e.target.id === 'story-gallery-modal' || e.target.id === 'story-gallery-modal-wrapper') {
+                storyGalleryModal.classList.remove("show");
+            }
+        });
 
         /** offset gallery to align with story-grid plus 120px indent*/
         const storyGrid = document.querySelector(".story-grid");
@@ -46,14 +51,6 @@
                 storyGalleryModal.classList.add("show");
             });
         });
-
-        // for (let i = 0; i < storyImageWrappers.length; i++) {
-        //     console.log(i);
-        //     storyImageWrappers[i].addEventListener("click", function() {
-        //         console.log("event click for img number " + i);
-        //     });
-        // }
-        
 
         const storyImages = document.querySelectorAll(".story-gallery-slider img");
 
