@@ -5,9 +5,8 @@
 
     document.addEventListener("DOMContentLoaded", function(event) {
 
-        const mediaQuery = window.matchMedia("(max-width: 650px)"); //falls into single col
+        const mediaQuery = window.matchMedia("(max-width: 650px)");
         const mobile = mediaQuery.matches;
-        //console.log ("mobile: " + mobile);
 
         let loadMoreOffset = 0;
         let amountPerLoad = 9; //the amount loaded in the next 'load more' call

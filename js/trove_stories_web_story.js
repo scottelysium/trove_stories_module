@@ -7,6 +7,9 @@
 
         if (!storySliderWrapper) return; //no images.
 
+        const mediaQuery = window.matchMedia("(max-width: 700px)"); //falls into single col
+        const mobile = mediaQuery.matches;
+
         /* setup image modal popup functionality **/
         const storyGalleryModal = document.getElementById("story-gallery-modal");
         const storyGalleryModalInner = document.getElementById("story-gallery-modal-inner");
@@ -17,7 +20,6 @@
 
         //if the outer white area is clicked, close the modal
         storyGalleryModal.addEventListener("click", function(e) {
-            console.log(e.target.id);
             if (e.target.id === 'story-gallery-modal' || e.target.id === 'story-gallery-modal-wrapper') {
                 storyGalleryModal.classList.remove("show");
             }
@@ -25,7 +27,10 @@
 
         /** offset gallery to align with story-grid plus 120px indent*/
         const storyGrid = document.querySelector(".story-grid");
-        storySliderWrapper.style.left = (storyGrid.offsetLeft + 120) + "px";
+
+        if (!mobile) {
+            storySliderWrapper.style.left = (storyGrid.offsetLeft + 120) + "px";
+        }
 
         storySliderWrapper.classList.add("show"); //makes nice fade in
 
@@ -38,16 +43,14 @@
         //setup click events for each image
         storyImageWrappers.forEach((imgWrapper, i, elements) => {
             imgWrapper.addEventListener("click", function(e) {
-                console.log("event click for img number " + i);
-                console.log(e.currentTarget);
-                const fullImageUrl = e.currentTarget.getAttribute('data');
-                console.log(fullImageUrl);
+                const fullImageUrl = e.currentTarget.getAttribute('data-url');
+                const imageAlt = e.currentTarget.getAttribute('data-alt');
                 const fullImageElement = document.createElement("img");
                 fullImageElement.classList.add("modalFade");
                 fullImageElement.src = fullImageUrl;
+                fullImageElement.alt = imageAlt;
                 storyGalleryModalInner.innerHTML = ''; //clear out previous img
                 storyGalleryModalInner.appendChild(fullImageElement);
-                //.getAttribute('data-item-id')
                 storyGalleryModal.classList.add("show");
             });
         });

@@ -37,6 +37,10 @@
     margin: 0rem 0 4rem 0;
 }
 
+.node--type-trove-story-web-story article .story-grid .story-content h1.story-title.mobile {
+    display: none;
+}
+
 .node--type-trove-story-web-story article .story-grid .story-side {
     padding: 4rem 0rem 0rem 0rem;
 }
@@ -109,15 +113,15 @@
     margin: 0rem auto 4rem auto;
 }
 
-.node--type-trove-story-web-story article .story-article-links-title {
+/* .node--type-trove-story-web-story article .story-article-links-title {
     
-}
+} */
 
 .node--type-trove-story-web-story article .story-gallery-modal {
     position: fixed;
     height: 100%;
     width: 100%;
-    background-color: rgba(255,255,255, 0.8);
+    background-color: rgba(255,255,255, 0.9);
     top: 0;
     left: 0;
     right: 0;
@@ -127,6 +131,10 @@
     align-items: center;
     justify-content: center;
     display: none;
+}
+
+.adminimal-admin-toolbar.node--type-trove-story-web-story article .story-gallery-modal {
+    top: 80px;
 }
 
 .node--type-trove-story-web-story article .story-gallery-modal button.gallery-close {
@@ -147,6 +155,10 @@
     background-size: 4rem auto;
 }
 
+/* .adminimal-admin-toolbar.node--type-trove-story-web-story article .story-gallery-modal button.gallery-close {
+    top: calc(3rem + 80px);
+} */
+
 .node--type-trove-story-web-story article .story-gallery-modal button.gallery-close span {
     display: none;
 }
@@ -156,16 +168,21 @@
 }
 
 .node--type-trove-story-web-story article .story-gallery-modal .story-gallery-modal-wrapper {
-    padding: 5rem;
-    width: 80%;
+    
+    display:flex;
+    justify-content: center;
+    align-items: center;
 } 
 
 .node--type-trove-story-web-story article .story-gallery-modal .story-gallery-modal-wrapper .story-gallery-modal-inner {
-    background-color: black;
+    height: 80vh;
+    width: 80vw;
 }
 
 .node--type-trove-story-web-story article .story-gallery-modal .story-gallery-modal-inner img {
     width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .modalFade { 
@@ -201,26 +218,45 @@
 }
 
 .node--type-trove-story-web-story article .story-images .story-gallery-button {
+    display: block;
+    padding: 1rem;
     position: absolute;
     z-index: 1;
-    top: 180px;
+    top: 175px;
+    border: 0;
+    background-color: transparent;
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-button span {
+    display: block;
     width: 24px;
     height: 24px;
-    border: 0;
     background-repeat: no-repeat;
     background-position: center center;
     border-radius: 3px;
     -webkit-box-shadow: 1px 2px 11px 1px rgba(0,0,0,0.39); 
     box-shadow: 1px 2px 11px 1px rgba(0,0,0,0.39);
+    background-color: #fff;
+    transition: transform 0.5s;
 }
 
-.node--type-trove-story-web-story article .story-images .story-gallery-button.left { /* note this is INSIDE wrapper and the right button is outside it so they align */
+.node--type-trove-story-web-story article .story-images .story-gallery-button:hover span {
+    transform: scale(1.2);
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-button.left {
     left: 5%;
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-button.left span {
     background-image: url(../images/left-arrow-blue.svg);
 }
 
 .node--type-trove-story-web-story article .story-images .story-gallery-button.right {
-    right: 5%;
+    right: 4%;
+}
+
+.node--type-trove-story-web-story article .story-images .story-gallery-button.right span {
     background-image: url(../images/right-arrow-blue.svg);
 }
 
@@ -252,3 +288,122 @@
     opacity: 0.9;
 }
 
+/************* RESPONSIVE *********************************/
+
+
+@media only screen and (max-width : 1200px) {
+    .node--type-trove-story-web-story article .story-grid {
+        width: auto;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .node--type-trove-story-web-story article .story-article-links {
+        width: auto;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
+
+@media only screen and (max-width : 1020px) {
+    .node--type-trove-story-web-story .field--name-field-tsws-story-hero {
+        max-height: 300px;
+    }
+}
+
+@media only screen and (max-width : 900px) {
+
+    .node--type-trove-story-web-story article .story-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-content {
+        grid-column-start: 1;
+       
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-side {
+        grid-column-start: 1;
+        grid-row-start: 1;
+        padding-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-side .story-info-row {
+        display: flex;
+        align-items: center;
+        margin-top: 0.5rem;
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-side .story-info-row .story-author {
+        max-width: 250px;
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-side .story-info-row .story-category {
+        margin-top: 0;
+        margin-left: auto;
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-side .story-share-links {
+        display: flex;
+        /* justify-content: flex-end; */
+        align-items: center;
+        margin-bottom: 2rem;
+        margin-top: 1rem;
+        padding-top: 0;
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-side .story-share-links .share-links-title {
+        margin-bottom: 0;
+        margin-right: 1rem;
+    }
+}
+
+@media only screen and (max-width : 700px) {
+    .node--type-trove-story-web-story article .story-grid .story-side .story-info-row {
+        flex-wrap: wrap;
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-side .story-info-row .story-category {
+        flex-basis: 100%;
+        margin-top: 1rem;
+    }
+
+    .node--type-trove-story-web-story article .story-images {
+        margin-bottom: 5rem;
+    }
+
+    .node--type-trove-story-web-story article .story-images .story-slider-wrapper .story-gallery-slider .story-gallery-slide img {
+        width: 100vw;
+    }
+
+    .node--type-trove-story-web-story article .story-images .story-slider-wrapper {
+        background-color: transparent;
+    }
+    .node--type-trove-story-web-story article .story-images .story-gallery-button.left {
+        left: 4%;
+    }
+
+
+}
+
+@media only screen and (max-width : 600px) {
+    .node--type-trove-story-web-story article .story-images .story-slider-wrapper {
+        height: 300px;
+    }
+
+    .node--type-trove-story-web-story article .story-images .story-gallery-button {
+        top: 130px;
+    }
+
+    .node--type-trove-story-web-story article .story-grid .story-content {
+        margin-bottom: 1rem;
+    }
+}
+
+@media only screen and (max-width : 400px) {
+    .node--type-trove-story-web-story article .story-images .story-gallery-button {
+        top: 120px;
+    }
+}

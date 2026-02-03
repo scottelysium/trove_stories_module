@@ -122,11 +122,6 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
                 ],
             ],
             'field_tsws_story_inspiration' => $webStoryInspiration,
-            //'field_tsws_story_name' => $webStoryName,
-            //'field_tsws_story_category' => //Category field defaults to 'none'
-            //'field_tsws_story_postcode' => $webStoryPostcode,
-            //'field_tsws_story_title' => $webStoryTitle,
-            //'field_tsws_story_year_of_birth' => $webStoryBirth
         ));
 
         $trove_story_web_story->save();
