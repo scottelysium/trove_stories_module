@@ -180,7 +180,7 @@
 
            // console.log(totalIndex % amountPerLoad);
 
-            let indexByAmount = totalIndex % amountPerLoad; //totalindex keeps going up, but we % back down to 0-5 for the six colours.
+            let indexByAmount = totalIndex % 6; //totalindex keeps going up, but we % back down to 0-5 for the six colours.
 
             let colorClass = '';
 

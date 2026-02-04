@@ -89,7 +89,7 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
         }
         
         if (!empty($webStoryInspiration)) {
-            $formated_content .= "<h2>What Inspired this project</h2>";
+            $formated_content .= "<h2>What inspired this project</h2>";
             $formated_content .= "<p>" . $webStoryInspiration . "</p>";
         }
 

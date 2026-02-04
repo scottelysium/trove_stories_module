@@ -374,10 +374,6 @@ function trove_stories_form_node_trove_story_web_story_edit_form_alter(&$form, \
     if (isset($form['ds_switch_view_mode'])) {
         unset($form['ds_switch_view_mode']);
     }
-    // // Remove the promotion options group from the sidebar.
-    // if (isset($form['options'])) {
-    //     unset($form['options']);
-    // }
 }
 
 /**
@@ -530,7 +526,7 @@ function trove_stories_install() {
     $config = \Drupal::configFactory()->getEditable('trove_stories.settings');
 
     $config->set('trove_stories_gallery_banner_text_heading', 'Explore Trove Stories');
-    $config->set('trove_stories_gallery_banner_text_message', "Discover bold stories, share your own spark and explore a world of creativity shaped by people like you! We're inviting you to explore how the community uses one of our favourite online resources.<br><br>Browse our gallery, or feel free to submit your own!");
+    $config->set('trove_stories_gallery_banner_text_message', "Discover bold stories, share your own spark and explore a world of creativity shaped by people like you! We're inviting you to explore how the community uses one of our favourite online resources.<br><br>Browse our gallery, or feel free to <a href='/form/trove-story'>submit your own!</a>");
     $config->save();
 
     /***** 

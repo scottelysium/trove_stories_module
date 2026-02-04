@@ -16,7 +16,7 @@ dependencies:
   module:
     - user
 _core:
-  default_config_hash: nKA_p1MChpJ0V_iKYK1M--MFuuUZIPTf0ITDUCg-Edk
+  default_config_hash: vRxppRL88JkJL2KQ4vfZ2IKnte_VpFQSzQzm8zMV4Js
 id: node.trove_story_web_story.teaser
 targetEntityType: node
 bundle: trove_story_web_story

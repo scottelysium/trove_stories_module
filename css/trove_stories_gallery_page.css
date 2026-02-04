@@ -64,18 +64,6 @@
     color: #535353;
 }
 
-/* #trove-stories-gallery #trove-stories-gallery-list .masonry-col1 {
-    
-}
-
-#trove-stories-gallery #trove-stories-gallery-list .masonry-col2 {
-    
-}
-
-#trove-stories-gallery #trove-stories-gallery-list .masonry-col3 {
-    
-} */
-
 #trove-stories-gallery #trove-stories-gallery-list .storyItem {
     margin-bottom: 3rem;
 }
@@ -90,6 +78,11 @@
     width: 100%;
     height: auto;
     margin-bottom: 0.9rem;
+    transition: opacity 0.5s;
+}
+
+#trove-stories-gallery #trove-stories-gallery-list .storyItem:hover a img {
+    opacity: 0.85;
 }
 
 #trove-stories-gallery #trove-stories-gallery-list .storyItem a h2.storyItemTitle {
