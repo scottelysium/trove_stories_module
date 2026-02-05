@@ -27,16 +27,11 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
             return new RedirectResponse($destination);
         }
 
-        //$webStoryNodeTitle = $storySubmissionNode->get('title')->value;
         $webStoryTitle = $storySubmissionNode->get('field_tss_story_title')->value; //note different from default title
-        //$webStoryUse = $storySubmissionNode->get('field_tss_story_use')->value;
         $webStoryAbout = $storySubmissionNode->get('field_tss_story_about')->value;
         $webStoryAuthor = $storySubmissionNode->get('field_tss_story_author')->value;
         $webStoryEmail = $storySubmissionNode->get('field_tss_story_email')->value;
         $webStoryInspiration = $storySubmissionNode->get('field_tss_story_inspiration')->value;
-        //$webStoryName = $storySubmissionNode->get('field_tss_story_name')->value;
-        //$webStoryPostcode = $storySubmissionNode->get('field_tss_story_postcode')->value;
-        //$webStoryBirth = $storySubmissionNode->get('field_tss_story_year_of_birth')->value;
 
         //get links
         $webStoryLinks = $storySubmissionNode->get('field_tss_story_links')->getValue();
@@ -106,7 +101,6 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
             'langcode' => 'en',
             'uid' => \Drupal::currentUser()->id(), 
             'status' => 0, //not published by default
-            //'field_tsws_story_use' => $webStoryUse,
             'field_tsws_content' => [
                 'value' => $formated_content,
                 'format' => 'basic_html'

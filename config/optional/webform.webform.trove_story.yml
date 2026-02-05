@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: fmyzbDXjHTRlJUxw9QZ_JbypMxZrEj6YY8kRUVCy118
+  default_config_hash: emXNre86AkViHUzM8mFO3nO4yI-um2ffDMXAdZw2rMM
 weight: 0
 open: null
 close: null
@@ -21,6 +21,8 @@ elements: |-
   tswf_how_you_use_trove:
     '#type': textarea
     '#title': 'Tell us how you use Trove'
+    '#description': '<p>To help others using Trove, could you describe your search process? For example, did you start with a broad keyword search? Or did you begin within a specific category (like Newspapers or Pictures)? What features, did you find useful?</p>'
+    '#description_display': before
     '#required': true
     '#counter_type': word
     '#counter_minimum': 1

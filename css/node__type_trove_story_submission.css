@@ -17,11 +17,6 @@
     display: none;
 }
 
-
-/* .node--type-trove-story-submission .messages.messages--error {
-    display: none; 
-} */
-
 .node--type-trove-story-submission .layout-main-wrapper .main-content > .container .block-page-title-block {
     padding: 0;
 }
@@ -30,23 +25,12 @@
     padding: 0;
 }
 
-/* .node--type-trove-story-submission .content-outer-wrap > .container .nav.mb-5 {
-    margin-top: 2rem;
-    justify-content: center;
-    align-items: center;
-} */
-
 .node--type-trove-story-submission .block-page-title-block h1 { /** title of the page **/
     font-family: "Source Sans Pro", sans-serif;
     font-size: 1.55rem;
     margin-top: 2rem;
-    /* text-align: center; */
     font-weight: 400;
 }
-
-/* .node--type-trove-story-submission .block-page-title-block h1 span {
-    font-weight: 600;
-} */
 
 .node--type-trove-story-submission .node__content .field { /** each individual field output **/
     margin: 1rem 0rem 1rem 0rem;
@@ -56,9 +40,9 @@
     font-weight: 700;
 }
 
-.node--type-trove-story-submission .node__content .field .field__item {
+/* .node--type-trove-story-submission .node__content .field .field__item {
 
-}
+} */
 
 .node--type-trove-story-submission .node__content .field .field__item .field--type-created { /** hide the date on images **/
     display: none;
@@ -75,7 +59,6 @@
 .node--type-trove-story-submission .node__content .field .field__item img { 
     max-width: 100%;
     height: auto;
-    /* margin-bottom: 2rem; */
     padding: 0rem 3rem 3rem 3rem;
 }
 
@@ -104,15 +87,13 @@
     text-align: center;
     text-decoration: none;
     color: #fff;
-    border: 1px solid #1e5c90;;
-    /* border-radius: 20em; */
+    border: 1px solid #1e5c90;
     background-color: #0071b8;
     background-image: -webkit-linear-gradient(top, #007bc6, #0071b8);
     background-image: linear-gradient(to bottom, #007bc6, #0071b8);
     text-shadow: 0 1px hsla(0, 0%, 0%, 0.5);
     font-size: 14px;
     font-size: 0.875rem;
-    
     line-height: normal;
     border-radius: 4px;
 }

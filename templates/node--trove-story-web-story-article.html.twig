@@ -59,7 +59,6 @@
  * @see template_preprocess_node()
  */
 #}
-{# {{ attach_library('bootstrap_barrio/node') }} #}
 {{ attach_library('trove_stories/trove_stories_web_story') }}
 {%
   set classes = [
@@ -92,11 +91,11 @@
                     {{ node.getCreatedTime()|date("d/m/Y") }}
                 </div>
                 
-                {% if content.field_tsws_story_category|render is not empty %}
+                {# {% if content.field_tsws_story_category|render is not empty %}
                     <div class="story-category">
                         <span>{{ content.field_tsws_story_category }}</span>
                     </div>
-                {% endif %}
+                {% endif %} #}
 
             </div>
 

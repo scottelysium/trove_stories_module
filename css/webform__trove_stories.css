@@ -1,7 +1,7 @@
 
-.trove-stories-form {
+/* .trove-stories-form {
 
-}
+} */
 
 /**** header / banner ***************** (main styles defined in trove_stories.css */
 
@@ -12,58 +12,6 @@
 .troveStoriesPage .trove-stories-form .story-banner  { /* slightly bigger on form page */
     grid-template-rows: 596px;
 }
-
-
-/* .trove-stories-form .story-banner {
-    display: grid;
-    grid-template-columns: 1fr 613px;
-    grid-template-rows: 596px;
-    margin-bottom: 3rem;
-}
-
-.trove-stories-form .story-banner .banner-left {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffbd4c;
-}
-
-.trove-stories-form .story-banner .banner-left .banner-content {
-    padding-left: 10vw;
-}
-
-.trove-stories-form .story-banner .banner-left .banner-content h1 {
-    margin: 0;
-    padding: 0;
-    font-family: "Source Serif Variable", serif;
-    font-size: 60px;
-    font-weight: 600;
-}
-
-.trove-stories-form .story-banner .banner-left .banner-content p {
-    margin: 25px 5vw 25px 0px;
-    font-size: 1.3rem;
-}
-
-.trove-stories-form .story-banner .banner-left .banner-content p strong {
-    font-weight: 500;
-}
-
-.trove-stories-form .story-banner .banner-right {
-    background-image: url(../images/banner-book.jpg);
-    background-repeat: no-repeat;
-    background-position: top right;
-    background-size: auto 100%;
-}
-
-.trove-stories-form .story-banner .banner-right .bannerGoblet svg {
-    display: block;
-    height: 596px;
-    width: auto;
-} */
-
-
-
 
 /**** form *****************/
 
@@ -111,6 +59,12 @@
     color: #333333;
 }
 
+.trove-stories-form .js-form-item-tswf-how-you-use-trove .webform-element-description {
+    margin-bottom: 1rem;
+    color: #333333;
+    font-size: 1rem;
+}
+
 .trove-stories-form .js-form-item-tswf-intro-message {
     color: #333333;
     margin-bottom: 2.3rem;
@@ -125,9 +79,9 @@
 
 /** links table overrides ******/
 
-.trove-stories-form .js-form-item-tswf-links {
+/* .trove-stories-form .js-form-item-tswf-links {
 
-}
+} */
 
 .trove-stories-form .js-form-item-tswf-links .table-responsive {
     display: block;
@@ -294,9 +248,9 @@
     margin-bottom: 2rem;
 }
 
-.trove-stories-form .alert-wrapper .alert-warning {
+/* .trove-stories-form .alert-wrapper .alert-warning {
     
-}
+} */
 
 .trove-stories-form .alert-wrapper .alert-warning > span {
     display: none; /** small close button but does nothing */
@@ -307,14 +261,6 @@
 
 @media only screen and (max-width : 1300px) {
 
-    /* .trove-stories-form .story-banner {
-        grid-template-columns: 1fr 413px;
-    }
-
-    .trove-stories-form .story-banner .banner-right {
-        background-position: top left;
-    } */
-
     .trove-stories-form .js-form-wrapper, 
     .trove-stories-form .js-webform-flexbox, 
     .trove-stories-form .js-form-item {
@@ -323,23 +269,6 @@
 }
 
 @media only screen and (max-width : 990px) {
-
-    /* .trove-stories-form .story-banner .banner-left .banner-content h1 {
-        font-size: 2.75rem;
-        padding-top: 1rem;
-    }
-
-    .trove-stories-form .story-banner .banner-left .banner-content p {
-        font-size: 1rem;
-    }
-
-    .trove-stories-form .story-banner {
-        grid-template-rows: 410px;
-    }
-
-    .trove-stories-form .story-banner .banner-right .bannerGoblet svg {
-        height: 410px;
-    } */
 
     .trove-stories-form .js-form-wrapper, 
     .trove-stories-form .js-webform-flexbox, 
@@ -351,9 +280,6 @@
 }
 
 @media only screen and (max-width : 860px) {
-    /* .trove-stories-form .story-banner {
-        grid-template-columns: 1fr 250px;
-    } */
 
     .trove-stories-form .alert-wrapper {
         max-width: none;
@@ -363,19 +289,6 @@
 }
 
 @media only screen and (max-width : 680px) {
-    /* .trove-stories-form .story-banner {
-        display: block;
-    }
-
-    .trove-stories-form .story-banner .banner-right {
-        height: 55vw;
-        background-position: center center;
-        background-size: cover;
-    }
-
-    .trove-stories-form .story-banner .banner-right .bannerGoblet {
-        display: none;
-    } */
 
     .trove-stories-form .js-form-item-tswf-how-you-use-trove label {
         font-size: 2rem;

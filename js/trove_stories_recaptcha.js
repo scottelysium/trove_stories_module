@@ -2,7 +2,7 @@
 (function (Drupal) {
     Drupal.behaviors.trove_stories_form = {
         attach: function(context, settings) {
-            //once('trove_stories_form', '#webform-submission-trove-story-add-form').forEach(function (trove_form_element) { //should only loop once, just dealing with array
+
             once('trove_stories_form', '.webform-submission-trove-story-add-form').forEach(function (trove_form_element) {
                 if (typeof grecaptcha === 'undefined') {
                     const recaptchaWarn = trove_form_element.querySelector('.recaptchaInvalid');

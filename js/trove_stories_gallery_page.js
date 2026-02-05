@@ -67,7 +67,7 @@
             try {
                 const storiesResponse = await fetch(`/trove-stories/api/website_stories/${offset}/${amountPerLoad}`);
                 const data = await storiesResponse.json();
-                //console.log(data);
+
                 if (data) {
                     createList(data.story_gallery_items);
                     
@@ -89,7 +89,7 @@
             try {
                 const storiesResponse = await fetch(`trove-stories/api/search_website_stories/${searchString}`);
                 const data = await storiesResponse.json();
-                //console.log(data);
+
                 if (data) {
                     clearList();
                     createList(data.story_gallery_items);
@@ -118,14 +118,10 @@
             }
 
             const number_of_cols = 3;
-            //const number_of_cols = mobile ? 1 : 3;
 
-
-            //console.log(storyItems.length);
             for (let i = 0; i < storyItems.length; i = i + number_of_cols) {
 
                 /* when loop by 3, and access the index 1 ahead and 2 ahead */
-
                 let colIndexOne = i;
                 let colIndexTwo = i + 1;
                 let colIndexThree = i + 2;
@@ -174,11 +170,8 @@
         }
 
         function generateHtmlStoryItem(item, currentIndex) {
-            //console.log("currentIndex" + (loadMoreOffset + currentIndex));
 
             const totalIndex = (loadMoreOffset + currentIndex);
-
-           // console.log(totalIndex % amountPerLoad);
 
             let indexByAmount = totalIndex % 6; //totalindex keeps going up, but we % back down to 0-5 for the six colours.
 
@@ -215,10 +208,6 @@
 
             return htmlContent;
         }
-
-        
-
     });
-
 
 })(Drupal);

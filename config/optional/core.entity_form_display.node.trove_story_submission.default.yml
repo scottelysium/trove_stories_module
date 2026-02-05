@@ -20,7 +20,7 @@ dependencies:
     - content_moderation
     - link
 _core:
-  default_config_hash: '-oOzs0SbbX6sa5i-CwsQWNyUUFY881KVWvwLRlHx_bc'
+  default_config_hash: bdH1S4qgqWOr32CmL1uOvyiWSk6xdz0jHUHwS-UP0q4
 id: node.trove_story_submission.default
 targetEntityType: node
 bundle: trove_story_submission
