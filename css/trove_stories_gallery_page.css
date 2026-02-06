@@ -1,4 +1,86 @@
 
+
+/** banner styling - used on gallery. **/
+.story-banner-gallery {
+    display: grid;
+    /* grid-template-columns: 1fr 605px; */
+    grid-template-columns: 1fr 800px;
+    grid-template-rows: 540px;
+    margin-bottom: 3rem;
+}
+
+.story-banner-gallery .banner-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffbd4c;
+}
+
+.story-banner-gallery .banner-left .banner-content {
+    padding-left: 10vw;
+}
+
+.story-banner-gallery .banner-left .banner-content h1 {
+    margin: 0;
+    padding: 0;
+    font-family: "Source Serif Variable", serif;
+    font-size: 60px;
+    font-weight: 600;
+}
+
+.story-banner-gallery .banner-left .banner-content p {
+    margin: 25px 5vw 25px 0px;
+    font-size: 1.3rem;
+}
+
+.story-banner-gallery .banner-left .banner-content a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.story-banner-gallery .banner-left .banner-content .banner-story-button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: transparent;
+    background-image: url(../images/arrow-right-black.svg);
+    background-repeat: no-repeat;
+    background-position: top 13px right 15px;
+    background-size: 1.4rem auto;
+    font-family: "Source Serif Variable", serif;
+    color: #000;
+    border: 1.5px solid #000;
+    border-radius: 1.5rem;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    padding: 0.8rem 3rem 0.8rem 1.6rem;
+    margin: 1.5rem 0 0rem 0;
+    transition: background 0.5s;
+}
+
+.story-banner-gallery .banner-left .banner-content .banner-story-button:hover {
+    background-color: rgba(0,0,0,0.05);
+    /* color: #fff; */
+}
+
+.story-banner-gallery .banner-left .banner-content p strong {
+    font-weight: 500;
+}
+
+.story-banner-gallery .banner-right {
+    /* background-image: url(../images/banner-book.jpg); */
+    background-image: url(../images/gallery-banner.jpg);
+    
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: auto 100%;
+}
+
+.story-banner-gallery .banner-right .bannerGoblet svg {
+    display: block;
+    height: 540px;
+    width: auto;
+}
+
 #trove-stories-gallery {
     width: 1160px;
     margin: 0 auto;
@@ -155,6 +237,21 @@
 /************* RESPONSIVE *********************************/
 
 
+@media only screen and (max-width : 1520px) {
+
+    .story-banner-gallery {
+        grid-template-columns: 1fr 600px;
+    }
+
+    .story-banner-gallery .banner-right {
+        background-position: top left -85px;
+    }
+
+    .story-banner-gallery .banner-left .banner-content {
+        padding-left: 5vw;
+    }
+}
+
 @media only screen and (max-width : 1200px) {
     #trove-stories-gallery {
         width: auto;
@@ -166,14 +263,92 @@
     }
 }
 
+@media only screen and (max-width : 1200px) {
+
+    .story-banner-gallery {
+        grid-template-columns: 1fr 480px;
+    }
+
+    .story-banner-gallery .banner-right {
+        background-position: top left -112px;
+    }
+}
+
+@media only screen and (max-width : 1040px) {
+
+    .story-banner-gallery .banner-left .banner-content h1 {
+        font-size: 2.75rem;
+        padding-top: 1rem;
+    }
+
+    .story-banner-gallery .banner-left .banner-content p {
+        font-size: 1rem;
+    }
+
+    .story-banner-gallery {
+        grid-template-rows: 410px;
+    }
+
+    .story-banner-gallery .banner-right {
+        background-position: top left -30px;
+    }
+
+    .story-banner-gallery .banner-right .bannerGoblet svg {
+        height: 410px;
+    }
+}
+
+@media only screen and (max-width : 970px) {
+    .story-banner-gallery {
+        grid-template-columns: 1fr 370px;
+    }
+
+    .story-banner-gallery .banner-right {
+        background-position: top left -88px;
+    }
+}
+
+@media only screen and (max-width : 860px) {
+    .story-banner-gallery {
+        display: block;
+    }
+
+    .story-banner-gallery .banner-right {
+        height: 65vw;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .story-banner-gallery .banner-right .bannerGoblet {
+        display: none;
+    }
+
+    .story-banner-gallery .banner-left .banner-content {
+        padding-top: 3rem;
+    }
+
+    .story-banner-gallery .banner-left .banner-content .banner-story-button {
+        margin-top: 0;
+    }
+
+    .story-banner-gallery .banner-left .banner-content .banner-story-button {
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+    }
+}
+
+/* @media only screen and (max-width : 740px) {
+    .story-banner-gallery .banner-left .banner-content .banner-story-button {
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+    }
+} */
+
+
 @media only screen and (max-width : 650px) {
     #trove-stories-gallery #trove-stories-gallery-list {
         display: block;
     }
-
-    /* #trove-stories-gallery #trove-stories-gallery-list .masonry-col1 {
-        
-    } */
 
     #trove-stories-gallery #trove-stories-gallery-list .masonry-col2 {
         display: none;

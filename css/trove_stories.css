@@ -47,105 +47,34 @@
     align-items: center;
 }
 
-/** banner styling - used on gallery AND form page. **/
-.troveStoriesPage .story-banner {
-    display: grid;
-    grid-template-columns: 1fr 605px;
-    grid-template-rows: 540px;
-    margin-bottom: 3rem;
-}
 
-
-
-.troveStoriesPage .story-banner .banner-left {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffbd4c;
-}
-
-.troveStoriesPage .story-banner .banner-left .banner-content {
-    padding-left: 10vw;
-}
-
-.troveStoriesPage .story-banner .banner-left .banner-content h1 {
-    margin: 0;
-    padding: 0;
-    font-family: "Source Serif Variable", serif;
-    font-size: 60px;
-    font-weight: 600;
-}
-
-.troveStoriesPage .story-banner .banner-left .banner-content p {
-    margin: 25px 5vw 25px 0px;
-    font-size: 1.3rem;
-}
-
-.troveStoriesPage .story-banner .banner-left .banner-content a {
-    color: #000;
-    text-decoration: underline;
-}
-
-.troveStoriesPage .story-banner .banner-left .banner-content .banner-story-button {
-    display: inline-block;
-    text-decoration: none;
-    background-color: transparent;
-    background-image: url(../images/arrow-right-black.svg);
-    background-repeat: no-repeat;
-    background-position: top 13px right 15px;
-    background-size: 1.4rem auto;
-    font-family: "Source Serif Variable", serif;
-    color: #000;
-    border: 1.5px solid #000;
-    border-radius: 1.5rem;
-    font-size: 1.2rem;
-    line-height: 1.2rem;
-    padding: 0.8rem 3rem 0.8rem 1.6rem;
-    margin: 1.5rem 0 0rem 0;
-    transition: background 0.5s;
-}
-
-.troveStoriesPage .story-banner .banner-left .banner-content .banner-story-button:hover {
-    background-color: rgba(0,0,0,0.05);
-    /* color: #fff; */
-}
-
-.troveStoriesPage .story-banner .banner-left .banner-content p strong {
-    font-weight: 500;
-}
-
-.troveStoriesPage .story-banner .banner-right {
-    /* background-image: url(../images/banner-book.jpg); */
-    background-image: url(../images/gallery-banner.jpg);
-    
-    background-repeat: no-repeat;
-    background-position: top right;
-    background-size: auto 100%;
-}
-
-.troveStoriesPage .story-banner .banner-right .bannerGoblet svg {
-    display: block;
-    height: 540px;
-    width: auto;
-}
 
 
 
 /***** RESPONSIVE ********************************************************/
 /*********************DESKTOP FIRST**************************************/
 
+/* @media only screen and (max-width : 1460px) {
+    .troveStoriesPage .story-banner {
+        grid-template-columns: 1fr 700px;
+    }
+    .troveStoriesPage .story-banner .banner-right {
+        background-position: top center;
+    }
+} */
 
-@media only screen and (max-width : 1300px) {
+
+
+/* @media only screen and (max-width : 1150px) {
 
     .troveStoriesPage .story-banner {
-        grid-template-columns: 1fr 413px;
+        grid-template-columns: 1fr 500px;
     }
 
     .troveStoriesPage .story-banner .banner-right {
-        background-position: top left;
+        background-position: top left -140px;
     }
-}
-
+} */
 
 @media only screen and (max-width : 1020px) {
     .troveStoriesPage .footer .footer-middle .container .row {
@@ -158,94 +87,16 @@
     }
 }
 
-@media only screen and (max-width : 990px) {
-
-    .troveStoriesPage .story-banner .banner-left .banner-content h1 {
-        font-size: 2.75rem;
-        padding-top: 1rem;
-    }
-
-    .troveStoriesPage .story-banner .banner-left .banner-content p {
-        font-size: 1rem;
-    }
-
-    .troveStoriesPage .story-banner {
-        grid-template-rows: 410px;
-    }
-
-    .troveStoriesPage .story-banner .banner-right .bannerGoblet svg {
-        height: 410px;
-    }
-}
-
-@media only screen and (max-width : 950px) {
-    .troveStoriesPage .story-banner {
-        grid-template-columns: 1fr 250px;
-    }
-}
-
 @media only screen and (max-width : 785px) {
     .troveStoriesPage .header .header-bottom .container .row {
         margin-right: 0px;
         margin-left: 0px;
     }
 
-    .troveStoriesPage .story-banner .banner-left .banner-content .banner-story-button {
-        margin-top: 0;
-    }
-}
-
-@media only screen and (max-width : 740px) {
-    .troveStoriesPage .story-banner {
-        display: block;
-    }
-
-    .troveStoriesPage .story-banner .banner-right {
-        height: 55vw;
-        background-position: center center;
-        background-size: cover;
-    }
-
-    .troveStoriesPage .story-banner .banner-right .bannerGoblet {
-        display: none;
-    }
-
-    .troveStoriesPage .story-banner .banner-left .banner-content .banner-story-button {
-        margin-top: 1rem;
-        margin-bottom: 3rem;
-    }
 }
 
 
 
 
 
-/**** general admin area ****/
-
-
-/**** admin area fixing bootstrap/adminimal css bugs ****/
-
-
-
-/* .troveStoriesPage .region-messages {
-    justify-content: center;
-}
-
-.troveStoriesPage .region-messages .messages__wrapper {
-    text-align: center;
-    margin: 40px auto 40px auto;
-}
-
-.troveStoriesPage table.sticky-header thead {
-    top: auto;
-}
-
-.troveStoriesPage.adminimal .messages--status { 
-    background-color: #fff;
-}
-
-.troveStoriesPage.adminimal nav.is-horizontal.is-collapsible.position-container.is-horizontal-enabled ul.tabs.primary {
-    margin-left: 0;
-    margin-right: 0;
-} */
 
