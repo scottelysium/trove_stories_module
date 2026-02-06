@@ -6,16 +6,10 @@ use Drupal\Core\Controller\ControllerBase;
  * Controller for creating the page showing the trove stories gallery page.
  */
 class TroveStoriesGalleryController extends ControllerBase {
-    // public function createPage() {
-
-    //     return [
-    //         '#theme' => 'page__trove_stories_gallery_page',
-    //     ];
-
-    // }
 
     public function createPage() {
 
+        //we get the custom banner text from the settings page and pass it into the template as variables.
         $config = \Drupal::config('trove_stories.settings');
         $banner_text_heading = $config->get('trove_stories_gallery_banner_text_heading');
         $banner_text_message = $config->get('trove_stories_gallery_banner_text_message');

@@ -13,20 +13,10 @@ class TroveStoriesApiController extends ControllerBase {
 
     public function searchWebsiteStories($searchString) { //ensure searchString is Urlencoded 
 
-        // $data = [
-        //     'searchString' => $searchString,
-        //     'timestamp' => time(),
-        //     'payload' => [
-        //         ['id' => 1, 'name' => 'Project Alpha'],
-        //         ['id' => 2, 'name' => 'Project Beta'],
-        //     ],
-        // ];
-
         $storage = \Drupal::entityTypeManager()->getStorage('node');
         $query = $storage->getQuery();
         $query->condition('type', 'trove_story_web_story')
                 ->condition('status', 1)
-               // ->condition('field_tsws_story_title', rawurldecode($searchString), 'CONTAINS') //this is just LIKE '%$searchString%'
                 ->condition('title', rawurldecode($searchString), 'CONTAINS')
                 ->sort('created', 'DESC');
         
@@ -81,7 +71,6 @@ class TroveStoriesApiController extends ControllerBase {
         ];
 
         return new JsonResponse($jsonData);
-        //return new JsonResponse($story_gallery_items);
     }
 
     private function processStoriesJson($web_stories) {
@@ -153,34 +142,15 @@ class TroveStoriesApiController extends ControllerBase {
                         $thumbnail_url = $thumb_path . $thumb_filename;
                         
                         
-                    } else {
-                        //if the category thumbnail is also empty then we need a default
                     }
 
                 }
                 
             }
 
-            
-            
-            // /** @var \Drupal\node\NodeInterface[] $image_entities */
-            // $image_entities = $images->referencedEntities();
-
-            // foreach ($image_entities as $image_entity) {
-            //     $file_entity = $image_entity->get('field_media_image')->entity;
-            //     $uri = $file_entity->getFileUri();
-
-            //     // Load the style and build the URL
-            //     $style = ImageStyle::load('thumbnail');
-            //     $styled_url = $style->buildUrl($uri);
-            //     $thumbnails[] = $styled_url; 
-            // }
-
             $story_gallery_items[] = [
-                //'story_title' => $web_story->get('field_tsws_story_title')->value,
                 'story_title' => $web_story->get('title')->value,
                 'story_link' => $web_story->toUrl()->toString(),
-                //'image_urls' => $thumbnails,
                 'thumbnail_url' => $thumbnail_url
             ];
             

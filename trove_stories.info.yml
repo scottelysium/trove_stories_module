@@ -1,5 +1,5 @@
 name: Trove Stories
-description: Trove stories are items submitted by the public via a public form that then get processed and displayed on a custom drupal page.
+description: Trove stories are items submitted by the public via a public form that then get reviewed, processed and displayed as a gallery.
 package: Custom
 type: module
 core_version_requirement: ^10

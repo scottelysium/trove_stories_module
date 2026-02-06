@@ -5,9 +5,6 @@ use Drupal\node\NodeInterface;
 class TroveStoriesCommonServices {
 
     public function getTroveStoriesFormId() {
-        // $config = \Drupal::config('trove_stories.settings');
-        // $selected_form_id = $config->get('trove_stories_selected_form');
-        // return $selected_form_id;
         return "trove_story";
     }
 
@@ -23,22 +20,6 @@ class TroveStoriesCommonServices {
         if ($route_name === 'entity.webform.canonical' && $webform->id() === $selected_form_id) {
             return true;
         }
-
-       // echo $route_name;
-
-       //if (strpos($route_name, 'entity.webform.') === 0 || strpos($route_name, 'entity.webform_submission.') === 0) {
-
-        //This checks if we are on the trove stories form
-        // if (strpos($route_name, 'entity.webform.') === 0) {
-        //     if (
-        //         ($webform instanceof \Drupal\webform\WebformInterface && $webform->id() === $selected_form_id) //if an object we need to check id
-        //         || 
-        //         (is_string($webform) && $webform === $selected_form_id)) //if a string we assume it must be the id.
-        //     { 
-        //         return true;
-        //     }
-        // }
-
         return false;
     }
 
@@ -98,7 +79,6 @@ class TroveStoriesCommonServices {
         if ($route_name === "trove_stories.trove_stories") {
             return true;
         }
-
         return false;
     }
 

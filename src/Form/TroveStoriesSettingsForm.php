@@ -7,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Module settings form.
+ * This is the form on the content > trove stories > settings page.
  */
 class TroveStoriesSettingsForm extends ConfigFormBase {
 
@@ -24,29 +24,6 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
         $form = parent::buildForm($form, $form_state);
 
         $config = $this->config('trove_stories.settings');
-
-        // $entityTypeManager = \Drupal::service('entity_type.manager');
-        // $formsList = $entityTypeManager->getStorage('webform')->loadMultiple();
-
-        // $select_form_ids = [];
-
-        // foreach ($formsList as $currentform) {
-        //     if (!str_contains($currentform->id(), "template_")) { //filter out the 'template' forms
-        //         $select_form_ids[$currentform->id()] = $currentform->label();
-        //     }
-        // }
-
-        
-        // $form['trove_stories_selected_form'] = [
-        //     '#type' => 'select',
-        //     '#title' => $this->t('Choose webform'),
-        //     '#description' => $this->t('Select a form to use for Trove Stories'),
-        //     '#options' => [
-        //         'none' => $this->t('None'),
-        //         ...$select_form_ids
-        //     ],
-        //     '#default_value' => $config->get('trove_stories_selected_form'),
-        // ];
 
         /** GALLERY HEADER TEXT FORM  */
         $form['trove_stories_gallery_banner_text_fieldset'] = [
@@ -95,15 +72,13 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
         $form_state->setRedirectUrl($route_url);
     }
 
-    public function validateForm(array &$form, FormStateInterface $form_state) {
+    //public function validateForm(array &$form, FormStateInterface $form_state) {
         //todo if needed
-    }
+    //}
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
 
         $config = $this->config('trove_stories.settings');
-
-        //$config->set('trove_stories_selected_form', $form_state->getValue('trove_stories_selected_form'));
 
         $config->set('trove_stories_gallery_banner_text_heading', $form_state->getValue('trove_stories_gallery_banner_text_heading'));
         $config->set('trove_stories_gallery_banner_text_message', $form_state->getValue('trove_stories_gallery_banner_text_message'));
@@ -114,9 +89,8 @@ class TroveStoriesSettingsForm extends ConfigFormBase {
         $config->save();
 
         /*IMPORTANT (for recaptcha): 
-            because out module relies on hook_library_info_build() to dynamically
-            insert the recaptcha api,
-            which is heavily cached, we need to ensure a library cache clear so
+            because our module relies on hook_library_info_build() to dynamically
+            insert the recaptcha api which is heavily cached, we need to ensure a library cache clear so
             the recent values in this form are used in the hook.
         */
         \Drupal::service('library.discovery')->clearCachedDefinitions();

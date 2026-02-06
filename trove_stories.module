@@ -6,7 +6,7 @@ use Drupal\media\Entity\Media;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\image\Entity\ImageStyle;
-//use Drupal\paragraphs\Entity\Paragraph;
+
 /**
 * Implements hook_theme().
 */
@@ -19,25 +19,23 @@ function trove_stories_theme($existing, $type, $theme, $path) { //note: can't do
                     'banner_text_message' => '',
                 ],
             ],
-            'webform__trove_stories' => [ //this defines a base hook that ensures 'trove_stories_theme_suggestions_webform_alter' is called
+            'webform__trove_stories' => [ //webform overwrite
                 'base hook' => 'webform',
             ],
-            'form_element__webform__tswf_banner_message' => [ //overwrite the header/banner html markup field
+            'form_element__webform__tswf_banner_message' => [ //overwrite the header/banner for the FORM
                 'base hook' => 'form_element',
             ],
-            'field__node__full__field_tss_private_image_ids__trove_story_submission' => [ //private image ids template, so we can fetch and show the images
+            'field__node__full__field_tss_private_image_ids__trove_story_submission' => [ //private image ids template, so we can fetch and show the images on submission review
                 'base hook' => 'field',
             ],
             'field__node__title__trove_story_submission' => [ //overwrite the 'title' area of a 'trove story submission'
                 'template' => 'field--node--title--trove-story-submission',
                 'base hook' => 'field',
             ],
-            'node__trove_story_web_story_article' => [ //overwrite the 'title' area of a 'trove story submission'
-            //'page__trove_story_web_story' => [ 
-                //'template' => 'page--trove-story-web-story',
+            'node__trove_story_web_story_article' => [ //main template used for "trove_story_web_story" content type - eg, public stories
                 'base hook' => 'node',
             ],
-            'input__submit_trove_stories' => [ //register new hook suggestion implemented in trove_stories_theme_suggestions_input_alter()
+            'input__submit_trove_stories' => [ //overwrite input submit button on the form
                 'base hook' => 'input__submit',
             ],
         ];
@@ -69,9 +67,7 @@ function trove_stories_theme_suggestions_webform_alter(array &$suggestions, arra
 
     $selected_form_id = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
 
-    //if ($variables['element']['#webform_id'] == 'trove_story') {
     if ($variables['element']['#webform_id'] == $selected_form_id) {
-        //look for this 'webform--trove-stories.html' template in modules/trove_stories/templates
         $suggestions[] = 'webform__trove_stories';
     }
 }
@@ -138,11 +134,8 @@ function trove_stories_preprocess_field(&$variables) {
             
             $file_id = $item['content']['#context']['value'];
             
-            //$variables['items'][$key]['content'] = $content . "hello";
-            
             $file = File::load($file_id);
             $file_uri = $file->getFileUri();
-
             
             $file_url_generator = \Drupal::service('file_url_generator');
             $relative_url = $file_url_generator->generateString($file_uri);
@@ -162,7 +155,6 @@ function trove_stories_webform_submission_insert(\Drupal\webform\WebformSubmissi
             //create trove story submission content
             $submissionData = $webform_submission->getData();
 
-            
             //create new trove story display from the data
             $trove_story_submission = Node::create(array(
                 'type' => 'trove_story_submission',
@@ -175,7 +167,6 @@ function trove_stories_webform_submission_insert(\Drupal\webform\WebformSubmissi
                 'field_tss_story_links' => $submissionData["tswf_links"],
                 'field_tss_story_author' => $submissionData["tswf_display_name_story_author"],
                 'field_tss_story_email' => $submissionData["tswf_email"],
-                //'field_tss_story_images' => $uploaded_media_ids,
                 'field_tss_story_inspiration' => $submissionData["tswf_inspired"],
                 'field_tss_story_name' => $submissionData["tswf_name"],
                 'field_tss_story_postcode' => $submissionData["tswf_postcode"],
@@ -311,7 +302,6 @@ function trove_stories_library_info_build() {
     $recapta_url = 'https://www.google.com/recaptcha/api.js?render=' . $recaptcha_site_key;
 
     $libraries['trove_recaptcha_api'] = [
-        //'version' => '',
         'header' => TRUE, // Load in the <head>
         'js' => [
             // The dynamically generated URL is used as the key.
@@ -408,7 +398,7 @@ function _trove_stories_webform_validate(array &$form, FormStateInterface $form_
         'response' => $recaptcha_hidden_token,
     ];
 
-    $ip_address = \Drupal::request()->getClientIp(); //locally this returns the docker container ip.
+    $ip_address = \Drupal::request()->getClientIp();
 
     if ($ip_address) {
         $post_data['remoteip'] = $ip_address;
@@ -429,7 +419,6 @@ function _trove_stories_webform_validate(array &$form, FormStateInterface $form_
         $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
         return;
     }
-    
 
     $response_data = json_decode($result, true);
 
@@ -440,11 +429,10 @@ function _trove_stories_webform_validate(array &$form, FormStateInterface $form_
 
     if ($response_data['success'] === true) {
         if ($response_data['score'] < 0.5) {
-        // if ($response_data['score'] > 0.5) {
             $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
             return;
         }
-    } else { //$response_data['success'] === false
+    } else {
         $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
         return;
     }
@@ -511,16 +499,6 @@ function trove_stories_node_view_alter(array &$build, \Drupal\Core\Entity\Entity
  */
 function trove_stories_install() {
 
-    /***** 
-        set default form to "trove_story" which should be installed from the config/optional install ymls
-    ****/    
-    $selected_form = \Drupal::service('trove_stories.common_services')->getTroveStoriesFormId();
-    if (is_null($selected_form)) {
-        $config = \Drupal::getContainer()->get('config.factory')->getEditable('trove_stories.settings');
-        $config->set('trove_stories_selected_form', 'trove_story');
-        $config->save();
-    }
-
     /*** Default values for banner text on gallery page */
     
     $config = \Drupal::configFactory()->getEditable('trove_stories.settings');
@@ -536,8 +514,7 @@ function trove_stories_install() {
         paragraph permissions found at: admin/people/permissions/module/paragraphs_type_permissions
         We do this in the hook_install because the yml config files
         require ALL permissions to be set and we don't want to accidently
-        edit or change any current permissions outside the scope of this modules
-        content types.
+        edit or change any current permissions outside the scope of this module
     ****/
     $roles = ['trove_editor', 'trove_author', 'trove_administrator'];
 
