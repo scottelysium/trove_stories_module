@@ -16,8 +16,9 @@ class TroveStoriesCommonServices {
         
         $webform = $route_match->getParameter('webform'); //this can return an object OR a simple id string.
         $selected_form_id = $this->getTroveStoriesFormId();
-
-        if ($route_name === 'entity.webform.canonical' && $webform->id() === $selected_form_id) {
+        //"entity.webform.test_form"
+        if (($route_name === 'entity.webform.canonical' || $route_name === 'entity.webform.test_form')
+            && $webform->id() === $selected_form_id) {
             return true;
         }
         return false;

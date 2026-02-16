@@ -3,7 +3,7 @@
     Drupal.behaviors.trove_stories_form = {
         attach: function(context, settings) {
 
-            once('trove_stories_form', '.webform-submission-trove-story-add-form').forEach(function (trove_form_element) {
+            once('trove_stories_form', '.webform-submission-trove-story-form').forEach(function (trove_form_element) {
                 if (typeof grecaptcha === 'undefined') {
                     const recaptchaWarn = trove_form_element.querySelector('.recaptchaInvalid');
                     recaptchaWarn.classList.add("show");
@@ -30,7 +30,6 @@
                     */
                 const recaptchaSubmitButton = trove_form_element.querySelector('#recaptcha-submit');
                 const hiddenSubmitButton = trove_form_element.querySelector('#edit-submit');
-
                 recaptchaSubmitButton.addEventListener('click', function (event) {
 
                     grecaptcha.ready(function() {
