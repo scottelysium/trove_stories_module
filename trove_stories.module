@@ -416,6 +416,7 @@ function _trove_stories_webform_validate(array &$form, FormStateInterface $form_
     $result = file_get_contents($url, false, $context);
 
     if ($result === false) {
+        \Drupal::logger('trove_stories')->error('reCAPTCHA VALIDATION failed: file_get_contents() returned false for url: ' . $url);
         $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
         return;
     }
@@ -423,16 +424,19 @@ function _trove_stories_webform_validate(array &$form, FormStateInterface $form_
     $response_data = json_decode($result, true);
 
     if (empty($response_data)) {
+        \Drupal::logger('trove_stories')->error('reCAPTCHA VALIDATION failed: $response_data returned empty');
         $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
         return;
     }
 
     if ($response_data['success'] === true) {
         if ($response_data['score'] < 0.5) {
+            \Drupal::logger('trove_stories')->error('reCAPTCHA VALIDATION failed: score is less than 0.5: <pre>' . print_r($response_data, TRUE) . '</pre>');
             $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
             return;
         }
     } else {
+        \Drupal::logger('trove_stories')->error('reCAPTCHA VALIDATION failed: $response_data returned unsuccessful: <pre>' . print_r($response_data, TRUE) . '</pre>');
         $form_state->setErrorByName(NULL, 'reCAPTCHA validation failed');
         return;
     }
