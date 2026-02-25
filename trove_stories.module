@@ -168,7 +168,7 @@ function trove_stories_webform_submission_insert(\Drupal\webform\WebformSubmissi
                 'field_tss_story_author' => $submissionData["tswf_display_name_story_author"],
                 'field_tss_story_email' => $submissionData["tswf_email"],
                 'field_tss_story_inspiration' => $submissionData["tswf_inspired"],
-                'field_tss_story_name' => $submissionData["tswf_name"],
+                'field_tss_story_name' => empty($submissionData["tswf_name"]) ? '' : $submissionData["tswf_name"],
                 'field_tss_story_postcode' => $submissionData["tswf_postcode"],
                 'field_tss_story_title' => $submissionData["tswf_story_title"],
                 'field_tss_story_year_of_birth' => $submissionData["tswf_year_of_birth"],

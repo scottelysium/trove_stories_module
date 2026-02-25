@@ -3,9 +3,8 @@
 /** banner styling - used on gallery. **/
 .story-banner-gallery {
     display: grid;
-    /* grid-template-columns: 1fr 605px; */
-    grid-template-columns: 1fr 800px;
-    grid-template-rows: 540px;
+    grid-template-columns: 1fr 605px;
+    grid-template-rows: 400px;
     margin-bottom: 3rem;
 }
 
@@ -24,8 +23,9 @@
     margin: 0;
     padding: 0;
     font-family: "Source Serif Variable", serif;
-    font-size: 60px;
+    font-size: 45px;
     font-weight: 600;
+    color: #2D004B;
 }
 
 .story-banner-gallery .banner-left .banner-content p {
@@ -53,7 +53,7 @@
     font-size: 1.2rem;
     line-height: 1.2rem;
     padding: 0.8rem 3rem 0.8rem 1.6rem;
-    margin: 1.5rem 0 0rem 0;
+    margin: 0.5rem 0 0rem 0;
     transition: background 0.5s;
 }
 
@@ -77,7 +77,7 @@
 
 .story-banner-gallery .banner-right .bannerGoblet svg {
     display: block;
-    height: 540px;
+    height: 400px;
     width: auto;
 }
 
@@ -243,9 +243,9 @@
         grid-template-columns: 1fr 600px;
     }
 
-    .story-banner-gallery .banner-right {
+    /* .story-banner-gallery .banner-right {
         background-position: top left -85px;
-    }
+    } */
 
     .story-banner-gallery .banner-left .banner-content {
         padding-left: 5vw;
@@ -270,7 +270,12 @@
     }
 
     .story-banner-gallery .banner-right {
-        background-position: top left -112px;
+        /* background-position: top left -112px; */
+        background-position: top right -90px;
+    }
+
+    .story-banner-gallery .banner-left .banner-content .banner-story-button {
+        margin-top: 0px;
     }
 }
 
