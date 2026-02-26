@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: emXNre86AkViHUzM8mFO3nO4yI-um2ffDMXAdZw2rMM
+  default_config_hash: oBCjeaUPsVXQq2G4dWl1VCJMlO65SUCQ7vSZZeGhmWQ
 weight: 0
 open: null
 close: null
@@ -17,7 +17,12 @@ categories: {  }
 elements: |-
   tswf_banner_message:
     '#type': webform_markup
-    '#markup': '<h1>Submit your Trove Story!</h1><p><strong>Discover bold stories, share your own spark and explore a world of creativity shaped by people like you!</strong</p><p>Trove invites you to show how you use one of the country’s most-loved online resources. Share a photo, video, or a quick story and your submission may become part of a public gallery for everyone to explore and enjoy!</p>'
+    '#markup': |-
+      <h1>Submit your Trove Story!</h1>
+
+      <p><strong>Discover bold stories, share your own spark and explore a world of creativity shaped by people like you!</strong></p>
+
+      <p><strong>Trove invites you to show how you use one of the country’s most-loved online resources. Share a photo, video, or a quick story and your submission may become part of a public gallery for everyone to explore and enjoy!</strong></p>
   tswf_how_you_use_trove:
     '#type': textarea
     '#title': 'Tell us how you use Trove'
@@ -86,10 +91,6 @@ elements: |-
   tswf_about_message:
     '#type': webform_markup
     '#markup': '<p>A few things about you</p>'
-  tswf_name:
-    '#type': textfield
-    '#title': Name
-    '#required': true
   tswf_email:
     '#type': email
     '#title': Email

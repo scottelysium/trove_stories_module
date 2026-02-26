@@ -323,18 +323,25 @@
     font-size: 0.8rem;
     line-height: 0.6rem;
     margin: 0.3rem 0rem 0.5rem 0rem;
+    background-color: #008944;
+    border: 3px solid #008944;
+}
+
+.trove-stories-form [id^='edit-tswf-upload-images-remove-button']:hover {
+    color: #008944 !important;
+    background-color: #fff;
+    border: 3px solid #008944;
 }
 
 .trove-stories-form [id^='edit-tswf-upload-images-remove-button']:disabled {
-    background-color: #2d004b;
-    border-color: #2d004b;
-    background-color: #2d004b;
+    background-color: #008944;
+    border: 3px solid #008944;
 }
 
 .trove-stories-form [id^='edit-tswf-upload-images-remove-button']:disabled:hover {
-    color: #fff !important;
-    /* background-color: #015aad;
-    border-color: #0154a0; */
+    color: #008944 !important;
+    background-color: #fff;
+    border: 3px solid #008944;
 }
 
 .trove-stories-form #edit-flexbox.js-webform-flexbox {

@@ -9,7 +9,7 @@ third_party_settings:
     available_menus: {  }
     parent: ''
 _core:
-  default_config_hash: FHv7tBnsavTgPt7bi0Q_rAzgtME1TTuvuWSq5JF5Hh0
+  default_config_hash: BHSQ8kqgwxqrGMqxfUNzD6YCx7ihx2R4RiMub2cEvVc
 name: 'Trove Story Web Story'
 type: trove_story_web_story
 description: 'A trove story website story item that can be viewed by the public'

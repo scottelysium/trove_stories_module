@@ -11,7 +11,6 @@ dependencies:
     - field.field.node.trove_story_submission.field_tss_story_email
     - field.field.node.trove_story_submission.field_tss_story_inspiration
     - field.field.node.trove_story_submission.field_tss_story_links
-    - field.field.node.trove_story_submission.field_tss_story_name
     - field.field.node.trove_story_submission.field_tss_story_postcode
     - field.field.node.trove_story_submission.field_tss_story_title
     - field.field.node.trove_story_submission.field_tss_story_use
@@ -20,7 +19,7 @@ dependencies:
   module:
     - user
 _core:
-  default_config_hash: npFTQEYNN-zNsPpolKkBj-0YWkL4M1vlY2geny5HfNU
+  default_config_hash: BajP6WPdz2avVddtTY-75mpPbRcVh8DcMAOcFH0Ybvw
 id: node.trove_story_submission.teaser
 targetEntityType: node
 bundle: trove_story_submission
@@ -39,7 +38,6 @@ hidden:
   field_tss_story_email: true
   field_tss_story_inspiration: true
   field_tss_story_links: true
-  field_tss_story_name: true
   field_tss_story_postcode: true
   field_tss_story_title: true
   field_tss_story_use: true

@@ -19,7 +19,7 @@ dependencies:
     - text
     - user
 _core:
-  default_config_hash: ogOiJgof9StwgM4PsBDAFVVDf5uIUSXa1weXwn01il0
+  default_config_hash: MsYLnPMwY80FIa8_uHKuYOW8Em2qFARWYMV3KDpFmSw
 id: node.trove_story_web_story.default
 targetEntityType: node
 bundle: trove_story_web_story
