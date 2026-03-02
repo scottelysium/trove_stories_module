@@ -80,12 +80,12 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
         //setup the formatting of the various fields that go into the main content field
         $formated_content = "";
         if (!empty($webStoryAbout)) {
-            $formated_content .= "<p>" . $webStoryAbout . "</p>";
+            $formated_content .= nl2br(htmlspecialchars($webStoryAbout));
         }
         
         if (!empty($webStoryInspiration)) {
             $formated_content .= "<h2>What inspired this project</h2>";
-            $formated_content .= "<p>" . $webStoryInspiration . "</p>";
+            $formated_content .= nl2br(htmlspecialchars($webStoryInspiration));
         }
 
         //reate the paragraph field for the story gallery
@@ -122,6 +122,8 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
         
         $trove_story_web_story_edit_link = $trove_story_web_story->toUrl('edit-form')->toString();
         $trove_story_web_story_link = $trove_story_web_story->toUrl()->toString();
+
+
 
         $this->messenger()->addStatus("The story submission has been turned into a new <strong><a href='" . 
         $trove_story_web_story_link . "'>trove website story</a> item</strong>");

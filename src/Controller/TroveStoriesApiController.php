@@ -141,7 +141,6 @@ class TroveStoriesApiController extends ControllerBase {
                         
                         $thumbnail_url = $thumb_path . $thumb_filename;
                         
-                        
                     }
 
                 }

@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: oBCjeaUPsVXQq2G4dWl1VCJMlO65SUCQ7vSZZeGhmWQ
+  default_config_hash: Z782eHFeRtJ0EccTOGNKFj_eMsVFm5gBWicAXzUNq0w
 weight: 0
 open: null
 close: null
@@ -69,11 +69,11 @@ elements: |-
   tswf_links:
     '#type': url
     '#title': 'Link articles used from the Trove archive'
-    '#multiple': true
-    '#description': '<p>Links must be sourced from <em>trove.nla.gov.au</em>, <em>nla.gov.au</em> or <em>webarchive.nla.gov.au</em></p>'
+    '#multiple': 4
+    '#description': '<p>Links are limited to four and must be sourced from <em>trove.nla.gov.au</em>, <em>nla.gov.au</em> or <em>webarchive.nla.gov.au</em></p>'
     '#help_title': 'Valid URLs'
     '#help': |-
-      <p>Links must be sourced from the following websites:</p>
+      <p>Links are limited to four and must be sourced from the following websites:</p>
 
       <p>https://trove.nla.gov.au<br />
       https://nla.gov.au<br />
@@ -225,7 +225,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Thank you for your story submission.</p>\r\n\r\n<p>Our staff will review your story and if it meets the correct criteria your story may be featured on the trove stories gallery page.</p>\r\n\r\n<p>For any technical assistance please feel free to <a href=\"https://trove.nla.gov.au/about/contact-us\">contact us</a></p>"
+  confirmation_message: "<p>Thank you for sharing a Trove Story. Your contribution is now being reviewed by staff.</p>\r\n\r\n<p>If you have any questions, please <a href=\"https://trove.nla.gov.au/about/contact-us\">contact us</a> or see our FAQs for further information</p>\r\n\r\n<p>Please explore <a href=\"https://trove.nla.gov.au/\">Trove</a> and find your next story </p>"
   confirmation_attributes: {  }
   confirmation_back: false
   confirmation_back_label: ''

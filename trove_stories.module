@@ -5,6 +5,8 @@ use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\node\NodeInterface;
+use Drupal\Core\Cache\Cache;
 use Drupal\image\Entity\ImageStyle;
 
 /**
@@ -372,7 +374,6 @@ function trove_stories_form_node_trove_story_web_story_edit_form_alter(&$form, \
  * the validation function is called only on form submission.
  * note the form id is not 'trove_story' but 'webform-submission-trove-story-add-form' these are the same forms though.
  */
-
 function trove_stories_form_webform_submission_trove_story_add_form_alter(array &$form, FormStateInterface $form_state, $form_id) {
     $form['#validate'][] = '_trove_stories_webform_validate'; //we tell the form that we have a custom validation function
 }
@@ -496,6 +497,26 @@ function trove_stories_node_view_alter(array &$build, \Drupal\Core\Entity\Entity
             'class' => ['button', 'button--primary'],
         ],
     ];
+}
+
+/*
+When a web story is published, invalidate the cache to ensure the gallery page displays the most up to date data
+*/
+function trove_stories_node_update(NodeInterface $node) {
+    if ($node->bundle() === 'trove_story_web_story') {
+        if ($node->isPublished()) {
+            Cache::invalidateTags(['node_list:trove_story_web_story']);
+        }
+    }
+}
+
+/*
+When a web story is deleted, invalidate the cache to ensure the gallery page displays the most up to date data
+*/
+function trove_stories_node_delete(NodeInterface $node) {
+    if ($node->bundle() === 'trove_story_web_story') {
+        Cache::invalidateTags(['node_list:trove_story_web_story']);
+    }
 }
 
 /**

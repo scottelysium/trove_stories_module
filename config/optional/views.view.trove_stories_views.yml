@@ -26,7 +26,7 @@ dependencies:
     - user
     - views_data_export
 _core:
-  default_config_hash: p_3Ivup7EH0DIjvvR9grDSHiFLiMdJk0nM7K5sHuILU
+  default_config_hash: KcRRIvxDtXE9BVRHH3LqPcrGCMfuZKFzGSJzgnx803Q
 id: trove_stories_views
 label: 'Trove Stories Views'
 module: views
