@@ -24,6 +24,10 @@
    font-weight: 600;
 }
 
+.troveStoriesPage .webform-confirmation .webform-confirmation__message a:hover {
+    color: #016ed3;
+}
+
 /** status updates after editing trove story related nodes **/
 .troveStoriesPage .region-messages {
     display: flex;

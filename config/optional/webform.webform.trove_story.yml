@@ -3,7 +3,7 @@ langcode: en
 status: open
 dependencies: {  }
 _core:
-  default_config_hash: Z782eHFeRtJ0EccTOGNKFj_eMsVFm5gBWicAXzUNq0w
+  default_config_hash: oTyCYlp1ccYoCDaY6QIt8E9Kb8QUZ4ecyTMmuonMmOI
 weight: 0
 open: null
 close: null
@@ -225,7 +225,7 @@ settings:
   confirmation_type: page
   confirmation_url: ''
   confirmation_title: ''
-  confirmation_message: "<p>Thank you for sharing a Trove Story. Your contribution is now being reviewed by staff.</p>\r\n\r\n<p>If you have any questions, please <a href=\"https://trove.nla.gov.au/about/contact-us\">contact us</a> or see our FAQs for further information</p>\r\n\r\n<p>Please explore <a href=\"https://trove.nla.gov.au/\">Trove</a> and find your next story </p>"
+  confirmation_message: "<p>Thank you for sharing a Trove Story. Your contribution is now being reviewed by staff.</p>\r\n\r\n<p>If you have any questions, please <a href=\"https://trove.nla.gov.au/about/contact-us\">contact us</a>.</p>\r\n\r\n<p>Please explore <a href=\"https://trove.nla.gov.au/\">Trove</a> and find your next story</p>"
   confirmation_attributes: {  }
   confirmation_back: false
   confirmation_back_label: ''

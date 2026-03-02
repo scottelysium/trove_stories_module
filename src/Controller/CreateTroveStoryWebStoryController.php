@@ -126,7 +126,7 @@ class CreateTroveStoryWebStoryController extends ControllerBase {
 
 
         $this->messenger()->addStatus("The story submission has been turned into a new <strong><a href='" . 
-        $trove_story_web_story_link . "'>trove website story</a> item</strong>");
+        $trove_story_web_story_link . "'>Trove website story</a></strong> item");
 
         return new RedirectResponse($trove_story_web_story_edit_link);
     }

@@ -215,6 +215,13 @@
 #trove-stories-gallery .stories-footer button#trove-stories-load-more {
     line-height: 0.5rem;
     margin-top: 1rem;
+    background-color: #008944;
+    border: 3px solid #008944;
+}
+
+#trove-stories-gallery .stories-footer button#trove-stories-load-more:hover {
+    background-color: #fff;
+    color: #008944 !important;
 }
 
 #trove-stories-gallery .stories-footer button#trove-stories-load-more.hide {

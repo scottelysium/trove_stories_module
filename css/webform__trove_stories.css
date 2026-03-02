@@ -124,6 +124,10 @@
     font-size: 14px;
 }
 
+.trove-stories-form .text-count-wrapper.webform-counter-warning .text-count-message {
+    color: #C0286F;
+}
+
 .trove-stories-form small {
     font-size: 14px;
 }
